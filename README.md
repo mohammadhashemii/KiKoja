@@ -1,3 +1,4 @@
 # KiKoja
 
-![](https://github.com/mohammadhashemii/KiKoja/blob/master/src/main/images/icon-kikoja.png | width=100)
+
+<img src="https://github.com/mohammadhashemii/KiKoja/blob/master/src/main/images/icon-kikoja.png" width="200" height="200" />
