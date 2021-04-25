@@ -1,5 +1,3 @@
 # KiKoja
 
-<div style="text-align: center">
-	<img src="https://github.com/mohammadhashemii/KiKoja/blob/master/src/main/images/icon-kikoja.png" width="200" height="200">	
-</div>
+<img img align="center" src="https://github.com/mohammadhashemii/KiKoja/blob/master/src/main/images/icon-kikoja.png" width="200" height="200">	
