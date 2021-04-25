@@ -1,4 +1,5 @@
 # KiKoja
 
-
-<img src="https://github.com/mohammadhashemii/KiKoja/blob/master/src/main/images/icon-kikoja.png" width="200" height="200" margin-left="auto" margin-right="auto">
+<div style="text-align: center">
+	<img src="https://github.com/mohammadhashemii/KiKoja/blob/master/src/main/images/icon-kikoja.png" width="200" height="200" margin-left="auto" margin-right="auto">	
+</div>
