@@ -1,0 +1,26 @@
+<dialog id="type">
+    <frame layout="linear_vertical" scrollable="true">
+        <checkbox id="ce" onClick="">مهندسی کامپیوتر</checkbox>
+        <checkbox id="civil" onClick="">مهندسی عمران</checkbox>
+        <checkbox id="arch" onClick="">مهندسی معماری</checkbox>
+	<checkbox id="mech" onClick="">مهندسی مکانیک</checkbox>
+      	<checkbox id="nucl" onClick="">مهندسی هسته‌ای</checkbox>
+      	<checkbox id="chem" onClick="">مهندسی شیمی</checkbox>
+      	<checkbox id="cs" onClick="">علوم کامپیوتر</checkbox>
+      	<checkbox id="math" onClick="">علوم ریاضی</checkbox>
+      	<checkbox id="phys" onClick="">علوم فیزیک</checkbox>
+      	<checkbox id="bio" onClick="">زیست شناسی</checkbox>
+      	<checkbox id="dent" onClick="">دندانپزشکی</checkbox>
+      	<checkbox id="law" onClick="">حقوق</checkbox>
+      	<checkbox id="earth" onClick="">علوم زمین</checkbox>
+      	<checkbox id="physc" onClick="">روانشناسی</checkbox>
+      	<checkbox id="educ" onClick="">علوم تربیتی</checkbox>
+      	<checkbox id="sport" onClick="">تربیت بدنی</checkbox>
+      	<checkbox id="reli" onClick="">الهیات و فقه</checkbox>
+      	<checkbox id="fa" onClick="">ادبیات فارسی</checkbox>
+      	<checkbox id="en" onClick="">ادبیات انگلیسی</checkbox>
+      	<checkbox id="ch" onClick="">ادبیات چینی</checkbox>
+      	<checkbox id="fina" onClick="">حسابداری</checkbox>
+      	<checkbox id="busi" onClick="">مدیریت بازرگانی</checkbox>
+    </frame>
+</dialog>
