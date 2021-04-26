@@ -1,0 +1,36 @@
+<page  clearBackStack="true" background="#ececec" toolbarcolor="#b4d9c7" title="خانه" statusbarcolor="#d8f2e5" scrollable="true">
+
+	<frame layout="linear_vertical" >
+      <frame  margin_bottom="100" background="white" padding_bottom="-115" margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="500">
+        	<frame   borderCornerRadius="8" width="290" height="300">
+          			<image id="profile-image"  layout="linear_vertical" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-alireza.jpg" borderStrokeWidth="1"></image>
+      		</frame>
+          	<text   id="name"  textsize="14"  padding_right="10"> علیرضا بیناییان</text>
+        	<frame layout="linear_horizontal" padding_left="15" padding_right="10">
+              <text  id="major"  gravity="left" textsize="11"  textcolor="#909090"> ورودی ۱۳۹۷</text>
+              <text  id="major"  textsize="11"  textcolor="#909090">رشته: مهندسی کامپیوتر</text>
+        	</frame>
+          	
+      		
+      </frame>
+    </frame>  
+
+  	<footer background="#b4d9c7" layout="linear_horizontal">
+      	<frame layout="linear_vertical">
+          	<frame borderColor="black" borderCornerRadius="8" width="35" >
+              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
+          </frame>     	
+      	</frame>
+      	<frame layout="linear_vertical">
+          	<frame borderColor="black" borderCornerRadius="8" width="35" background="#d8f2e5">
+              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
+          </frame>     	
+      	</frame>
+      <frame layout="linear_vertical">
+          	<frame borderColor="black" borderCornerRadius="8" width="35" >
+              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
+          </frame>     	
+      	</frame>
+     	
+  	</footer>
+</page>
