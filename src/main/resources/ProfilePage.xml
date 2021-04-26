@@ -3,7 +3,7 @@
   		<image width="150" height="50" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja-text.png"></image>
   	</frame>
 	<frame layout="linear_vertical"margin_top="0"  >
-      	<frame borderColor="black" borderCornerRadius="11" width="200" height="300">
+      	<frame borderColor="black" borderCornerRadius="11" width="150" height="225">
           <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-amini.jpg" borderStrokeWidth="1"></image>
       	</frame>
       	<text id="name" gravity="center" textsize="20"> علیرضا امینی</text>
