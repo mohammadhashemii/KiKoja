@@ -5,11 +5,11 @@
   	<frame layout="linear_vertical">
   		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
           	<text margin_left="10" margin_right="10" background="white">نام:</text>
-          	<textInput textalignment="right" margin-right="50" hint="علی" ></textInput>
+          	<textInput textsize="11" textalignment="right" margin-right="50" hint="علی" ></textInput>
       	</frame>
       <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
           	<text margin_left="10" margin_right="10" background="white">نام خانوادگی:</text>
-          	<textInput textalignment="right" margin-right="50" hint="احمدی" ></textInput>
+          	<textInput textsize="11" textalignment="right" margin-right="50" hint="احمدی" ></textInput>
       	</frame>
   	</frame>
   	<frame  layout="linear_vertical" margin_top="120" >
