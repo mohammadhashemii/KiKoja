@@ -1,0 +1,65 @@
+<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="صفحه شخصی" statusbarcolor="#d8f2e5" scrollable="true">
+	<frame layout="linear_vertical"margin_bottom="0" padding="0">
+  		<image width="150" height="50" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja-text.png"></image>
+  	</frame>
+	<frame layout="linear_vertical"margin_top="0"  >
+      	<frame borderColor="black" borderCornerRadius="11" width="200" height="300">
+          <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-amini.jpg" borderStrokeWidth="1"></image>
+      	</frame>
+      	<text id="name" gravity="center" textsize="20"> علیرضا امینی</text>
+    </frame>  
+  	<frame layout="linear_vertical" >
+  		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
+          	<textInput textalignment="right" margin-right="50" hint="مهندسی کامپیوتر  ▼" ></textInput>
+      	</frame>
+      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
+          	<textInput textalignment="right" margin-right="50" hint="کارشناسی  ▼" ></textInput>
+      	</frame>
+      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">سال ورود</text>
+        <textInput textalignment="right" margin-right="50" hint="▼  ۱۳۹۷" ></textInput>
+      	</frame>
+      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
+              	<textInput textalignment="right" margin-right="50" hint="فوتبال" ></textInput>
+        		<frame  gravity="left" layout="linear_vertical" >
+                  		<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+        		</frame>
+        		<text  padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
+      </frame>
+      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">مهارت‌ها:</text>
+              	<textInput textalignment="right" margin-right="50" hint="ماشین‌لرنینگ" ></textInput>
+        		<frame  gravity="left" layout="linear_vertical" >
+                  		<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+        		</frame>
+                 <text  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right"> طراحی وبسایت - ‌HTML - python - فرانت‌اند</text>
+        		
+      </frame>
+      
+      
+  	</frame>
+  	<frame  layout="linear_vertical" margin_bottom="100" >
+      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">ذخیره</button>
+  	</frame>
+  	<footer background="#b4d9c7" layout="linear_horizontal">
+      	<frame layout="linear_vertical">
+          	<frame borderColor="black" borderCornerRadius="11" width="50" >
+              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
+          </frame>     	
+      	</frame>
+      	<frame layout="linear_vertical">
+          	<frame borderColor="black" borderCornerRadius="11" width="50" >
+              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
+          </frame>     	
+      	</frame>
+      <frame layout="linear_vertical">
+          	<frame borderColor="black" borderCornerRadius="11" width="50" background="#d8f2e5">
+              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
+          </frame>     	
+      	</frame>
+     	
+  	</footer>
+</page>
