@@ -1,0 +1,25 @@
+<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="false">
+	<frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
+  		<image width="100" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja.png"></image>
+  	</frame>
+  	<frame layout="linear_vertical">
+  		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
+          	<textInput textalignment="right" margin-right="50" hint="انتخاب کنید  ▼" ></textInput>
+      	</frame>
+      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
+          	<textInput textalignment="right" margin-right="50" hint="انتخاب کنید  ▼" ></textInput>
+      	</frame>
+      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+          	<text margin_left="10" margin_right="10" background="white">سال ورود</text>
+        	<frame layout="linear_horizontal">
+              	<textInput textalignment="right" margin-right="50" hint="انتخاب کنید  ▼" ></textInput>
+        	</frame>
+          	
+      	</frame>
+  	</frame>
+  	<frame  layout="linear_vertical" margin_top="20" >
+      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">تایید ثبت‌نام</button>
+  	</frame>
+</page>
