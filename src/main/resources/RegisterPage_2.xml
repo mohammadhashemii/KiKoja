@@ -56,6 +56,6 @@
       	</frame>
   	</frame>
   	<frame  layout="linear_vertical" margin_top="20" >
-      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">تایید ثبت‌نام</button>
+      	<button onClick="command/nextButtonOfSecondRegisterPage" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">تایید ثبت‌نام</button>
   	</frame>
 </page>
