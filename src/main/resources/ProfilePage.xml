@@ -1,103 +1,103 @@
 <page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="صفحه شخصی" statusbarcolor="#d8f2e5" scrollable="true">
-	<frame layout="linear_vertical" margin_bottom="0" padding="0">
-  		<image width="150" height="50" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja-text.png"></image>
-  	</frame>
-	<frame layout="linear_vertical" margin_top="0"  >
-      	<frame borderColor="black" borderCornerRadius="11" width="150" height="225">
-          <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-amini.jpg" borderStrokeWidth="1"></image>
-      	</frame>
-      	<text id="name" gravity="center" textsize="20"> علیرضا امینی</text>
-    </frame>  
-  	<frame layout="linear_vertical" >
-  		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
-			<dropdown>
-				<item id="-">انتخاب کنید</item>
-				<item id="ce" onClick="">مهندسی کامپیوتر</item>
-				<item id="civil" onClick="">مهندسی عمران</item>
-				<item id="arch" onClick="">مهندسی معماری</item>
-				<item id="mech" onClick="">مهندسی مکانیک</item>
-				<item id="nucl" onClick="">مهندسی هسته‌ای</item>
-				<item id="chem" onClick="">مهندسی شیمی</item>
-				<item id="cs" onClick="">علوم کامپیوتر</item>
-				<item id="math" onClick="">علوم ریاضی</item>
-				<item id="phys" onClick="">علوم فیزیک</item>
-				<item id="bio" onClick="">زیست شناسی</item>
-				<item id="dent" onClick="">دندانپزشکی</item>
-				<item id="law" onClick="">حقوق</item>
-				<item id="earth" onClick="">علوم زمین</item>
-				<item id="physc" onClick="">روانشناسی</item>
-				<item id="educ" onClick="">علوم تربیتی</item>
-				<item id="sport" onClick="">تربیت بدنی</item>
-				<item id="reli" onClick="">الهیات و فقه</item>
-				<item id="fa" onClick="">ادبیات فارسی</item>
-				<item id="en" onClick="">ادبیات انگلیسی</item>
-				<item id="ch" onClick="">ادبیات چینی</item>
-				<item id="fina" onClick="">حسابداری</item>
-				<item id="busi" onClick="">مدیریت بازرگانی</item>
-			</dropdown>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
-		  <dropdown>
-			  <item id="-">انتخاب کنید</item>
-			  <item id="bsc" onClick="">کارشناسی</item>
-			  <item id="msc" onClick="">کارشناسی ارشد</item>
-			  <item id="phd" onClick="">دکترا</item>
-			  <item id="post-phd" onClick="">پسا دکترا</item>
-		  </dropdown>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">سال ورود</text>
-		  <dropdown>
-			  <item id="-">انتخاب کنید</item>
-			  <item id="1399" onClick="">۱۳۹۹</item>
-			  <item id="1398" onClick="">۱۳۹۸</item>
-			  <item id="1397" onClick="">۱۳۹۷</item>
-			  <item id="1396" onClick="">۱۳۹۶</item>
-			  <item id="1395" onClick="">۱۳۹۵</item>
-			  <item id="1394" onClick="">۱۳۹۴</item>
-		  </dropdown>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
-              	<textInput textsize="11" textalignment="right" margin-right="50" hint="فوتبال" ></textInput>
-        		<frame  gravity="left" layout="linear_vertical" >
-                  		<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
-        		</frame>
-        		<text  textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
-      </frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">مهارت‌ها:</text>
-              	<textInput textsize="11" textalignment="right" margin-right="50" hint="ماشین‌لرنینگ" ></textInput>
-        		<frame  gravity="left" layout="linear_vertical" >
-                  		<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
-        		</frame>
-                 <text  textsize="11"  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right"> طراحی وبسایت - ‌HTML - python - فرانت‌اند</text>
-        		
-      </frame>
-      
-      
-  	</frame>
-  	<frame  layout="linear_vertical" margin_bottom="100" >
-      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/saveProfile"  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">ذخیره</button>
-  	</frame>
-  	<footer background="#b4d9c7" layout="linear_horizontal">
-      	<frame layout="linear_vertical">
-          	<frame onClick="command/getFavouritePage" borderColor="black" borderCornerRadius="8" width="35" >
-              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
-          </frame>     	
-      	</frame>
-      	<frame layout="linear_vertical">
-          	<frame onClick="command/getHomePage" borderColor="black" borderCornerRadius="8" width="35" >
-              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
-          </frame>     	
-      	</frame>
-      <frame layout="linear_vertical">
-          	<frame borderColor="black" borderCornerRadius="8" width="35" background="#d8f2e5">
-              	<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
-          </frame>     	
-      	</frame>
-     	
-  	</footer>
+<frame layout="linear_vertical" margin_bottom="0" padding="0">
+	<image width="150" height="50" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja-text.png"></image>
+</frame>
+<frame layout="linear_vertical" margin_top="0"  >
+	<frame borderColor="black" borderCornerRadius="11" width="150" height="225">
+		<image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-amini.jpg" borderStrokeWidth="1"></image>
+	</frame>
+	<text id="name" gravity="center" textsize="20"> علیرضا امینی</text>
+</frame>
+<frame layout="linear_vertical" >
+	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
+		<dropdown>
+			<item id="-">انتخاب کنید</item>
+			<item id="ce" onClick="">مهندسی کامپیوتر</item>
+			<item id="civil" onClick="">مهندسی عمران</item>
+			<item id="arch" onClick="">مهندسی معماری</item>
+			<item id="mech" onClick="">مهندسی مکانیک</item>
+			<item id="nucl" onClick="">مهندسی هسته‌ای</item>
+			<item id="chem" onClick="">مهندسی شیمی</item>
+			<item id="cs" onClick="">علوم کامپیوتر</item>
+			<item id="math" onClick="">علوم ریاضی</item>
+			<item id="phys" onClick="">علوم فیزیک</item>
+			<item id="bio" onClick="">زیست شناسی</item>
+			<item id="dent" onClick="">دندانپزشکی</item>
+			<item id="law" onClick="">حقوق</item>
+			<item id="earth" onClick="">علوم زمین</item>
+			<item id="physc" onClick="">روانشناسی</item>
+			<item id="educ" onClick="">علوم تربیتی</item>
+			<item id="sport" onClick="">تربیت بدنی</item>
+			<item id="reli" onClick="">الهیات و فقه</item>
+			<item id="fa" onClick="">ادبیات فارسی</item>
+			<item id="en" onClick="">ادبیات انگلیسی</item>
+			<item id="ch" onClick="">ادبیات چینی</item>
+			<item id="fina" onClick="">حسابداری</item>
+			<item id="busi" onClick="">مدیریت بازرگانی</item>
+		</dropdown>
+	</frame>
+	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
+		<dropdown>
+			<item id="-">انتخاب کنید</item>
+			<item id="bsc" onClick="">کارشناسی</item>
+			<item id="msc" onClick="">کارشناسی ارشد</item>
+			<item id="phd" onClick="">دکترا</item>
+			<item id="post-phd" onClick="">پسا دکترا</item>
+		</dropdown>
+	</frame>
+	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<text margin_left="10" margin_right="10" background="white">سال ورود</text>
+		<dropdown>
+			<item id="-">انتخاب کنید</item>
+			<item id="1399" onClick="">۱۳۹۹</item>
+			<item id="1398" onClick="">۱۳۹۸</item>
+			<item id="1397" onClick="">۱۳۹۷</item>
+			<item id="1396" onClick="">۱۳۹۶</item>
+			<item id="1395" onClick="">۱۳۹۵</item>
+			<item id="1394" onClick="">۱۳۹۴</item>
+		</dropdown>
+	</frame>
+	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
+		<textInput textsize="11" textalignment="right" margin-right="50" hint="فوتبال" ></textInput>
+		<frame  gravity="left" layout="linear_vertical" >
+			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+		</frame>
+		<text  textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
+	</frame>
+	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<text margin_left="10" margin_right="10" background="white">مهارت‌ها:</text>
+		<textInput textsize="11" textalignment="right" margin-right="50" hint="ماشین‌لرنینگ" ></textInput>
+		<frame  gravity="left" layout="linear_vertical" >
+			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+		</frame>
+		<text  textsize="11"  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right"> طراحی وبسایت - ‌HTML - python - فرانت‌اند</text>
+
+	</frame>
+
+
+</frame>
+<frame  layout="linear_vertical" margin_bottom="100" >
+	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/saveProfile"  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">ذخیره</button>
+</frame>
+<footer background="#b4d9c7" layout="linear_horizontal">
+	<frame layout="linear_vertical">
+		<frame onClick="command/getFavouritePage" borderColor="black" borderCornerRadius="8" width="35" >
+			<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
+		</frame>
+	</frame>
+	<frame layout="linear_vertical">
+		<frame onClick="command/getHomePage" borderColor="black" borderCornerRadius="8" width="35" >
+			<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
+		</frame>
+	</frame>
+	<frame layout="linear_vertical">
+		<frame borderColor="black" borderCornerRadius="8" width="35" background="#d8f2e5">
+			<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
+		</frame>
+	</frame>
+
+</footer>
 </page>
