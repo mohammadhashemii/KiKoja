@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 
 public class KikojaService extends APSService {
 
-    private final int FIRST_NAME_MAX_LENGTH = 2, FIRST_NAME_MIN_LENGTH = 1, LAST_NAME_MAX_LENGTH = 2,
+    private final int FIRST_NAME_MAX_LENGTH = 10, FIRST_NAME_MIN_LENGTH = 1, LAST_NAME_MAX_LENGTH = 10,
             LAST_NAME_MIN_LENGTH = 1;
 
     public KikojaService(String channelName) {
@@ -38,7 +38,7 @@ public class KikojaService extends APSService {
         switch (command) {
 
         }
-        view = new RegisterPage_2();
+        view = new RegisterPage_1();
         return view;
     }
 
@@ -92,8 +92,9 @@ public class KikojaService extends APSService {
             update.addChildUpdate("lastNameRegisterInput", "innerhtml", "");
             update.addChildUpdate("lastNameRegisterInput", "background", "black");
             break;
+
         }
-        view = new RegisterPage_2();
+        view = new RegisterPage_1();
         return view;
     }
 

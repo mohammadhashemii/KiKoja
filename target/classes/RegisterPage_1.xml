@@ -5,14 +5,14 @@
   	<frame layout="linear_vertical">
   		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
           	<text margin_left="10" margin_right="10" background="white">نام:</text>
-          	<textInput textsize="11" textalignment="right" margin-right="50" hint="علی" ></textInput>
+          	<textInput textsize="11" textalignment="right" margin-right="50" hint="علی" id="firstNameRegisterInput" onClick="firstNameRegisterInputClick"></textInput>
       	</frame>
       <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
           	<text margin_left="10" margin_right="10" background="white">نام خانوادگی:</text>
-          	<textInput textsize="11" textalignment="right" margin-right="50" hint="احمدی" ></textInput>
+          	<textInput textsize="11" textalignment="right" margin-right="50" hint="احمدی" id="lastNameRegisterInput" onClick="lastNameRegisterInputClick"></textInput>
       	</frame>
   	</frame>
   	<frame  layout="linear_vertical" margin_top="120" >
-      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">بعدی</button>
+      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/nextButtonOfFirstRegisterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">بعدی</button>
   	</frame>
 </page>
