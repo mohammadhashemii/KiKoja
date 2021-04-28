@@ -1,11 +1,11 @@
-<page clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="false">
+<page clearBackStack="false" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="false">
 	<frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
 		<image width="100" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja.png"></image>
 	</frame>
 	<frame layout="linear_vertical">
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 			<text margin_left="10" margin_right="10" background="white">رشته تحصیلی:</text>
-			<dropdown>
+			<dropdown background="#ededeb" borderCornerRadius="8">
 				<item id="-">انتخاب کنید</item>
 				<item id="ce" onClick="">مهندسی کامپیوتر</item>
 				<item id="civil" onClick="">مهندسی عمران</item>
@@ -33,7 +33,7 @@
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 			<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
-			<dropdown>
+			<dropdown background="#ededeb" borderCornerRadius="8">
 				<item id="-">انتخاب کنید</item>
 				<item id="bsc" onClick="">کارشناسی</item>
 				<item id="msc" onClick="">کارشناسی ارشد</item>
@@ -43,7 +43,7 @@
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 			<text margin_left="10" margin_right="10" background="white">سال ورود</text>
-			<dropdown>
+			<dropdown background="#ededeb" borderCornerRadius="8">
 				<item id="-">انتخاب کنید</item>
 				<item id="1399" onClick="">۱۳۹۹</item>
 				<item id="1398" onClick="">۱۳۹۸</item>
