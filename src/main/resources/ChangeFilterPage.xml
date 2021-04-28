@@ -1,4 +1,4 @@
-<page  clearBackStack="true" background="#ececec" toolbarcolor="#b4d9c7" title="تغییر فیلتر جستجو" statusbarcolor="#d8f2e5" scrollable="true">
+<page  clearBackStack="false" background="#ececec" toolbarcolor="#b4d9c7" title="تغییر فیلتر جستجو" statusbarcolor="#d8f2e5" scrollable="true">
 
 	<frame layout="linear_vertical" >
 		<frame  margin_bottom="100" background="white" padding_top=""margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="850">
