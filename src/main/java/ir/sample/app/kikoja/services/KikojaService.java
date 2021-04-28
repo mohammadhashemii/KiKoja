@@ -29,16 +29,46 @@ public class KikojaService extends APSService {
     @Override
     public View onCreateView(String command, JSONObject pageData, String userId) {
         // assign the next page to view variable and return it to change page
-        View view;
+        View view = new StartingPage();
         // enter the command_name which entered in onclick second attribute here to
         // specify desired on create command
         // use pageData to get data from xml page elements using
         // their id :: pageData.get([element_id]).[desired_method]();
         // use view classes to create new page and return view class to open
         switch (command) {
-
+            case "startingPage": {
+                view = new StartingPage();
+                break;
+            }
+            case "registerPageOne": {
+                view = new RegisterPage_1();
+                break;
+            }
+            case "getHomePage": {
+                view = new HomePage();
+                break;
+            }
+            case "getFavouritePage": {
+                view = new FavouritePersonsPage();
+                break;
+            }
+            case "getProfilePage": {
+                view = new ProfilePage();
+                break;
+            }
+            case "getMoreInfoPage": {
+                view = new MoreInfoPage();
+                break;
+            }
+            case "getNotFoundPage": {
+                view = new NotFoundPage();
+                break;
+            }
+            case "getChangeFilterPage": {
+                view = new ChangeFilterPage();
+                break;
+            }
         }
-        view = new RegisterPage_1();
         return view;
     }
 
@@ -47,7 +77,7 @@ public class KikojaService extends APSService {
     public ir.appsan.sdk.Response onUpdate(ViewUpdate update, String updateCommand, JSONObject pageData,
             String userId) {
         // assign the next page to view variable and return it to change page
-        View view;
+        View view = new StartingPage();
         // used to write warning messages inside the xml elements
         String WarningMessage;
         // enter the command_name which entered in onclick second attribute here to
@@ -58,43 +88,46 @@ public class KikojaService extends APSService {
         // update.addChildUpdate([child_id],[attribute],[update_value]);
         // use view classes to create new page and return view class to open
         switch (updateCommand) {
-        case "nextButtonOfFirstRegisterPage":
-            int firstNameInputLength = pageData.get("firstNameRegisterInput").toString().length();
-            int lastNameInputLength = pageData.get("lastNameRegisterInput").toString().length();
-            // success case
-            if ((firstNameInputLength > FIRST_NAME_MIN_LENGTH) && (firstNameInputLength < FIRST_NAME_MAX_LENGTH)
-                    && (lastNameInputLength > LAST_NAME_MIN_LENGTH) && (lastNameInputLength < LAST_NAME_MAX_LENGTH)) {
-                // lunch the second registering page if succeed
-                view = new RegisterPage_2();
-                return view;
-            }
-            // fail case
-            else {
-                if ((firstNameInputLength < FIRST_NAME_MIN_LENGTH) || (firstNameInputLength > FIRST_NAME_MAX_LENGTH)) {
-                    update.addChildUpdate("firstNameRegisterInput", "background", "red");
-                    WarningMessage = "کاراکتر باشد" + FIRST_NAME_MAX_LENGTH + " و حداکثر" + FIRST_NAME_MIN_LENGTH
-                            + "طول نام باید حداقل";
-                    update.addChildUpdate("firstNameRegisterInput", "innerhtml", WarningMessage);
+            case "nextButtonOfFirstRegisterPage": {
+                int firstNameInputLength = pageData.get("firstNameRegisterInput").toString().length();
+                int lastNameInputLength = pageData.get("lastNameRegisterInput").toString().length();
+                // success case
+                if ((firstNameInputLength > FIRST_NAME_MIN_LENGTH) && (firstNameInputLength < FIRST_NAME_MAX_LENGTH)
+                        && (lastNameInputLength > LAST_NAME_MIN_LENGTH) && (lastNameInputLength < LAST_NAME_MAX_LENGTH)) {
+                    // lunch the second registering page if succeed
+                    view = new RegisterPage_2();
                 }
-                if ((lastNameInputLength < LAST_NAME_MIN_LENGTH) || (lastNameInputLength > LAST_NAME_MAX_LENGTH)) {
-                    update.addChildUpdate("lastNameRegisterInput", "background", "red");
-                    WarningMessage = "کاراکتر باشد" + LAST_NAME_MAX_LENGTH + " و حداکثر" + LAST_NAME_MIN_LENGTH
-                            + "طول نام خانوادگی باید حداقل";
-                    update.addChildUpdate("lastNameRegisterInput", "innerhtml", WarningMessage);
+                // fail case
+                else {
+                    if ((firstNameInputLength < FIRST_NAME_MIN_LENGTH) || (firstNameInputLength > FIRST_NAME_MAX_LENGTH)) {
+                        update.addChildUpdate("firstNameRegisterInput", "background", "red");
+                        WarningMessage = "کاراکتر باشد" + FIRST_NAME_MAX_LENGTH + " و حداکثر" + FIRST_NAME_MIN_LENGTH
+                                + "طول نام باید حداقل";
+                        update.addChildUpdate("firstNameRegisterInput", "innerhtml", WarningMessage);
+                    }
+                    if ((lastNameInputLength < LAST_NAME_MIN_LENGTH) || (lastNameInputLength > LAST_NAME_MAX_LENGTH)) {
+                        update.addChildUpdate("lastNameRegisterInput", "background", "red");
+                        WarningMessage = "کاراکتر باشد" + LAST_NAME_MAX_LENGTH + " و حداکثر" + LAST_NAME_MIN_LENGTH
+                                + "طول نام خانوادگی باید حداقل";
+                        update.addChildUpdate("lastNameRegisterInput", "innerhtml", WarningMessage);
+                    }
                 }
+                break;
             }
-            break;
-        case "firstNameRegisterInputClick":
-            update.addChildUpdate("firstNameRegisterInput", "innerhtml", "");
-            update.addChildUpdate("firstNameRegisterInput", "background", "black");
-            break;
-        case "lastNameRegisterInputClick":
-            update.addChildUpdate("lastNameRegisterInput", "innerhtml", "");
-            update.addChildUpdate("lastNameRegisterInput", "background", "black");
-            break;
-
+            case "firstNameRegisterInputClick": {
+                update.addChildUpdate("firstNameRegisterInput", "innerhtml", "");
+                update.addChildUpdate("firstNameRegisterInput", "background", "black");
+                break;
+            }
+            case "lastNameRegisterInputClick": {
+                update.addChildUpdate("lastNameRegisterInput", "innerhtml", "");
+                update.addChildUpdate("lastNameRegisterInput", "background", "black");
+                break;
+            }
+            case "saveProfile": {
+                view = new HomePage();
+            }
         }
-        view = new RegisterPage_1();
         return view;
     }
 
