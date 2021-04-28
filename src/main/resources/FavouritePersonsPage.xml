@@ -1,10 +1,10 @@
 <page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="افراد مورد علاقه" statusbarcolor="#d8f2e5" scrollable="true">
-	<frame layout="linear_vertical"margin_bottom="0" padding="0">
+	<frame layout="linear_vertical" margin_bottom="0" padding="0">
   		<image width="150" height="50" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja-text.png"></image>
   	</frame>
   <frame  layout="linear_vertical" height="wrap_content" margin_bottom="70">
     <frame background="#d8f2e5" margin_left="20" margin_right="20" borderCornerRadius="11">
-     	<frame layout="linear_vertical"margin_top="0"  >
+     	<frame layout="linear_vertical" margin_top="0"  >
       	<frame  borderCornerRadius="11" width="300" height="200">
           <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="#d8f2e5" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-alireza.jpg" borderStrokeWidth="1"></image>
       	</frame>
@@ -13,7 +13,7 @@
     </frame>
     
   <frame background="#d8f2e5" margin_left="20" margin_right="20" borderCornerRadius="11">
-     	<frame layout="linear_vertical"margin_top="0"  >
+     	<frame layout="linear_vertical" margin_top="0"  >
       	<frame  borderCornerRadius="11" width="300" height="200">
           <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="#d8f2e5" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-amirmasud.jpeg" borderStrokeWidth="1"></image>
       	</frame>
@@ -21,7 +21,7 @@
     </frame>   	
     </frame>
     <frame background="#d8f2e5" margin_left="20" margin_right="20" borderCornerRadius="11">
-     	<frame layout="linear_vertical"margin_top="0"  >
+     	<frame layout="linear_vertical" margin_top="0"  >
       	<frame  borderCornerRadius="11" width="300" height="200">
           <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="#d8f2e5" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-hossein.jpeg" borderStrokeWidth="1"></image>
       	</frame>

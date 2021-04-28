@@ -1,4 +1,4 @@
-<page id="startingPage" clearBackStack="true" toolbarcolor="#b4d9c7" title="کی‌کجا" statusbarcolor="#d8f2e5" scrollable="false">
+<page clearBackStack="true" toolbarcolor="#b4d9c7" title="کی‌کجا" statusbarcolor="#d8f2e5" scrollable="false">
     <frame scrollable="true"  layout="linear_vertical" margin_top="100">
         <image width="170" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja.png"></image>
     </frame>
