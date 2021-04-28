@@ -5,6 +5,7 @@ import ir.appsan.sdk.View;
 import ir.appsan.sdk.ViewUpdate;
 // import required models here
 import ir.sample.app.kikoja.views.*;
+import org.json.simple.JSONObject;
 // import org.json.simple.JSONObject;
 // import java.sql.Connection;
 
@@ -27,6 +28,8 @@ public class KikojaService extends APSService {
     // use this method to change pages
     @Override
     public View onCreateView(String command, JSONObject pageData, String userId) {
+        // assign the next page to view variable and return it to change page
+        View view;
         // enter the command_name which entered in onclick second attribute here to
         // specify desired on create command
         // use pageData to get data from xml page elements using
@@ -35,6 +38,8 @@ public class KikojaService extends APSService {
         switch (command) {
 
         }
+        view = new RegisterPage_2();
+        return view;
     }
 
     // use this method to update current page
@@ -54,8 +59,8 @@ public class KikojaService extends APSService {
         // use view classes to create new page and return view class to open
         switch (updateCommand) {
         case "nextButtonOfFirstRegisterPage":
-            int firstNameInputLength = pageData.get("firstNameRegisterInput").length;
-            int lastNameInputLength = pageData.get("lastNameRegisterInput").length;
+            int firstNameInputLength = pageData.get("firstNameRegisterInput").toString().length();
+            int lastNameInputLength = pageData.get("lastNameRegisterInput").toString().length();
             // success case
             if ((firstNameInputLength > FIRST_NAME_MIN_LENGTH) && (firstNameInputLength < FIRST_NAME_MAX_LENGTH)
                     && (lastNameInputLength > LAST_NAME_MIN_LENGTH) && (lastNameInputLength < LAST_NAME_MAX_LENGTH)) {
@@ -88,6 +93,8 @@ public class KikojaService extends APSService {
             update.addChildUpdate("lastNameRegisterInput", "background", "black");
             break;
         }
+        view = new RegisterPage_2();
+        return view;
     }
 
 }

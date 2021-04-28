@@ -1,7 +1,7 @@
-package main.java.ir.sample.app.kikoja;
+package ir.sample.app.kikoja;
 
 import ir.appsan.sdk.APSChannel;
-import ir.sample.app.highway.services.KikojaService;
+import ir.sample.app.kikoja.services.KikojaService;
 
 public class KikojaChannel extends APSChannel {
 
