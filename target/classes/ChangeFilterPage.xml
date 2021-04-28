@@ -1,43 +1,43 @@
 <page  clearBackStack="true" background="#ececec" toolbarcolor="#b4d9c7" title="تغییر فیلتر جستجو" statusbarcolor="#d8f2e5" scrollable="true">
 
 	<frame layout="linear_vertical" >
-      <frame  margin_bottom="100" background="white" padding_top=""margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="850">
-       <frame layout="linear_vertical" >
-  		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
-          	<textInput textsize="11" textalignment="right" margin-right="50" > مهندسی کامپیوتر  ▼</textInput>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
-          	<textInput textsize="11" textalignment="right" margin-right="50" >کارشناسی  ▼</textInput>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">سال ورود</text>
-        <textInput textsize="11" textalignment="right" margin-right="50"  >▼  ۱۳۹۷</textInput>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
-              	<textInput textsize="11" textalignment="right" margin-right="50" hint="فوتبال" ></textInput>
-        		<frame  gravity="left" layout="linear_vertical" >
-                  		<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
-        		</frame>
-        		<text  textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
-      </frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">مهارت‌ها:</text>
-              	<textInput textsize="11" textalignment="right" margin-right="50" hint="ماشین‌لرنینگ" ></textInput>
-        		<frame  gravity="left" layout="linear_vertical" >
-                  		<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
-        		</frame>
-                 <text  textsize="11"  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right"> طراحی وبسایت - ‌HTML - python - فرانت‌اند</text>
-        		
-      </frame>
-      
-      
-  	</frame>
-      		
-      </frame>
-    </frame>  
+		<frame  margin_bottom="100" background="white" padding_top=""margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="850">
+			<frame layout="linear_vertical" >
+				<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+					<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
+					<textInput textsize="11" textalignment="right" margin-right="50" > مهندسی کامپیوتر  ▼</textInput>
+				</frame>
+				<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+					<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
+					<textInput textsize="11" textalignment="right" margin-right="50" >کارشناسی  ▼</textInput>
+				</frame>
+				<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+					<text margin_left="10" margin_right="10" background="white">سال ورود</text>
+					<textInput textsize="11" textalignment="right" margin-right="50"  >▼  ۱۳۹۷</textInput>
+				</frame>
+				<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+					<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
+					<textInput textsize="11" textalignment="right" margin-right="50" hint="فوتبال" ></textInput>
+					<frame  gravity="left" layout="linear_vertical" >
+						<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+					</frame>
+					<text  textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
+				</frame>
+				<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+					<text margin_left="10" margin_right="10" background="white">مهارت‌ها:</text>
+					<textInput textsize="11" textalignment="right" margin-right="50" hint="ماشین‌لرنینگ" ></textInput>
+					<frame  gravity="left" layout="linear_vertical" >
+						<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+					</frame>
+					<text  textsize="11"  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right"> طراحی وبسایت - ‌HTML - python - فرانت‌اند</text>
 
-  	
+				</frame>
+
+
+			</frame>
+
+		</frame>
+	</frame>
+
+
 </page>

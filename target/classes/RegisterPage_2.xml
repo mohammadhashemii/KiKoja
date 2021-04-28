@@ -1,9 +1,9 @@
 <page clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="false">
 	<frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
-  		<image width="100" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja.png"></image>
-  	</frame>
-  	<frame layout="linear_vertical">
-  		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<image width="100" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja.png"></image>
+	</frame>
+	<frame layout="linear_vertical">
+		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 			<text margin_left="10" margin_right="10" background="white">رشته تحصیلی:</text>
 			<dropdown>
 				<item id="-">انتخاب کنید</item>
@@ -30,20 +30,20 @@
 				<item id="fina" onClick="">حسابداری</item>
 				<item id="busi" onClick="">مدیریت بازرگانی</item>
 			</dropdown>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
-		  <dropdown>
-			  <item id="-">انتخاب کنید</item>
-			  <item id="bsc" onClick="">کارشناسی</item>
-			  <item id="msc" onClick="">کارشناسی ارشد</item>
-			  <item id="phd" onClick="">دکترا</item>
-			  <item id="post-phd" onClick="">پسا دکترا</item>
-		  </dropdown>
-      	</frame>
-      <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" margin_right="10" background="white">سال ورود</text>
-        	<dropdown>
+		</frame>
+		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+			<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
+			<dropdown>
+				<item id="-">انتخاب کنید</item>
+				<item id="bsc" onClick="">کارشناسی</item>
+				<item id="msc" onClick="">کارشناسی ارشد</item>
+				<item id="phd" onClick="">دکترا</item>
+				<item id="post-phd" onClick="">پسا دکترا</item>
+			</dropdown>
+		</frame>
+		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+			<text margin_left="10" margin_right="10" background="white">سال ورود</text>
+			<dropdown>
 				<item id="-">انتخاب کنید</item>
 				<item id="1399" onClick="">۱۳۹۹</item>
 				<item id="1398" onClick="">۱۳۹۸</item>
@@ -52,10 +52,10 @@
 				<item id="1395" onClick="">۱۳۹۵</item>
 				<item id="1394" onClick="">۱۳۹۴</item>
 			</dropdown>
-          	
-      	</frame>
-  	</frame>
-  	<frame  layout="linear_vertical" margin_top="20" >
-      	<button onClick="command/nextButtonOfSecondRegisterPage" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">تایید ثبت‌نام</button>
-  	</frame>
+
+		</frame>
+	</frame>
+	<frame  layout="linear_vertical" margin_top="20" >
+		<button onClick="command/getProfilePage" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="black" textsize="10" background="#b4d9c7" height="35" >تایید ثبت‌نام</button>
+	</frame>
 </page>
