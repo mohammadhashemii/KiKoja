@@ -3,7 +3,7 @@
   		<image width="170" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja.png"></image>
   	</frame>
   	<frame scrollable="true"  layout="linear_vertical" margin_top="100" >
-      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">ثبت نام</button>
+      	<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="command/registerPageOne"  textcolor="black" textsize="10" background="#b4d9c7" height="35" margin_left="50" margin_right="50">ثبت نام</button>
    		<button progressBarRadius="11" borderStrokeWidth="1"  borderColor="black" progressBarColor="white" borderCornerRadius="8"  onClick=""  textcolor="black" textsize="10" background="" height="35" margin_left="50" margin_right="50" >ورود</button>
   	</frame>
 </page>

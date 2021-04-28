@@ -44,6 +44,10 @@ public class KikojaService extends APSService {
                 view = new RegisterPage_1();
                 break;
             }
+            case "loginRegisterPage":{
+                view = new LoginRegisterPage();
+                break;
+            }
             case "getHomePage": {
                 view = new HomePage();
                 break;
@@ -103,13 +107,13 @@ public class KikojaService extends APSService {
                         update.addChildUpdate("firstNameRegisterInput", "background", "red");
                         WarningMessage = "کاراکتر باشد" + FIRST_NAME_MAX_LENGTH + " و حداکثر" + FIRST_NAME_MIN_LENGTH
                                 + "طول نام باید حداقل";
-                        update.addChildUpdate("firstNameRegisterInput", "innerhtml", WarningMessage);
+                        update.addChildUpdate("firstNameRegisterFrame", "background", "red");
                     }
                     if ((lastNameInputLength < LAST_NAME_MIN_LENGTH) || (lastNameInputLength > LAST_NAME_MAX_LENGTH)) {
                         update.addChildUpdate("lastNameRegisterInput", "background", "red");
                         WarningMessage = "کاراکتر باشد" + LAST_NAME_MAX_LENGTH + " و حداکثر" + LAST_NAME_MIN_LENGTH
                                 + "طول نام خانوادگی باید حداقل";
-                        update.addChildUpdate("lastNameRegisterInput", "innerhtml", WarningMessage);
+                        update.addChildUpdate("lastNameRegisterFrame", "background", "red");
                     }
                 }
                 return update;
@@ -126,6 +130,12 @@ public class KikojaService extends APSService {
             }
             case "saveProfile": {
                 return new HomePage();
+            }
+            case "addHobbiesButtonUpdate":{
+//                String hobbyBoxText = pageData.get("hobbiesTextBox").toString();
+//                String userInput = pageData.get("hobbiesTextInput").toString();
+//                update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
+//                update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
             }
             default:{
                 return update;

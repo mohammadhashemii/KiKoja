@@ -3,11 +3,11 @@
 		<image width="100" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja.png"></image>
 	</frame>
 	<frame layout="linear_vertical">
-		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="firstNameRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">نام:</text>
 			<textInput textsize="11" textalignment="right" margin-right="50" hint="علی" id="firstNameRegisterInput" onClick="firstNameRegisterInputClick"></textInput>
 		</frame>
-		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="lastNameRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">نام خانوادگی:</text>
 			<textInput textsize="11" textalignment="right" margin-right="50" hint="احمدی" id="lastNameRegisterInput" onClick="lastNameRegisterInputClick"></textInput>
 		</frame>
