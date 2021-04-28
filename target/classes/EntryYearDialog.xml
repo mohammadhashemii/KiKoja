@@ -1,0 +1,10 @@
+<dialog id="type">
+    <frame layout="linear_vertical">
+        <checkbox id="1399" onClick="">۱۳۹۹</checkbox>
+        <checkbox id="1398" onClick="">۱۳۹۸</checkbox>
+        <checkbox id="1397" onClick="">۱۳۹۷</checkbox>
+        <checkbox id="1396" onClick="">۱۳۹۶</checkbox>
+        <checkbox id="1395" onClick="">۱۳۹۵</checkbox>
+        <checkbox id="1394" onClick="">۱۳۹۴</checkbox>
+    </frame>
+</dialog>
