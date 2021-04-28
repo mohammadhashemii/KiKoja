@@ -36,9 +36,15 @@ public class KikojaService extends APSService {
         // their id :: pageData.get([element_id]).[desired_method]();
         // use view classes to create new page and return view class to open
         switch (command) {
+            case "startingPage":
+                view = new StartingPage();
+                return view;
+            case "registerPageOne":
+                view = new RegisterPage_1();
+                return view;
 
         }
-        view = new RegisterPage_1();
+        view = new StartingPage();
         return view;
     }
 
@@ -94,7 +100,7 @@ public class KikojaService extends APSService {
             break;
 
         }
-        view = new RegisterPage_1();
+        view = new StartingPage();
         return view;
     }
 
