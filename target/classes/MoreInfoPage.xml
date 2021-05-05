@@ -1,26 +1,28 @@
 <page  clearBackStack="true" background="#ececec" toolbarcolor="#b4d9c7" title="اطلاعات بیشتر" statusbarcolor="#d8f2e5" scrollable="true">
 
 	<frame layout="linear_vertical" >
-      <frame  margin_bottom="100" background="white" padding_top="70" margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="700">
-        	<frame   borderCornerRadius="8" width="290" height="300" >
-          			<image id="profile-image"  layout="linear_vertical" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-alireza.jpg" borderStrokeWidth="1"></image>
-      		</frame>
-          	<text   id="name"  textsize="14"  padding_right="10"> علیرضا بیناییان</text>
-        	<frame layout="linear_horizontal" padding_left="15" padding_right="10">
-              <text  id="major"  gravity="left" textsize="11"  textcolor="#909090"> ورودی ۱۳۹۷</text>
-              <text  id="major"  textsize="11"  textcolor="#909090">رشته: مهندسی کامپیوتر</text>
-        	</frame>
-          	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" textsize="11" margin_right="10" background="white"  textcolor="#909090">علاقه‌مندی‌ها:</text>
-        	<text  textsize="11"  textcolor="#909090"   padding_right="10" height="70"  borderCornerRadius="8" borderColor="#909090" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کافه‌گردی - فوتبال - سینما - پرورش اندام</text>
-      		</frame>
-        <frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-          	<text margin_left="10" textsize="11" margin_right="10" background="white"  textcolor="#909090">مهارت‌ها:</text>
-        	<text  textsize="11"  textcolor="#909090"   padding_right="10" height="70"  borderCornerRadius="8" borderColor="#909090" borderStrokeWidth="1" textalignment="right">هوش مصنوعی - توسعه فرانت‌اند - مقاله‌نویسی - ماشین لرنینگ‌- pytorch - tensorflow - pandas - برنامه‌نویسی</text>
-        
-      		</frame>
-        
-      		
-      </frame>
-    </frame>
+		<frame  margin_bottom="100" background="white" padding_top="70" margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="700">
+			<frame   borderCornerRadius="8" width="290" height="300" >
+				<image id="profile-image"  layout="linear_vertical" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-alireza.jpg" borderStrokeWidth="1"></image>
+			</frame>
+			<text   id="name"  textsize="14"  padding_right="10"> علیرضا بیناییان</text>
+			<frame layout="linear_horizontal" padding_left="15" padding_right="10">
+				<text  id="major"  gravity="left" textsize="11"  textcolor="#909090"> ورودی ۱۳۹۷</text>
+				<text  id="major"  textsize="11"  textcolor="#909090">رشته: مهندسی کامپیوتر</text>
+			</frame>
+			<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+				<text margin_left="10" textsize="11" margin_right="10" background="white"  textcolor="#909090">علاقه‌مندی‌ها:</text>
+				<text  textsize="11"  textcolor="#909090"   padding_right="10" height="70"  borderCornerRadius="8" borderColor="#909090" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کافه‌گردی - فوتبال - سینما - پرورش اندام</text>
+			</frame>
+			<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+				<text margin_left="10" textsize="11" margin_right="10" background="white"  textcolor="#909090">مهارت‌ها:</text>
+				<text  textsize="11"  textcolor="#909090"   padding_right="10" height="70"  borderCornerRadius="8" borderColor="#909090" borderStrokeWidth="1" textalignment="right">هوش مصنوعی - توسعه فرانت‌اند - مقاله‌نویسی - ماشین لرنینگ‌- pytorch - tensorflow - pandas - برنامه‌نویسی</text>
+
+			</frame>
+
+
+		</frame>
+	</frame>
+
+
 </page>

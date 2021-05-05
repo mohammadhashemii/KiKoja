@@ -1,7 +1,7 @@
 <page  clearBackStack="true" background="#ececec" toolbarcolor="#b4d9c7" title="کی‌کجا" statusbarcolor="#d8f2e5" scrollable="false">
 
 	<frame layout="linear_vertical" >
-		<frame height="wrap_content"  margin_bottom="100" background="white" padding_bottom=""margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="400">
+		<frame  margin_bottom="100" background="white" padding_bottom="" margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="400">
 			<frame  gravity="center" layout="linear_vertical" >
 				<text  gravity="center" textsize="11">متاسفانه شخصی با ویژگی‌های مورد‌نظر یافت نشد.</text>
 			</frame>
