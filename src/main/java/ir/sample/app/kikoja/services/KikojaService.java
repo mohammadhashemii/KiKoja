@@ -95,7 +95,7 @@ public class KikojaService extends APSService {
                 if ((firstNameInputLength > FIRST_NAME_MIN_LENGTH) && (firstNameInputLength < FIRST_NAME_MAX_LENGTH)
                         && (lastNameInputLength > LAST_NAME_MIN_LENGTH) && (lastNameInputLength < LAST_NAME_MAX_LENGTH)) {
                     // lunch the second registering page if succeed
-                    view = new RegisterPage_2();
+                    return new RegisterPage_2();
                 }
                 // fail case
                 else {
@@ -112,23 +112,26 @@ public class KikojaService extends APSService {
                         update.addChildUpdate("lastNameRegisterInput", "innerhtml", WarningMessage);
                     }
                 }
-                break;
+                return update;
             }
             case "firstNameRegisterInputClick": {
                 update.addChildUpdate("firstNameRegisterInput", "innerhtml", "");
                 update.addChildUpdate("firstNameRegisterInput", "background", "black");
-                break;
+                return update;
             }
             case "lastNameRegisterInputClick": {
                 update.addChildUpdate("lastNameRegisterInput", "innerhtml", "");
                 update.addChildUpdate("lastNameRegisterInput", "background", "black");
-                break;
+                return update;
             }
             case "saveProfile": {
-                view = new HomePage();
+                return new HomePage();
+            }
+            default:{
+                return update;
             }
         }
-        return view;
+
     }
 
 }
