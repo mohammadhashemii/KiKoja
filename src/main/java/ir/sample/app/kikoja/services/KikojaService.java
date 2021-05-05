@@ -1,5 +1,4 @@
 package ir.sample.app.kikoja.services;
-
 import ir.appsan.sdk.APSService;
 import ir.appsan.sdk.View;
 import ir.appsan.sdk.ViewUpdate;
@@ -143,5 +142,4 @@ public class KikojaService extends APSService {
         }
 
     }
-
 }
