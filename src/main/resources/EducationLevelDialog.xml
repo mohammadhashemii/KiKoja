@@ -1,8 +1,0 @@
-<dialog id="type">
-    <frame layout="linear_vertical">
-        <checkbox id="bsc" onClick="">کارشناسی</checkbox>
-        <checkbox id="msc" onClick="">کارشناسی ارشد</checkbox>
-        <checkbox id="phd" onClick="">دکترا</checkbox>
-        <checkbox id="post-phd" onClick="">پسا دکترا</checkbox>
-    </frame>
-</dialog>
