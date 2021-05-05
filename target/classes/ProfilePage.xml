@@ -11,7 +11,7 @@
 <frame layout="linear_vertical" >
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
-		<dropdown background="#ededeb" borderCornerRadius="8">
+		<dropdown>
 			<item id="-">انتخاب کنید</item>
 			<item id="ce" onClick="">مهندسی کامپیوتر</item>
 			<item id="civil" onClick="">مهندسی عمران</item>
@@ -39,7 +39,7 @@
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
-		<dropdown background="#ededeb" borderCornerRadius="8">
+		<dropdown>
 			<item id="-">انتخاب کنید</item>
 			<item id="bsc" onClick="">کارشناسی</item>
 			<item id="msc" onClick="">کارشناسی ارشد</item>
@@ -49,7 +49,7 @@
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">سال ورود</text>
-		<dropdown background="#ededeb" borderCornerRadius="8">
+		<dropdown>
 			<item id="-">انتخاب کنید</item>
 			<item id="1399" onClick="">۱۳۹۹</item>
 			<item id="1398" onClick="">۱۳۹۸</item>
@@ -60,18 +60,24 @@
 		</dropdown>
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
+		<text margin_left="10" margin_right="10" background="white">ایمیل:</text>
+		<textInput textsize="11" textalignment="right" margin-right="50" hint="test@gmail.com" ></textInput>
+		<text margin_left="10" margin_right="10" background="white">شماره تماس:</text>
+		<textInput textsize="11" textalignment="right" margin-right="50" hint="+982129901" ></textInput>
 		<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
-		<textInput textsize="11" textalignment="right" margin-right="50" hint="فوتبال" id="hobbiesTextInput"></textInput>
-		<frame  gravity="left" layout="linear_vertical" >
-			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/addHobbiesButtonUpdate"  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+		<textInput textsize="11" textalignment="right" margin-right="50" hint="فوتبال" ></textInput>
+		<frame  gravity="left" layout="linear_horizontal" >
+			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#dc3545" height="35" width="60"> - حذف کن</button>
+			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
 		</frame>
-		<text  textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right" id="hobbiesTextBox"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
+		<text  textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">مهارت‌ها:</text>
 		<textInput textsize="11" textalignment="right" margin-right="50" hint="ماشین‌لرنینگ" ></textInput>
-		<frame  gravity="left" layout="linear_vertical" >
-			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+		<frame  gravity="center" layout="linear-horizontal" >
+			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#dc3545" height="35" width="60"> - حذف کن</button>
+			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
 		</frame>
 		<text  textsize="11"  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right"> طراحی وبسایت - ‌HTML - python - فرانت‌اند</text>
 
