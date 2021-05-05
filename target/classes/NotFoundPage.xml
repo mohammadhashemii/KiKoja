@@ -1,0 +1,68 @@
+<<<<<<< HEAD
+<page  clearBackStack="true" background="#ececec" toolbarcolor="#b4d9c7" title="کی‌کجا" statusbarcolor="#d8f2e5" scrollable="false">
+
+	<frame layout="linear_vertical" >
+		<frame  margin_bottom="100" background="white" padding_bottom="" margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="400">
+			<frame  gravity="center" layout="linear_vertical" >
+				<text  gravity="center" textsize="11">متاسفانه شخصی با ویژگی‌های مورد‌نظر یافت نشد.</text>
+			</frame>
+			<frame  gravity="center" layout="linear_vertical" >
+				<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="command/getChangeFilterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="150"> تغییر فیلتر‌های جستجو</button>
+			</frame>
+
+		</frame>
+	</frame>
+
+	<footer background="#b4d9c7" layout="linear_horizontal">
+		<frame layout="linear_vertical">
+			<frame onClick="command/getFavouritePage" borderColor="black" borderCornerRadius="8" width="35" >
+				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
+			</frame>
+		</frame>
+		<frame layout="linear_vertical">
+			<frame borderColor="black" borderCornerRadius="8" width="35" background="#d8f2e5">
+				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
+			</frame>
+		</frame>
+		<frame layout="linear_vertical">
+			<frame onClick="command/getProfilePage" borderColor="black" borderCornerRadius="8" width="35" >
+				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
+			</frame>
+		</frame>
+
+	</footer>
+=======
+<page  clearBackStack="true" background="#ececec" toolbarcolor="#b4d9c7" title="کی‌کجا" statusbarcolor="#d8f2e5" scrollable="false">
+
+	<frame layout="linear_vertical" >
+		<frame height="wrap_content"  margin_bottom="100" background="white" padding_bottom=""margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="400">
+			<frame  gravity="center" layout="linear_vertical" >
+				<text  gravity="center" textsize="11">متاسفانه شخصی با ویژگی‌های مورد‌نظر یافت نشد.</text>
+			</frame>
+			<frame  gravity="center" layout="linear_vertical" >
+				<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="command/getChangeFilterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" width="150"> تغییر فیلتر‌های جستجو</button>
+			</frame>
+
+		</frame>
+	</frame>
+
+	<footer background="#b4d9c7" layout="linear_horizontal">
+		<frame layout="linear_vertical">
+			<frame onClick="command/getFavouritePage" borderColor="black" borderCornerRadius="8" width="35" >
+				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
+			</frame>
+		</frame>
+		<frame layout="linear_vertical">
+			<frame borderColor="black" borderCornerRadius="8" width="35" background="#d8f2e5">
+				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
+			</frame>
+		</frame>
+		<frame layout="linear_vertical">
+			<frame onClick="command/getProfilePage" borderColor="black" borderCornerRadius="8" width="35" >
+				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
+			</frame>
+		</frame>
+
+	</footer>
+>>>>>>> 1433b74a70a7779cf7885c080208122aecde50a9
+</page>
