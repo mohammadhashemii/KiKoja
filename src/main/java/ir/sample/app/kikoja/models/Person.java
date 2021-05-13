@@ -11,4 +11,5 @@ public class Person{
     public Integer uniEntryYear;
     public String skills;
     public String favourites;
+    public String photoURL;
 }
