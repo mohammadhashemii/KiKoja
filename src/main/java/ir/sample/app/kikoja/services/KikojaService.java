@@ -74,7 +74,7 @@ public class KikojaService extends APSService {
             }
         }
         return view;
-    }
+    
         view = new RegisterPage_1();
         return view;
     }
