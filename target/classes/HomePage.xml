@@ -36,17 +36,17 @@
 	<footer background="#b4d9c7" layout="linear_horizontal">
 		<frame layout="linear_vertical">
 			<frame onClick="command/getFavouritePage" borderColor="black" borderCornerRadius="8" width="35" >
-				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
+				<image  src="http://162.55.105.137:8080/api/public/dl/tX_ZgJr7"></image>
 			</frame>
 		</frame>
 		<frame layout="linear_vertical">
 			<frame borderColor="black" borderCornerRadius="8" width="35" background="#d8f2e5">
-				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
+				<image  src="http://162.55.105.137:8080/api/public/dl/cOwz3R0c"></image>
 			</frame>
 		</frame>
 		<frame layout="linear_vertical">
 			<frame onClick="command/getProfilePage" borderColor="black" borderCornerRadius="8" width="35" >
-				<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
+				<image  src="http://162.55.105.137:8080/api/public/dl/bx1jAQw7"></image>
 			</frame>
 		</frame>
 
