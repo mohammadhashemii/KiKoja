@@ -1,6 +1,8 @@
-package ir.sample.app.kikoja.models;
+package ir.sample.app.kikoja.database;
 
+import javax.swing.*;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseManager {
