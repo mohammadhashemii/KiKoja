@@ -36,6 +36,10 @@ public class KikojaService extends APSService {
         // their id :: pageData.get([element_id]).[desired_method]();
         // use view classes to create new page and return view class to open
         switch (command) {
+            case "loginPage": {
+                view = new LoginPage();
+                break;
+            }
             case "startingPage": {
                 view = new StartingPage();
                 break;
@@ -44,7 +48,7 @@ public class KikojaService extends APSService {
                 view = new RegisterPage_1();
                 break;
             }
-            case "loginRegisterPage":{
+            case "loginRegisterPage": {
                 view = new LoginRegisterPage();
                 break;
             }
@@ -97,13 +101,15 @@ public class KikojaService extends APSService {
                 int lastNameInputLength = pageData.get("lastNameRegisterInput").toString().length();
                 // success case
                 if ((firstNameInputLength > FIRST_NAME_MIN_LENGTH) && (firstNameInputLength < FIRST_NAME_MAX_LENGTH)
-                        && (lastNameInputLength > LAST_NAME_MIN_LENGTH) && (lastNameInputLength < LAST_NAME_MAX_LENGTH)) {
+                        && (lastNameInputLength > LAST_NAME_MIN_LENGTH)
+                        && (lastNameInputLength < LAST_NAME_MAX_LENGTH)) {
                     // lunch the second registering page if succeed
                     return new RegisterPage_2();
                 }
                 // fail case
                 else {
-                    if ((firstNameInputLength < FIRST_NAME_MIN_LENGTH) || (firstNameInputLength > FIRST_NAME_MAX_LENGTH)) {
+                    if ((firstNameInputLength < FIRST_NAME_MIN_LENGTH)
+                            || (firstNameInputLength > FIRST_NAME_MAX_LENGTH)) {
                         update.addChildUpdate("firstNameRegisterInput", "background", "red");
                         WarningMessage = "کاراکتر باشد" + FIRST_NAME_MAX_LENGTH + " و حداکثر" + FIRST_NAME_MIN_LENGTH
                                 + "طول نام باید حداقل";
@@ -131,13 +137,13 @@ public class KikojaService extends APSService {
             case "saveProfile": {
                 return new HomePage();
             }
-            case "addHobbiesButtonUpdate":{
-//                String hobbyBoxText = pageData.get("hobbiesTextBox").toString();
-//                String userInput = pageData.get("hobbiesTextInput").toString();
-//                update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
-//                update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
+            case "addHobbiesButtonUpdate": {
+                // String hobbyBoxText = pageData.get("hobbiesTextBox").toString();
+                // String userInput = pageData.get("hobbiesTextInput").toString();
+                // update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
+                // update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
             }
-            default:{
+            default: {
                 return update;
             }
         }
