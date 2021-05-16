@@ -1,10 +1,10 @@
 <page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="صفحه شخصی" statusbarcolor="#d8f2e5" scrollable="true">
 <frame layout="linear_vertical" margin_bottom="0" padding="0">
-	<image width="150" height="50" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja-text.png"></image>
+	<image width="150" height="50" src="http://162.55.105.137:8080/api/public/dl/7Ek-S9IK"></image>
 </frame>
 <frame layout="linear_vertical" margin_top="0"  >
 	<frame borderColor="black" borderCornerRadius="11" width="150" height="225">
-		<image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-amini.jpg" borderStrokeWidth="1"></image>
+		<image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="http://162.55.105.137:8080/api/public/dl/qCi7vK8D" borderStrokeWidth="1"></image>
 	</frame>
 	<text id="name" gravity="center" textsize="20"> علیرضا امینی</text>
 </frame>
@@ -91,17 +91,17 @@
 <footer background="#b4d9c7" layout="linear_horizontal">
 	<frame layout="linear_vertical">
 		<frame onClick="command/getFavouritePage" borderColor="black" borderCornerRadius="8" width="35" >
-			<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-chat.png"></image>
+			<image  src="http://162.55.105.137:8080/api/public/dl/tX_ZgJr7"></image>
 		</frame>
 	</frame>
 	<frame layout="linear_vertical">
 		<frame onClick="command/getHomePage" borderColor="black" borderCornerRadius="8" width="35" >
-			<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-home.png"></image>
+			<image  src="http://162.55.105.137:8080/api/public/dl/cOwz3R0c"></image>
 		</frame>
 	</frame>
 	<frame layout="linear_vertical">
 		<frame borderColor="black" borderCornerRadius="8" width="35" background="#d8f2e5">
-			<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-profile.png"></image>
+			<image  src="http://162.55.105.137:8080/api/public/dl/bx1jAQw7"></image>
 		</frame>
 	</frame>
 
