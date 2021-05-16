@@ -3,7 +3,7 @@
 	<frame layout="linear_vertical" >
 		<frame  margin_bottom="100" background="white" padding_top="70" margin_left="5" margin_right="5" layout="linear_vertical" borderCornerRadius="8"  borderColor="" height="700">
 			<frame   borderCornerRadius="8" width="290" height="300" >
-				<image id="profile-image"  layout="linear_vertical" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-alireza.jpg" borderStrokeWidth="1"></image>
+				<image id="profile-image"  layout="linear_vertical" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="http://162.55.105.137:8080/api/public/dl/qCi7vK8D" borderStrokeWidth="1"></image>
 			</frame>
 			<text   id="name"  textsize="14"  padding_right="10"> علیرضا بیناییان</text>
 			<frame layout="linear_horizontal" padding_left="15" padding_right="10">
