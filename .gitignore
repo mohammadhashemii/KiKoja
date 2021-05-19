@@ -3,6 +3,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java
 
 *.idea/
+target/
+out/
 
 ### Java ###
 # Compiled class file
