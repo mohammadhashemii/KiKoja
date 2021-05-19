@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ورود" statusbarcolor="#d8f2e5" scrollable="false">
-    <frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
-=======
 <page clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ورود" statusbarcolor="#d8f2e5" scrollable="false">
     <frame scrollable="true" layout="linear_vertical" margin_top="0" margin_bottom="0">
->>>>>>> 89b971e7644cbd8b53aaef77cfd32719bffc6eca
         <image width="100" src="http://162.55.105.137:8080/api/public/dl/aX5iqrp2"></image>
     </frame>
     <frame layout="linear_vertical">
