@@ -13,7 +13,7 @@
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="studentNumberRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">شماره دانشجویی:</text>
-			<textInput textsize="11" textalignment="right" margin-right="50" hint="کد 8 رقمی" id="studentNumberRegisterInput" onClick="studentNumberRegisterInputClick"></textInput>
+			<textInput textsize="11" textalignment="right" margin-right="50" hint="کد 8 رقمی" id="studentNumberRegisterInput" onClick="update/studentNumberRegisterInputClick"></textInput>
 		</frame>
 	</frame>
 	<frame  layout="linear_vertical" margin_top="120" >

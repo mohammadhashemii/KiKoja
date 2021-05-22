@@ -13,15 +13,15 @@ public class DbOperation {
         try {
             String loginQuery = "INSERT INTO person(id,firstName,lastName,email,phoneNumber,uniMajor,uniEduLevel,uniEntryYear,imageURL) VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement pLoginQuery = connection.prepareStatement(loginQuery);
-            pstmt.setString(1, person.id);
-            pstmt.setString(2, person.firstName);
-            pstmt.setString(3, person.lastName);
-            pstmt.setString(4, person.email);
-            pstmt.setString(5, person.phoneNumber);
-            pstmt.setString(6, person.uniMajor);
-            pstmt.setString(7, person.uniEduLevel);
-            pstmt.setString(8, person.uniEntryYear);
-            pstmt.setString(9, person.imageURL);
+            pLoginQuery.setString(1, person.id);
+            pLoginQuery.setString(2, person.firstName);
+            pLoginQuery.setString(3, person.lastName);
+            pLoginQuery.setString(4, person.email);
+            pLoginQuery.setString(5, person.phoneNumber);
+            pLoginQuery.setString(6, person.uniMajor);
+            pLoginQuery.setString(7, person.uniEduLevel);
+            pLoginQuery.setString(8, String.valueOf(person.uniEntryYear));
+            pLoginQuery.setString(9, person.imageURL);
             pLoginQuery.executeUpdate();
             pLoginQuery.close();
         } catch (Exception e) {
@@ -29,9 +29,9 @@ public class DbOperation {
         }
     }
 
-    // public static void retrievePerson(){
-    //
-    // }
+//     public static void retrievePerson(){
+//     }
+
     //
     // public static LinkedList<String> getMatched(String personID){
     //

@@ -3,6 +3,7 @@ package ir.sample.app.kikoja.services;
 import ir.appsan.sdk.APSService;
 import ir.appsan.sdk.View;
 import ir.appsan.sdk.ViewUpdate;
+import ir.sample.app.kikoja.models.Person;
 // import required models here
 import ir.sample.app.kikoja.views.*;
 import org.json.simple.JSONObject;
@@ -84,6 +85,8 @@ public class KikojaService extends APSService {
     @Override
     public ir.appsan.sdk.Response onUpdate(ViewUpdate update, String updateCommand, JSONObject pageData,
             String userId) {
+        // new person data
+        Person newPerson = new Person();
         // assign the next page to view variable and return it to change page
         View view = new StartingPage();
         // used to write warning messages inside the xml elements
@@ -99,11 +102,19 @@ public class KikojaService extends APSService {
             case "nextButtonOfFirstRegisterPage": {
                 int firstNameInputLength = pageData.get("firstNameRegisterInput").toString().length();
                 int lastNameInputLength = pageData.get("lastNameRegisterInput").toString().length();
+                int studentNumberRegisterInputLength = pageData.get("studentNumberRegisterInput").toString().length();
                 // success case
                 if ((firstNameInputLength > FIRST_NAME_MIN_LENGTH) && (firstNameInputLength < FIRST_NAME_MAX_LENGTH)
-                        && (lastNameInputLength > LAST_NAME_MIN_LENGTH)
-                        && (lastNameInputLength < LAST_NAME_MAX_LENGTH)) {
+                        && (lastNameInputLength > LAST_NAME_MIN_LENGTH) && (lastNameInputLength < LAST_NAME_MAX_LENGTH)
+                        && (studentNumberRegisterInputLength == 8)) {
                     // lunch the second registering page if succeed
+                    newPerson.id = pageData.get("studentNumberRegisterInput").toString();
+                    newPerson.firstName = pageData.get("firstNameRegisterInput").toString();
+                    newPerson.lastName = pageData.get("lastNameRegisterInput").toString();
+                    // REVIEW test section ALL PASSED!
+//                    System.out.println("[id]=" + newPerson.id);
+//                    System.out.println("[first_name]=" + newPerson.firstName);
+//                    System.out.println("[last_name]=" + newPerson.lastName);
                     return new RegisterPage_2();
                 }
                 // fail case
@@ -124,6 +135,17 @@ public class KikojaService extends APSService {
                 }
                 return update;
             }
+            case "nextButtonOfSecondRegisterPage": {
+                //fail case must be implemented
+                //success case scenario
+
+                return new RegisterPage_3();
+            }
+            case "nextButtonOfThirdRegisterPage":{
+                newPerson.email = pageData.get("emailRegisterInput").toString();
+                newPerson.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
+                //finalize registration process if successful
+            }
             case "firstNameRegisterInputClick": {
                 update.addChildUpdate("firstNameRegisterInput", "innerhtml", "");
                 update.addChildUpdate("firstNameRegisterInput", "background", "black");
@@ -142,6 +164,33 @@ public class KikojaService extends APSService {
                 // String userInput = pageData.get("hobbiesTextInput").toString();
                 // update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
                 // update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
+            }
+            case "setFieldCe":
+            case "setFieldCivil" :
+            case "setFieldArch" :
+            case "setFieldMecha" :
+            case "setFieldNucl" :
+            case "setFieldChem" :
+            case "setFieldCs" :
+            case "setFieldMath" :
+            case "setFieldPhys" :
+            case "setFieldBio" :
+            case "setFieldDent" :
+            case "setFieldLaw" :
+            case "setFieldEarth" :
+            case "setFieldPhysc" :
+            case "setFieldEduc" :
+            case "setFieldSport" :
+            case "setFieldReli" :
+            case "setFieldFa" :
+            case "setFieldEn" :
+            case "setFieldCh" :
+            case "setFieldFina" :
+            case "setFieldBusi":{
+                System.out.println("HELLO");
+                newPerson.uniMajor = updateCommand.replace("setField","");
+                System.out.println(newPerson.uniMajor);
+                return update;
             }
             default: {
                 return update;

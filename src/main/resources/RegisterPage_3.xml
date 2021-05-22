@@ -13,6 +13,6 @@
         </frame>
     </frame>
     <frame  layout="linear_vertical" margin_top="120" >
-        <button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/nextButtonOfFirstRegisterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" >بعدی</button>
+        <button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/nextButtonOfSecondRegisterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" >بعدی</button>
     </frame>
 </page>

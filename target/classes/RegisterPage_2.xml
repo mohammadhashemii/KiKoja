@@ -7,28 +7,28 @@
 			<text margin_left="10" margin_right="10" background="white">رشته تحصیلی:</text>
 			<dropdown>
 				<item id="-">انتخاب کنید</item>
-				<item id="ce" onClick="">مهندسی کامپیوتر</item>
-				<item id="civil" onClick="">مهندسی عمران</item>
-				<item id="arch" onClick="">مهندسی معماری</item>
-				<item id="mech" onClick="">مهندسی مکانیک</item>
-				<item id="nucl" onClick="">مهندسی هسته‌ای</item>
-				<item id="chem" onClick="">مهندسی شیمی</item>
-				<item id="cs" onClick="">علوم کامپیوتر</item>
-				<item id="math" onClick="">علوم ریاضی</item>
-				<item id="phys" onClick="">علوم فیزیک</item>
-				<item id="bio" onClick="">زیست شناسی</item>
-				<item id="dent" onClick="">دندانپزشکی</item>
-				<item id="law" onClick="">حقوق</item>
-				<item id="earth" onClick="">علوم زمین</item>
-				<item id="physc" onClick="">روانشناسی</item>
-				<item id="educ" onClick="">علوم تربیتی</item>
-				<item id="sport" onClick="">تربیت بدنی</item>
-				<item id="reli" onClick="">الهیات و فقه</item>
-				<item id="fa" onClick="">ادبیات فارسی</item>
-				<item id="en" onClick="">ادبیات انگلیسی</item>
-				<item id="ch" onClick="">ادبیات چینی</item>
-				<item id="fina" onClick="">حسابداری</item>
-				<item id="busi" onClick="">مدیریت بازرگانی</item>
+				<item id="ce" onClick="update/setFieldCe">مهندسی کامپیوتر</item>
+				<item id="civil" onClick="update/setFieldCivil">مهندسی عمران</item>
+				<item id="arch" onClick="update/setFieldArch">مهندسی معماری</item>
+				<item id="mecha" onClick="update/setFieldMecha">مهندسی مکانیک</item>
+				<item id="nucl" onClick="update/setFieldNucl">مهندسی هسته‌ای</item>
+				<item id="chem" onClick="update/setFieldChem">مهندسی شیمی</item>
+				<item id="cs" onClick="update/setFieldCs">علوم کامپیوتر</item>
+				<item id="math" onClick="update/setFieldMath">علوم ریاضی</item>
+				<item id="phys" onClick="update/setFieldPhys">علوم فیزیک</item>
+				<item id="bio" onClick="update/setFieldBio">زیست شناسی</item>
+				<item id="dent" onClick="update/setFieldDent">دندانپزشکی</item>
+				<item id="law" onClick="update/setFieldLaw">حقوق</item>
+				<item id="earth" onClick="update/setFieldEarth">علوم زمین</item>
+				<item id="physc" onClick="update/setFieldPhysc">روانشناسی</item>
+				<item id="educ" onClick="update/setFieldEduc">علوم تربیتی</item>
+				<item id="sport" onClick="update/setFieldSport">تربیت بدنی</item>
+				<item id="reli" onClick="update/setFieldReli">الهیات و فقه</item>
+				<item id="fa" onClick="update/setFieldFa">ادبیات فارسی</item>
+				<item id="en" onClick="update/setFieldEn">ادبیات انگلیسی</item>
+				<item id="ch" onClick="update/setFieldCh">ادبیات چینی</item>
+				<item id="fina" onClick="update/setFieldFina">حسابداری</item>
+				<item id="busi" onClick="update/setFieldBusi">مدیریت بازرگانی</item>
 			</dropdown>
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
