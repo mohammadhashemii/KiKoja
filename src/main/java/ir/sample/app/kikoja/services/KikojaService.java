@@ -187,7 +187,7 @@ public class KikojaService extends APSService {
             case "setFieldCh" :
             case "setFieldFina" :
             case "setFieldBusi":{
-                System.out.println("HELLO");
+                //FIX BUG : can't access setField method through dropdown.
                 newPerson.uniMajor = updateCommand.replace("setField","");
                 System.out.println(newPerson.uniMajor);
                 return update;

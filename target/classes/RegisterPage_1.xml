@@ -5,11 +5,11 @@
 	<frame layout="linear_vertical">
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="firstNameRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">نام:</text>
-			<textInput textsize="11" textalignment="right" margin-right="50" hint="علی" id="firstNameRegisterInput" onClick="firstNameRegisterInputClick"></textInput>
+			<textInput textsize="11" textalignment="right" margin-right="50" hint="علی" id="firstNameRegisterInput" onClick="update/firstNameRegisterInputClick"></textInput>
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="lastNameRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">نام خانوادگی:</text>
-			<textInput textsize="11" textalignment="right" margin-right="50" hint="احمدی" id="lastNameRegisterInput" onClick="lastNameRegisterInputClick"></textInput>
+			<textInput textsize="11" textalignment="right" margin-right="50" hint="احمدی" id="lastNameRegisterInput" onClick="update/lastNameRegisterInputClick"></textInput>
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="studentNumberRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">شماره دانشجویی:</text>
