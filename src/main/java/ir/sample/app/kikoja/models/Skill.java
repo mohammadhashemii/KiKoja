@@ -1,6 +1,6 @@
 package ir.sample.app.kikoja.models;
 
-public class Skills {
+public class Skill {
     String skillName;
     String skillID;
 }
