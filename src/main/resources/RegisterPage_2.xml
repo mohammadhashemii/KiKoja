@@ -1,11 +1,11 @@
-<page clearBackStack="false" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="false">
+<page scrollable="true" clearBackStack="false" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5">
 	<frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
 		<image width="100" src="http://162.55.105.137:8080/api/public/dl/aX5iqrp2"></image>
 	</frame>
 	<frame layout="linear_vertical">
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 			<text margin_left="10" margin_right="10" background="white">رشته تحصیلی:</text>
-			<dropdown>
+			<dropdown onSelectionChange="update/setUniMajor" id="uniMajorDropdown">
 				<item id="-">انتخاب کنید</item>
 				<item id="ce" onClick="update/setFieldCe">مهندسی کامپیوتر</item>
 				<item id="civil" onClick="update/setFieldCivil">مهندسی عمران</item>
@@ -30,20 +30,22 @@
 				<item id="fina" onClick="update/setFieldFina">حسابداری</item>
 				<item id="busi" onClick="update/setFieldBusi">مدیریت بازرگانی</item>
 			</dropdown>
+			<text textColor="red" textSize="11" id="uniMajorError"></text>
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 			<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی:</text>
-			<dropdown>
+			<dropdown onSelectionChange="update/setUniEduLevel" id="uniEduLevelDropdown">
 				<item id="-">انتخاب کنید</item>
 				<item id="bsc" onClick="">کارشناسی</item>
 				<item id="msc" onClick="">کارشناسی ارشد</item>
 				<item id="phd" onClick="">دکترا</item>
 				<item id="post-phd" onClick="">پسا دکترا</item>
 			</dropdown>
+			<text textColor="red" textSize="11" id="uniEduLevelError"></text>
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 			<text margin_left="10" margin_right="10" background="white">سال ورود</text>
-			<dropdown>
+			<dropdown onSelectionChange="update/setUniEntryYear" id="uniEntryYearDropdown">
 				<item id="-">انتخاب کنید</item>
 				<item id="1399" onClick="">۱۳۹۹</item>
 				<item id="1398" onClick="">۱۳۹۸</item>
@@ -52,10 +54,10 @@
 				<item id="1395" onClick="">۱۳۹۵</item>
 				<item id="1394" onClick="">۱۳۹۴</item>
 			</dropdown>
-
+			<text textColor="red" textSize="11" id="uniEntryYearError"></text>
 		</frame>
 	</frame>
 	<frame  layout="linear_vertical" margin_top="20" >
-		<button onClick="command/getProfilePage" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="black" textsize="10" background="#b4d9c7" height="35" >تایید ثبت‌نام</button>
+		<button onClick="update/nextButtonOfSecondRegisterPage" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="black" textsize="10" background="#b4d9c7" height="35" >تایید ثبت‌نام</button>
 	</frame>
 </page>

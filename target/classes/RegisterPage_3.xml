@@ -1,4 +1,4 @@
-<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="false">
+<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="true">
     <frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
         <image width="100" src="http://162.55.105.137:8080/api/public/dl/aX5iqrp2"></image>
     </frame>
@@ -6,13 +6,15 @@
         <frame layout="linear_vertical"  margin_left="15" margin_right="15" id="email">
             <text margin_left="10" margin_right="10" background="white">ایمیل:</text>
             <textInput textsize="11" textalignment="right" margin-right="50" hint="test@sbu.ac.ir" id="emailRegisterInput" onClick="emailRegisterInputClick"></textInput>
+            <text textColor="red" textSize="11" id="emailError"></text>
         </frame>
         <frame layout="linear_vertical"  margin_left="15" margin_right="15" id="phoneNumber">
             <text margin_left="10" margin_right="10" background="white">شماره تماس:</text>
             <textInput textsize="11" textalignment="right" margin-right="50" hint="09111111111" id="phoneNumberRegisterInput" onClick="phoneNumberRegisterInputClick"></textInput>
+            <text textColor="red" textSize="11" id="phoneNumberError"></text>
         </frame>
     </frame>
     <frame  layout="linear_vertical" margin_top="120" >
-        <button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/nextButtonOfSecondRegisterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" >بعدی</button>
+        <button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/nextButtonOfThirdRegisterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" >بعدی</button>
     </frame>
 </page>
