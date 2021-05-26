@@ -3,18 +3,22 @@ package ir.sample.app.kikoja.services;
 import ir.appsan.sdk.APSService;
 import ir.appsan.sdk.View;
 import ir.appsan.sdk.ViewUpdate;
+import ir.sample.app.kikoja.database.DatabaseManager;
+import ir.sample.app.kikoja.database.DbOperation;
 import ir.sample.app.kikoja.models.Person;
 // import required models here
 import ir.sample.app.kikoja.views.*;
 import org.json.simple.JSONObject;
 // import org.json.simple.JSONObject;
-// import java.sql.Connection;
-
+ import java.sql.Connection;
+//
 public class KikojaService extends APSService {
 
     private final int FIRST_NAME_MAX_LENGTH = 15, FIRST_NAME_MIN_LENGTH = 1, LAST_NAME_MAX_LENGTH = 15,
             LAST_NAME_MIN_LENGTH = 1;
     private final String emptySelection = "انتخاب کنید";
+    private DbOperation operation = new DbOperation();
+    private Connection connection = DatabaseManager.getConnection();
 
     public KikojaService(String channelName) {
         super(channelName);
@@ -168,6 +172,7 @@ public class KikojaService extends APSService {
                 if(!pageData.get("emailRegisterInput").toString().equals("") && !pageData.get("phoneNumberRegisterInput").toString().equals("")) {
                     newPerson.email = pageData.get("emailRegisterInput").toString();
                     newPerson.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
+                    operation.registerPerson(newPerson, connection);
                 }
                 //finalize registration process if successful
             }

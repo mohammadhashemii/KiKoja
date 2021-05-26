@@ -24,6 +24,7 @@ public class DbOperation {
             pSingUpQuery.setString(9, person.imageURL);
             pSingUpQuery.executeUpdate();
             pSingUpQuery.close();
+            System.out.println("done");
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
