@@ -19,7 +19,7 @@ public class KikojaService extends APSService {
     private final String emptySelection = "انتخاب کنید";
     private DbOperation operation = new DbOperation();
     private Connection connection = DatabaseManager.getConnection();
-    private Person newPerson = new Person();
+    private Person person = new Person();
 
     public KikojaService(String channelName) {
         super(channelName);
@@ -112,9 +112,9 @@ public class KikojaService extends APSService {
                         && (lastNameInputLength > LAST_NAME_MIN_LENGTH) && (lastNameInputLength < LAST_NAME_MAX_LENGTH)
                         && (studentNumberRegisterInputLength == 8)) {
                     // lunch the second registering page if succeed
-                    newPerson.id = pageData.get("studentNumberRegisterInput").toString();
-                    newPerson.firstName = pageData.get("firstNameRegisterInput").toString();
-                    newPerson.lastName = pageData.get("lastNameRegisterInput").toString();
+                    person.id = pageData.get("studentNumberRegisterInput").toString();
+                    person.firstName = pageData.get("firstNameRegisterInput").toString();
+                    person.lastName = pageData.get("lastNameRegisterInput").toString();
                     // REVIEW test section ALL PASSED!
                     return new RegisterPage_2();
                 }
@@ -142,9 +142,9 @@ public class KikojaService extends APSService {
                 String uniEduLevel = pageData.get("uniEduLevelDropdown").toString();
                 int uniEntryYear = Integer.parseInt(pageData.get("uniEntryYearDropdown").toString());
                 if (!uniMajor.equals(emptySelection) && !uniEduLevel.equals(emptySelection) && uniEntryYear != 0) {
-                    newPerson.uniMajor = uniMajor;
-                    newPerson.uniEduLevel = uniEduLevel;
-                    newPerson.uniEntryYear = uniEntryYear;
+                    person.uniMajor = uniMajor;
+                    person.uniEduLevel = uniEduLevel;
+                    person.uniEntryYear = uniEntryYear;
                     return new RegisterPage_3();
                 } else {
                     if (uniMajor.equals(emptySelection))
@@ -168,10 +168,10 @@ public class KikojaService extends APSService {
                 if(pageData.get("phoneNumberRegisterInput").toString().equals(""))
                     update.addChildUpdate("emailError", "text", "باید شماره تلفن معتبر وارد کنید.");
                 if(!pageData.get("emailRegisterInput").toString().equals("") && !pageData.get("phoneNumberRegisterInput").toString().equals("")) {
-                    newPerson.email = pageData.get("emailRegisterInput").toString();
-                    newPerson.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
-                    newPerson.imageURL = "";
-                    boolean registerResponse = DbOperation.registerPerson(newPerson, connection);
+                    person.email = pageData.get("emailRegisterInput").toString();
+                    person.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
+                    person.imageURL = "";
+                    boolean registerResponse = DbOperation.registerPerson(person, connection);
                     if (registerResponse)
                         return new ProfilePage();
                     else
@@ -200,15 +200,37 @@ public class KikojaService extends APSService {
             }
             case "setUniMajor": {
                 if (pageData.get("uniMajorDropdown").toString() != emptySelection)
-                    newPerson.uniMajor = pageData.get("uniMajorDropdown").toString();
+                    person.uniMajor = pageData.get("uniMajorDropdown").toString();
             }
             case "setUniEduLevel": {
                 if (pageData.get("uniEduLevelDropdown").toString() != emptySelection)
-                    newPerson.uniMajor = pageData.get("uniEduLevelDropdown").toString();
+                    person.uniMajor = pageData.get("uniEduLevelDropdown").toString();
             }
             case "setUniEntryYear": {
                 if (pageData.get("uniEntryYearDropdown").toString() != emptySelection)
-                    newPerson.uniMajor = pageData.get("uniEntryYearDropdown").toString();
+                    person.uniMajor = pageData.get("uniEntryYearDropdown").toString();
+            }
+            case "nextButtonOfLoginPage": {
+                String studentId = pageData.get("studentNumberLoginInput").toString();
+                String phoneNumber = pageData.get("phoneNumberLoginInput").toString();
+                boolean isValid = true;
+                if (studentId.length() != 8) {
+                    update.addChildUpdate("studentNumberError", "text","شماره دانشجویی باید دقیقا 8 رقم باشد.");
+                    isValid = false;
+                }
+                if (phoneNumber.length() == 0) {
+                    update.addChildUpdate("phoneNumberError", "text", "شماره موبایل باید معتبر باشد.");
+                    isValid = false;
+                }
+                if (isValid) {
+                    Person loginResponse = DbOperation.retrievePerson(studentId, phoneNumber, connection);
+                    if (loginResponse == null)
+                        return new LoginPage();
+                    else {
+                        person = loginResponse;
+                        return new ProfilePage();
+                    }
+                }
             }
             default: {
                 return update;
