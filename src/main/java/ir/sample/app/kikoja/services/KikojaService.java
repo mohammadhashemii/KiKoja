@@ -3,17 +3,22 @@ package ir.sample.app.kikoja.services;
 import ir.appsan.sdk.APSService;
 import ir.appsan.sdk.View;
 import ir.appsan.sdk.ViewUpdate;
+import ir.sample.app.kikoja.database.DatabaseManager;
+import ir.sample.app.kikoja.database.DbOperation;
 import ir.sample.app.kikoja.models.Person;
 // import required models here
 import ir.sample.app.kikoja.views.*;
 import org.json.simple.JSONObject;
 // import org.json.simple.JSONObject;
-// import java.sql.Connection;
-
+ import java.sql.Connection;
+//
 public class KikojaService extends APSService {
 
-    private final int FIRST_NAME_MAX_LENGTH = 10, FIRST_NAME_MIN_LENGTH = 1, LAST_NAME_MAX_LENGTH = 10,
+    private final int FIRST_NAME_MAX_LENGTH = 15, FIRST_NAME_MIN_LENGTH = 1, LAST_NAME_MAX_LENGTH = 15,
             LAST_NAME_MIN_LENGTH = 1;
+    private final String emptySelection = "انتخاب کنید";
+    private DbOperation operation = new DbOperation();
+    private Connection connection = DatabaseManager.getConnection();
 
     public KikojaService(String channelName) {
         super(channelName);
@@ -121,29 +126,54 @@ public class KikojaService extends APSService {
                 else {
                     if ((firstNameInputLength < FIRST_NAME_MIN_LENGTH)
                             || (firstNameInputLength > FIRST_NAME_MAX_LENGTH)) {
-                        update.addChildUpdate("firstNameRegisterInput", "background", "red");
-                        WarningMessage = "کاراکتر باشد" + FIRST_NAME_MAX_LENGTH + " و حداکثر" + FIRST_NAME_MIN_LENGTH
-                                + "طول نام باید حداقل";
-                        update.addChildUpdate("firstNameRegisterFrame", "background", "red");
+                        update.addChildUpdate("firstNameHint", "textcolor", "red");
                     }
+                    else
+                        update.addChildUpdate("firstNameHint", "textcolor", "black");
                     if ((lastNameInputLength < LAST_NAME_MIN_LENGTH) || (lastNameInputLength > LAST_NAME_MAX_LENGTH)) {
-                        update.addChildUpdate("lastNameRegisterInput", "background", "red");
-                        WarningMessage = "کاراکتر باشد" + LAST_NAME_MAX_LENGTH + " و حداکثر" + LAST_NAME_MIN_LENGTH
-                                + "طول نام خانوادگی باید حداقل";
-                        update.addChildUpdate("lastNameRegisterFrame", "background", "red");
-                    }
+                        update.addChildUpdate("lastNameHint", "textcolor", "red");
+                    } else
+                        update.addChildUpdate("lastNameHint", "textcolor", "black");
+                    if (studentNumberRegisterInputLength != 8) {
+                        update.addChildUpdate("studentNumberHint", "textcolor", "red");
+                    } else
+                        update.addChildUpdate("studentNumberHint", "textcolor", "black");
                 }
                 return update;
             }
             case "nextButtonOfSecondRegisterPage": {
-                //fail case must be implemented
-                //success case scenario
-
-                return new RegisterPage_3();
+                String uniMajor = pageData.get("uniMajorDropdown").toString();
+                String uniEduLevel = pageData.get("uniEduLevelDropdown").toString();
+                String uniEntryYear = pageData.get("uniEntryYearDropdown").toString();
+                if (!uniMajor.equals(emptySelection) && !uniEduLevel.equals(emptySelection) && !uniEntryYear.equals(emptySelection))
+                    return new RegisterPage_3();
+                else {
+                    if (uniMajor.equals(emptySelection))
+                        update.addChildUpdate("uniMajorError", "text", "باید رشته تحصیلی را انتخاب کنید.");
+                    else
+                        update.addChildUpdate("uniMajorError", "text", "");
+                    if (uniEduLevel.equals(emptySelection))
+                        update.addChildUpdate("uniEduLevelError", "text", "باید مقطع تحصیلی را انتخاب کنید.");
+                    else
+                        update.addChildUpdate("uniEduLevelError", "text", "");
+                    if (uniEntryYear.equals(emptySelection))
+                        update.addChildUpdate("uniEntryYearError", "text", "باید سال ورود را انتخاب کنید.");
+                    else
+                        update.addChildUpdate("uniEntryYearError", "text", "");
+                }
+                return update;
             }
             case "nextButtonOfThirdRegisterPage":{
-                newPerson.email = pageData.get("emailRegisterInput").toString();
-                newPerson.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
+                System.out.println(pageData.get("emailRegisterInput").toString());
+                if(pageData.get("emailRegisterInput").toString().equals(""))
+                    update.addChildUpdate("emailError", "text", "باید ایمیل معتبر وارد کنید.");
+                if(pageData.get("phoneNumberRegisterInput").toString().equals(""))
+                    update.addChildUpdate("emailError", "text", "باید شماره تلفن معتبر وارد کنید.");
+                if(!pageData.get("emailRegisterInput").toString().equals("") && !pageData.get("phoneNumberRegisterInput").toString().equals("")) {
+                    newPerson.email = pageData.get("emailRegisterInput").toString();
+                    newPerson.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
+                    operation.registerPerson(newPerson, connection);
+                }
                 //finalize registration process if successful
             }
             case "firstNameRegisterInputClick": {
@@ -165,32 +195,17 @@ public class KikojaService extends APSService {
                 // update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
                 // update.addChildUpdate("hobbiesTextBox", "innerHTML", hobbyBoxText+userInput);
             }
-            case "setFieldCe":
-            case "setFieldCivil" :
-            case "setFieldArch" :
-            case "setFieldMecha" :
-            case "setFieldNucl" :
-            case "setFieldChem" :
-            case "setFieldCs" :
-            case "setFieldMath" :
-            case "setFieldPhys" :
-            case "setFieldBio" :
-            case "setFieldDent" :
-            case "setFieldLaw" :
-            case "setFieldEarth" :
-            case "setFieldPhysc" :
-            case "setFieldEduc" :
-            case "setFieldSport" :
-            case "setFieldReli" :
-            case "setFieldFa" :
-            case "setFieldEn" :
-            case "setFieldCh" :
-            case "setFieldFina" :
-            case "setFieldBusi":{
-                //FIX BUG : can't access setField method through dropdown.
-                newPerson.uniMajor = updateCommand.replace("setField","");
-                System.out.println(newPerson.uniMajor);
-                return update;
+            case "setUniMajor": {
+                if (pageData.get("uniMajorDropdown").toString() != emptySelection)
+                    newPerson.uniMajor = pageData.get("uniMajorDropdown").toString();
+            }
+            case "setUniEduLevel": {
+                if (pageData.get("uniEduLevelDropdown").toString() != emptySelection)
+                    newPerson.uniMajor = pageData.get("uniEduLevelDropdown").toString();
+            }
+            case "setUniEntryYear": {
+                if (pageData.get("uniEntryYearDropdown").toString() != emptySelection)
+                    newPerson.uniMajor = pageData.get("uniEntryYearDropdown").toString();
             }
             default: {
                 return update;

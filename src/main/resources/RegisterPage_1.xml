@@ -1,4 +1,4 @@
-<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="false">
+<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5" scrollable="true">
 	<frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
 		<image width="100" src="http://162.55.105.137:8080/api/public/dl/aX5iqrp2"></image>
 	</frame>
@@ -6,17 +6,20 @@
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="firstNameRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">نام:</text>
 			<textInput textsize="11" textalignment="right" margin-right="50" hint="علی" id="firstNameRegisterInput" onClick="update/firstNameRegisterInputClick"></textInput>
+			<text textColor="black" textSize="11" id="firstNameHint">نام اجباری است و باید حداکثر 15 کاراکتر باشد.</text>
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="lastNameRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">نام خانوادگی:</text>
 			<textInput textsize="11" textalignment="right" margin-right="50" hint="احمدی" id="lastNameRegisterInput" onClick="update/lastNameRegisterInputClick"></textInput>
+			<text textColor="black" textSize="11" id="lastNameHint">نام خانوادگی اجباری است و باید حداکثر 15 کاراکتر باشد.</text>
 		</frame>
 		<frame layout="linear_vertical"  margin_left="15" margin_right="15" id="studentNumberRegisterFrame">
 			<text margin_left="10" margin_right="10" background="white">شماره دانشجویی:</text>
 			<textInput textsize="11" textalignment="right" margin-right="50" hint="کد 8 رقمی" id="studentNumberRegisterInput" onClick="update/studentNumberRegisterInputClick"></textInput>
+			<text textColor="black" textSize="11" id="studentNumberHint">شماره دانشجویی اجباری است و باید دقیقا 8 رقم باشد.</text>
 		</frame>
 	</frame>
-	<frame  layout="linear_vertical" margin_top="120" >
-		<button progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/nextButtonOfFirstRegisterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" >بعدی</button>
+	<frame  layout="linear_vertical" margin_top="50" >
+		<button id="nextPageButton" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick="update/nextButtonOfFirstRegisterPage"  textcolor="black" textsize="10" background="#b4d9c7" height="35" >بعدی</button>
 	</frame>
 </page>
