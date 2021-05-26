@@ -236,6 +236,7 @@ public class KikojaService extends APSService {
                         return profilePage;
                     }
                 }
+                return update;
             }
             default: {
                 return update;
