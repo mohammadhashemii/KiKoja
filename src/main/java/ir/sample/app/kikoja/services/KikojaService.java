@@ -172,8 +172,11 @@ public class KikojaService extends APSService {
                     person.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
                     person.imageURL = "";
                     boolean registerResponse = DbOperation.registerPerson(person, connection);
-                    if (registerResponse)
-                        return new ProfilePage();
+                    if (registerResponse) {
+                        ProfilePage profilePage = new ProfilePage();
+                        profilePage.setMustacheModel(person);
+                        return profilePage;
+                    }
                     else
                         return new RegisterPage_1();
                 }
@@ -228,7 +231,9 @@ public class KikojaService extends APSService {
                         return new LoginPage();
                     else {
                         person = loginResponse;
-                        return new ProfilePage();
+                        ProfilePage profilePage = new ProfilePage();
+                        profilePage.setMustacheModel(person);
+                        return profilePage;
                     }
                 }
             }

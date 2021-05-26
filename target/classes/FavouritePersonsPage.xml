@@ -1,4 +1,4 @@
-<page  clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="افراد مورد علاقه" statusbarcolor="#d8f2e5" scrollable="true">
+<page onBack="app/back" clearBackStack="true" background="" toolbarcolor="#b4d9c7" title="افراد مورد علاقه" statusbarcolor="#d8f2e5" scrollable="true">
 	<frame layout="linear_vertical" margin_bottom="0" padding="0">
   		<image width="150" height="50" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-kikoja-text.png"></image>
   	</frame>

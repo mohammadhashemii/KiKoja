@@ -1,4 +1,4 @@
-<page scrollable="true" clearBackStack="false" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5">
+<page onBack="app/back" scrollable="true" clearBackStack="false" background="" toolbarcolor="#b4d9c7" title="ثبت‌نام" statusbarcolor="#d8f2e5">
 	<frame scrollable="true"  layout="linear_vertical" margin_top="0" margin_bottom="0">
 		<image width="100" src="http://162.55.105.137:8080/api/public/dl/aX5iqrp2"></image>
 	</frame>
