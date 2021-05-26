@@ -62,9 +62,9 @@ public class DbOperation {
             newPerson.uniEduLevel = data[6];
             newPerson.uniEntryYear = Integer.parseInt(data[7]);
             newPerson.imageURL = data[8];
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return null;
         }
         return newPerson;
     }
