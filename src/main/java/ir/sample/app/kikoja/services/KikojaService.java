@@ -19,6 +19,7 @@ public class KikojaService extends APSService {
     private final String emptySelection = "انتخاب کنید";
     private DbOperation operation = new DbOperation();
     private Connection connection = DatabaseManager.getConnection();
+    private Person newPerson = new Person();
 
     public KikojaService(String channelName) {
         super(channelName);
@@ -90,8 +91,6 @@ public class KikojaService extends APSService {
     @Override
     public ir.appsan.sdk.Response onUpdate(ViewUpdate update, String updateCommand, JSONObject pageData,
             String userId) {
-        // new person data
-        Person newPerson = new Person();
         // assign the next page to view variable and return it to change page
         View view = new StartingPage();
         // used to write warning messages inside the xml elements
@@ -117,9 +116,6 @@ public class KikojaService extends APSService {
                     newPerson.firstName = pageData.get("firstNameRegisterInput").toString();
                     newPerson.lastName = pageData.get("lastNameRegisterInput").toString();
                     // REVIEW test section ALL PASSED!
-//                    System.out.println("[id]=" + newPerson.id);
-//                    System.out.println("[first_name]=" + newPerson.firstName);
-//                    System.out.println("[last_name]=" + newPerson.lastName);
                     return new RegisterPage_2();
                 }
                 // fail case
@@ -144,10 +140,13 @@ public class KikojaService extends APSService {
             case "nextButtonOfSecondRegisterPage": {
                 String uniMajor = pageData.get("uniMajorDropdown").toString();
                 String uniEduLevel = pageData.get("uniEduLevelDropdown").toString();
-                String uniEntryYear = pageData.get("uniEntryYearDropdown").toString();
-                if (!uniMajor.equals(emptySelection) && !uniEduLevel.equals(emptySelection) && !uniEntryYear.equals(emptySelection))
+                int uniEntryYear = Integer.parseInt(pageData.get("uniEntryYearDropdown").toString());
+                if (!uniMajor.equals(emptySelection) && !uniEduLevel.equals(emptySelection) && uniEntryYear != 0) {
+                    newPerson.uniMajor = uniMajor;
+                    newPerson.uniEduLevel = uniEduLevel;
+                    newPerson.uniEntryYear = uniEntryYear;
                     return new RegisterPage_3();
-                else {
+                } else {
                     if (uniMajor.equals(emptySelection))
                         update.addChildUpdate("uniMajorError", "text", "باید رشته تحصیلی را انتخاب کنید.");
                     else
@@ -156,7 +155,7 @@ public class KikojaService extends APSService {
                         update.addChildUpdate("uniEduLevelError", "text", "باید مقطع تحصیلی را انتخاب کنید.");
                     else
                         update.addChildUpdate("uniEduLevelError", "text", "");
-                    if (uniEntryYear.equals(emptySelection))
+                    if (uniEntryYear == 0)
                         update.addChildUpdate("uniEntryYearError", "text", "باید سال ورود را انتخاب کنید.");
                     else
                         update.addChildUpdate("uniEntryYearError", "text", "");
@@ -164,7 +163,6 @@ public class KikojaService extends APSService {
                 return update;
             }
             case "nextButtonOfThirdRegisterPage":{
-                System.out.println(pageData.get("emailRegisterInput").toString());
                 if(pageData.get("emailRegisterInput").toString().equals(""))
                     update.addChildUpdate("emailError", "text", "باید ایمیل معتبر وارد کنید.");
                 if(pageData.get("phoneNumberRegisterInput").toString().equals(""))
@@ -172,7 +170,12 @@ public class KikojaService extends APSService {
                 if(!pageData.get("emailRegisterInput").toString().equals("") && !pageData.get("phoneNumberRegisterInput").toString().equals("")) {
                     newPerson.email = pageData.get("emailRegisterInput").toString();
                     newPerson.phoneNumber = pageData.get("phoneNumberRegisterInput").toString();
-                    operation.registerPerson(newPerson, connection);
+                    newPerson.imageURL = "";
+                    boolean registerResponse = DbOperation.registerPerson(newPerson, connection);
+                    if (registerResponse)
+                        return new ProfilePage();
+                    else
+                        return new RegisterPage_1();
                 }
                 //finalize registration process if successful
             }

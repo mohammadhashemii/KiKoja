@@ -9,9 +9,9 @@ import java.util.LinkedList;
 
 public class DbOperation {
 
-    public static void registerPerson(Person person, Connection connection) {
+    public static boolean registerPerson(Person person, Connection connection) {
         try {
-            String signUpQuery = "INSERT INTO person(id,firstName,lastName,email,phoneNumber,uniMajor,uniEduLevel,uniEntryYear,imageURL) VALUES(?,?,?,?,?,?,?,?,?)";
+            String signUpQuery = "INSERT INTO person(id,firstName,lastName,email,phone,uniMajor,uniEduLevel,uniEntryYear,imageURL) VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement pSingUpQuery = connection.prepareStatement(signUpQuery);
             pSingUpQuery.setString(1, person.id);
             pSingUpQuery.setString(2, person.firstName);
@@ -20,13 +20,14 @@ public class DbOperation {
             pSingUpQuery.setString(5, person.phoneNumber);
             pSingUpQuery.setString(6, person.uniMajor);
             pSingUpQuery.setString(7, person.uniEduLevel);
-            pSingUpQuery.setString(8, String.valueOf(person.uniEntryYear));
+            pSingUpQuery.setInt(8, person.uniEntryYear);
             pSingUpQuery.setString(9, person.imageURL);
             pSingUpQuery.executeUpdate();
             pSingUpQuery.close();
-            System.out.println("done");
+            return true;
         } catch (Exception e) {
             System.err.println(e.getMessage());
+            return false;
         }
     }
 

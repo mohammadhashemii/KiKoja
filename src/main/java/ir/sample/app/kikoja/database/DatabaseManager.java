@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DatabaseManager {
     public static String host = "162.55.105.142";
     public static String port = "55432";
-    public static String dbname = "kiKojaDB";
+    public static String dbname = "KiKojaDB";
     public static String user = "m_hashemi";
     public static String pass = "fsd5u8a8aa4c1kk";
     public static String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbname + "?user=" + user + "&password=" + pass;
