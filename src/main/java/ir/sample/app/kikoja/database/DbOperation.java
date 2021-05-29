@@ -1,5 +1,6 @@
 package ir.sample.app.kikoja.database;
 
+import ir.sample.app.kikoja.models.Favourite;
 import ir.sample.app.kikoja.models.Person;
 import ir.sample.app.kikoja.models.Skill;
 
@@ -85,10 +86,9 @@ public class DbOperation {
         if (!uniEduLevel.equals(""))
             matchedQuery += "uniedulevel=" + uniMajor + " ";
 
-
         ResultSet result;
         LinkedList personList = new LinkedList<Person>();
-        try{
+        try {
             PreparedStatement pMatchQuery = connection.prepareStatement(matchedQuery);
             result = pMatchQuery.executeQuery();
             while (result.next()) {
@@ -100,11 +100,9 @@ public class DbOperation {
                 newPerson.id = result.getString(4);
                 personList.add(newPerson);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.err.println("error at function getMatched");
         }
-
 
         // NOTE making a list of desired skills id using skill table
         String[] skillsArray = skills.split(",");
@@ -113,7 +111,7 @@ public class DbOperation {
         for (String skillString : skillsArray)
             skillQuery += "skill=" + skillString + " OR ";
 
-        try{
+        try {
             skillQuery = skillQuery.substring(0, skillQuery.length() - 3);
             PreparedStatement pSkillQuery = connection.prepareStatement(skillQuery);
             result = pSkillQuery.executeQuery();
@@ -122,16 +120,13 @@ public class DbOperation {
             while (result.next()) {
                 skillIDLIST.add(result.getInt(1));
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.err.println("error at function getMatched : skillIDList section");
         }
 
-
-
         // filter skills
         try {
-            for (Person targetPerson : (LinkedList<Person>)personList) {
+            for (Person targetPerson : (LinkedList<Person>) personList) {
                 String personSkillQuery = "SELECT skillid FROM skills WHERE id=" + targetPerson.id;
                 PreparedStatement pPersonSkillQuery = connection.prepareStatement(personSkillQuery);
                 result = pPersonSkillQuery.executeQuery();
@@ -142,7 +137,7 @@ public class DbOperation {
                 }
                 // compare list with skillIDList list
                 boolean isMatch = false;
-                for (Integer skillID : (LinkedList<Integer>)skillIDLIST) {
+                for (Integer skillID : (LinkedList<Integer>) skillIDLIST) {
                     if (personSkillsList.contains(skillID)) {
                         isMatch = true;
                         break;
@@ -152,14 +147,13 @@ public class DbOperation {
                     personList.remove(targetPerson);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("error at function getMatched : skillIDList filter");
         }
 
-
         // NOTE making a list of desired favs id using skill table
         LinkedList favIDList = new LinkedList<Integer>();
-        try{
+        try {
             String[] favsArray = favs.split(",");
             String favQuery = "SELECT favid FROM favinfo WHERE ";
             for (String favString : favsArray)
@@ -169,18 +163,16 @@ public class DbOperation {
             PreparedStatement pfavQuery = connection.prepareStatement(favQuery);
             result = pfavQuery.executeQuery();
 
-
             while (result.next()) {
                 favIDList.add(result.getInt(1));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("error at function getMatched : favIDLIST section");
         }
 
-
         // filter skills
         try {
-            for (Person targetPerson : (LinkedList<Person>)personList) {
+            for (Person targetPerson : (LinkedList<Person>) personList) {
                 String personFavQuery = "SELECT favid FROM favourites WHERE id=" + targetPerson.id;
                 PreparedStatement pPersonFavQuery = connection.prepareStatement(personFavQuery);
                 result = pPersonFavQuery.executeQuery();
@@ -191,7 +183,7 @@ public class DbOperation {
                 }
                 // compare list with skillIDList list
                 boolean isMatch = false;
-                for (Integer favID : (LinkedList<Integer>)favIDList) {
+                for (Integer favID : (LinkedList<Integer>) favIDList) {
                     if (personFavList.contains(favID)) {
                         isMatch = true;
                         break;
@@ -201,14 +193,13 @@ public class DbOperation {
                     personList.remove(targetPerson);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println("error at function getMatched : favIDLIST filter");
         }
 
-
         // delete blocked persons from person list
-        try{
-            for (Person targetPerson : (LinkedList<Person>)personList) {
+        try {
+            for (Person targetPerson : (LinkedList<Person>) personList) {
                 String isAcceptedQuery = "SELECT accepted FROM relations WHERE invitedid=? AND inviteeid=?";
                 PreparedStatement pIsAcceptedQuery = connection.prepareStatement(isAcceptedQuery);
                 pIsAcceptedQuery.setString(1, targetPerson.id);
@@ -237,11 +228,9 @@ public class DbOperation {
                     personList.remove(targetPerson);
                 }
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.err.println("block person filter section error");
         }
-
 
         // TODO use personList to update the match page
         return personList;
@@ -263,4 +252,219 @@ public class DbOperation {
 
     }
 
+    // this method will fetch all skills from database, not for specific person
+    public static LinkedList<Skill> getSkillList(Connection connection) {
+        String selecSkillQuery = "SELECT skill,skillid FROM skillinfo;";
+        ResultSet result;
+        LinkedList skillList = new LinkedList<Skill>();
+        try {
+            PreparedStatement pSelecSkillQuery = connection.prepareStatement(selecSkillQuery);
+            result = pSelecSkillQuery.executeQuery();
+            while (result.next()) {
+                Skill newSkill = new Skill();
+                newSkill.skillName = result.getString(1);
+                newSkill.skillID = result.getString(2);
+                skillList.add(newSkill);
+            }
+        } catch (Exception e) {
+            System.err.println("error during skill fetch operation");
+        }
+        return skillList;
+    }
+
+    // this method will fetch all favorites from database, not for specific person
+    public static LinkedList<Favourite> getFavouriteList(Connection connection) {
+        String selecFavQuery = "SELECT favourite,favid FROM favinfo;";
+        ResultSet result;
+        LinkedList favList = new LinkedList<Favourite>();
+        try {
+            PreparedStatement pSelecFavQuery = connection.prepareStatement(selecFavQuery);
+            result = pSelecFavQuery.executeQuery();
+            while (result.next()) {
+                Favourite newFav = new Favourite();
+                newFav.favName = result.getString(1);
+                newFav.favID = result.getString(2);
+                favList.add(newFav);
+            }
+        } catch (Exception e) {
+            System.err.println("error during favourite fetch operation");
+        }
+        return favList;
+    }
+
+    // this method will fetch skills for specific person
+    public static LinkedList<Skill> getPersonSkillList(String personID, Connection connection) {
+        ResultSet result;
+        LinkedList userSkillIDList = new LinkedList<String>();
+        LinkedList userSkillList = new LinkedList<String>();
+        String newSkillID;
+        String newSkill;
+        // first get all skill id's for the personList
+        try {
+            String selectUserSkillID = "SELECT skillid FROM skills WHERE id=?;";
+            PreparedStatement pSelectUserSkillID = connection.prepareStatement(selectUserSkillID);
+            pSelectUserSkillID.setString(1, personID);
+            result = pSelectUserSkillID.executeQuery();
+            while (result.next()) {
+                newSkillID = result.getString(1);
+                userSkillIDList.add(newSkillID);
+            }
+        } catch (Exception e) {
+            System.err.println("error during fetching user skill id");
+        }
+        // use id's to get their values from the skill table
+        for (String skillID : (LinkedList<String>)userSkillIDList) {
+            try {
+                String selectUserSkill = "SELECT skill FROM skillinfo WHERE id=?;";
+                PreparedStatement pSelectUserSkill = connection.prepareStatement(selectUserSkill);
+                pSelectUserSkill.setString(1, skillID);
+                result = pSelectUserSkill.executeQuery();
+                while (result.next()) {
+                    newSkill = result.getString(1);
+                    userSkillList.add(newSkill);
+                }
+            } catch (Exception e) {
+                System.err.println("error during fetching user sill list from user skill id list");
+            }
+        }
+        return userSkillList;
+    }
+
+    // this method will fetch favourites for specific person
+    public static LinkedList<Favourite> getPersonFavouriteList(String personID, Connection connection) {
+        ResultSet result;
+        LinkedList userFavIDList = new LinkedList<String>();
+        LinkedList userFavList = new LinkedList<String>();
+        String newFavID;
+        String newFav;
+        // first get all skill id's for the personList
+        try {
+            String selectUserFavID = "SELECT favid FROM favourites WHERE id=?;";
+            PreparedStatement pSelectUserFavID = connection.prepareStatement(selectUserFavID);
+            pSelectUserFavID.setString(1, personID);
+            result = pSelectUserFavID.executeQuery();
+            while (result.next()) {
+                newFavID = result.getString(1);
+                userFavIDList.add(newFavID);
+            }
+        } catch (Exception e) {
+            System.err.println("error during fetching user favourite id");
+        }
+        // use id's to get their values from the skill table
+        for (String favID : (LinkedList<String>)userFavIDList) {
+            try {
+                String selectUserFav = "SELECT favourite FROM favinfo WHERE id=?;";
+                PreparedStatement pSelectUserFav = connection.prepareStatement(selectUserFav);
+                pSelectUserFav.setString(1, favID);
+                result = pSelectUserFav.executeQuery();
+                while (result.next()) {
+                    newFav = result.getString(1);
+                    userFavList.add(newFav);
+                }
+            } catch (Exception e) {
+                System.err.println("error during fetching user fav list from user fav id list");
+            }
+        }
+        return userFavList;
+    }
+
+    // this method will insert new skill for specific person
+    public static void insertNewSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
+        String SkillID="";
+        try {
+            // first fetch skill id from skillinfo table
+            String selecSkillQuery = "SELECT skillid FROM skillinfo WHERE skill=?;";
+            ResultSet result;
+            PreparedStatement pSelecSkillQuery = connection.prepareStatement(selecSkillQuery);
+            pSelecSkillQuery.setString(1, SkillName);
+            result = pSelecSkillQuery.executeQuery();
+            while (result.next()) {
+                SkillID = result.getString(1);
+            }
+            // insert data into skills table
+            String insertSkillQuery = "INSERT INTO skills(id,skillid) VALUES(?,?)";
+            PreparedStatement pInsertSkillQuery = connection.prepareStatement(insertSkillQuery);
+            pInsertSkillQuery.setString(1, PersonID);
+            pInsertSkillQuery.setString(2, SkillID);
+            pInsertSkillQuery.executeUpdate();
+            pInsertSkillQuery.close();
+        } catch (Exception e) {
+            System.err.println("error during inserting skill for specific person");
+        }
+    }
+
+    // this mehtod will insert new favourite for specific person
+    public static void insertNewFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
+        String FavID="";
+        try {
+            // first fetch fav id from favinfo table
+            String selecFavQuery = "SELECT favid FROM favinfo WHERE favourite=?;";
+            ResultSet result;
+            PreparedStatement pSelecFavQuery = connection.prepareStatement(selecFavQuery);
+            pSelecFavQuery.setString(1, FavName);
+            result = pSelecFavQuery.executeQuery();
+            while (result.next()) {
+                FavID = result.getString(1);
+            }
+            // insert data into skills table
+            String insertFavQuery = "INSERT INTO favourites(id,favid) VALUES(?,?)";
+            PreparedStatement pInsertFavQuery = connection.prepareStatement(insertFavQuery);
+            pInsertFavQuery.setString(1, PersonID);
+            pInsertFavQuery.setString(2, FavID);
+            pInsertFavQuery.executeUpdate();
+            pInsertFavQuery.close();
+        } catch (Exception e) {
+            System.err.println("error during inserting favourite for specific person");
+        }
+    }
+
+    // this method will remove skill for specific person
+    public static void removeSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
+        String SkillID="";
+        try {
+            // first fetch skill id from skillinfo table
+            String selecSkillQuery = "SELECT skillid FROM skillinfo WHERE skill=?;";
+            ResultSet result;
+            PreparedStatement pSelecSkillQuery = connection.prepareStatement(selecSkillQuery);
+            pSelecSkillQuery.setString(1, SkillName);
+            result = pSelecSkillQuery.executeQuery();
+            while (result.next()) {
+                SkillID = result.getString(1);
+            }
+            // delete data from skills table
+            String deleteSkillQuery = "DELETE FROM skills WHERE id=? AND skillid=?;";
+            PreparedStatement pDeleteSkillQuery = connection.prepareStatement(deleteSkillQuery);
+            pDeleteSkillQuery.setString(1, PersonID);
+            pDeleteSkillQuery.setString(2, SkillID);
+            pDeleteSkillQuery.executeUpdate();
+            pDeleteSkillQuery.close();
+        } catch (Exception e) {
+            System.err.println("error during removing skill for specific person");
+        }
+    }
+
+    // this method will remove favourite for specific person
+    public static void removeFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
+        String FavID="";
+        try {
+            // first fetch fav id from favinfo table
+            String selecFavQuery = "SELECT favid FROM favinfo WHERE favourite=?;";
+            ResultSet result;
+            PreparedStatement pSelecFavQuery = connection.prepareStatement(selecFavQuery);
+            pSelecFavQuery.setString(1, FavName);
+            result = pSelecFavQuery.executeQuery();
+            while (result.next()) {
+                FavID = result.getString(1);
+            }
+            // remove data into skills table
+            String deleteFavQuery = "DELETE FROM favourites WHERE id=? AND favid=?;";
+            PreparedStatement pDeleteFavQuery = connection.prepareStatement(deleteFavQuery);
+            pDeleteFavQuery.setString(1, PersonID);
+            pDeleteFavQuery.setString(2, FavID);
+            pDeleteFavQuery.executeUpdate();
+            pDeleteFavQuery.close();
+        } catch (Exception e) {
+            System.err.println("error during removing favourite for specific person");
+        }
+    }
 }
