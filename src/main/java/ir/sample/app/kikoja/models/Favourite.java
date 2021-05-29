@@ -1,6 +1,6 @@
 package ir.sample.app.kikoja.models;
 
 public class Favourite {
-    String favName;
-    String favID;
+    public String favName;
+    public String favID;
 }
