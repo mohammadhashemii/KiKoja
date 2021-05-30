@@ -6,13 +6,13 @@
 	<frame borderColor="black" borderCornerRadius="11" width="150" height="225">
 		<image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="http://162.55.105.137:8080/api/public/dl/qCi7vK8D" borderStrokeWidth="1"></image>
 	</frame>
-	<text id="name" gravity="center" textsize="20">{{firstName}} {{lastName}}</text>
+	<text id="name" gravity="center" textsize="20">{{person.firstName}} {{person.lastName}}</text>
 </frame>
 <frame layout="linear_vertical" >
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
 		<dropdown>
-			<item id="-">{{uniMajor}}</item>
+			<item id="-">{{person.uniMajor}}</item>
 			<item id="ce" onClick="">مهندسی کامپیوتر</item>
 			<item id="civil" onClick="">مهندسی عمران</item>
 			<item id="arch" onClick="">مهندسی معماری</item>
@@ -40,7 +40,7 @@
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی</text>
 		<dropdown>
-			<item id="-">{{uniEduLevel}}</item>
+			<item id="-">{{person.uniEduLevel}}</item>
 			<item id="bsc" onClick="">کارشناسی</item>
 			<item id="msc" onClick="">کارشناسی ارشد</item>
 			<item id="phd" onClick="">دکترا</item>
@@ -50,7 +50,7 @@
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">سال ورود</text>
 		<dropdown>
-			<item id="-">{{uniEntryYear}}</item>
+			<item id="-">{{person.uniEntryYear}}</item>
 			<item id="1399" onClick="">۱۳۹۹</item>
 			<item id="1398" onClick="">۱۳۹۸</item>
 			<item id="1397" onClick="">۱۳۹۷</item>
@@ -61,26 +61,44 @@
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">ایمیل:</text>
-		<textInput textsize="11" textalignment="right" margin-right="50" hint="test@gmail.com" >{{email}}</textInput>
+		<textInput textsize="11" textalignment="right" margin-right="50" hint="test@gmail.com" >{{person.email}}</textInput>
 		<text margin_left="10" margin_right="10" background="white">شماره تماس:</text>
-		<textInput textsize="11" textalignment="right" margin-right="50" hint="+982129901" >{{phoneNumber}}</textInput>
+		<textInput textsize="11" textalignment="right" margin-right="50" hint="+982129901" >{{person.phoneNumber}}</textInput>
+
 		<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
-		<textInput textsize="11" textalignment="right" margin-right="50" hint="فوتبال" ></textInput>
+		<dropdown onSelectionChange="update/favSelect" id="favDropdown">
+			<item id="-">انتخاب کنید</item>
+			{{#favouriteList}}
+			<item>{{favName}}</item>
+			{{/favouriteList}}
+		</dropdown>
 		<frame  gravity="left" layout="linear_horizontal" >
-			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#dc3545" height="35" width="60"> - حذف کن</button>
-			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+			<button onClick="update/removeFav" gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="white" textsize="10" background="#dc3545" height="35" width="60"> - حذف کن</button>
+			<button onClick="update/addFav" gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="white" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
 		</frame>
-		<text  textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کتابخوانی - کافه‌گردی</text>
+		<text textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right" id="personFavouriteList">
+			{{#personFavouriteList}}
+			{{favName}}
+			{{/personFavouriteList}}
+		</text>
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
-		<text margin_left="10" margin_right="10" background="white">مهارت‌ها:</text>
-		<textInput textsize="11" textalignment="right" margin-right="50" hint="ماشین‌لرنینگ" ></textInput>
-		<frame  gravity="center" layout="linear-horizontal" >
-			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#dc3545" height="35" width="60"> - حذف کن</button>
-			<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" onClick=""  textcolor="white" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
+		<text margin_left="10" margin_right="10" background="white">مهارت ها:</text>
+		<dropdown onSelectionChange="update/skillSelect" id="skillDropdown">
+			<item id="-">انتخاب کنید</item>
+			{{#skillList}}
+			<item>{{skillName}}</item>
+			{{/skillList}}
+		</dropdown>
+		<frame gravity="center" layout="linear-horizontal" >
+			<button onClick="update/removeSkill" gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="white" textsize="10" background="#dc3545" height="35" width="60"> - حذف کن</button>
+			<button onClick="update/addSkill" gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="white" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
 		</frame>
-		<text  textsize="11"  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right"> طراحی وبسایت - ‌HTML - python - فرانت‌اند</text>
-
+		<text id="personSkillList" textsize="11"  padding_top="50" borderCornerRadius="8" borderColor="black" borderStrokeWidth="1"  height="100"  textalignment="right">
+			{{#personSkillList}}
+			{{skillName}}
+			{{/personSkillList}}
+		</text>
 	</frame>
 
 
