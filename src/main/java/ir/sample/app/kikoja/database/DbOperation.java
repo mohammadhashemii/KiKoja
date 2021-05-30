@@ -363,6 +363,7 @@ public class DbOperation {
     // this method will fetch skills for specific person
     public static LinkedList<Skill> getPersonSkillList(String personID, Connection connection) {
         ResultSet result;
+        Skill skill;
         LinkedList userSkillIDList = new LinkedList<String>();
         LinkedList userSkillList = new LinkedList<String>();
         String newSkillID;
@@ -383,13 +384,16 @@ public class DbOperation {
         // use id's to get their values from the skill table
         for (String skillID : (LinkedList<String>) userSkillIDList) {
             try {
-                String selectUserSkill = "SELECT skill FROM skillinfo WHERE id=?;";
+                String selectUserSkill = "SELECT skill FROM skillinfo WHERE skillid=?;";
                 PreparedStatement pSelectUserSkill = connection.prepareStatement(selectUserSkill);
                 pSelectUserSkill.setString(1, skillID);
                 result = pSelectUserSkill.executeQuery();
                 while (result.next()) {
+                    skill = new Skill();
+                    skill.skillID = skillID;
                     newSkill = result.getString(1);
-                    userSkillList.add(newSkill);
+                    skill.skillName = newSkill;
+                    userSkillList.add(skill);
                 }
             } catch (Exception e) {
                 System.err.println("error during fetching user sill list from user skill id list");
@@ -401,6 +405,7 @@ public class DbOperation {
     // this method will fetch favourites for specific person
     public static LinkedList<Favourite> getPersonFavouriteList(String personID, Connection connection) {
         ResultSet result;
+        Favourite fav;
         LinkedList userFavIDList = new LinkedList<String>();
         LinkedList userFavList = new LinkedList<String>();
         String newFavID;
@@ -418,16 +423,19 @@ public class DbOperation {
         } catch (Exception e) {
             System.err.println("error during fetching user favourite id");
         }
-        // use id's to get their values from the skill table
+        // use id's to get their values from the favourite table
         for (String favID : (LinkedList<String>) userFavIDList) {
             try {
-                String selectUserFav = "SELECT favourite FROM favinfo WHERE id=?;";
+                String selectUserFav = "SELECT favourite FROM favinfo WHERE favid=?;";
                 PreparedStatement pSelectUserFav = connection.prepareStatement(selectUserFav);
                 pSelectUserFav.setString(1, favID);
                 result = pSelectUserFav.executeQuery();
                 while (result.next()) {
+                    fav = new Favourite();
+                    fav.favID = favID;
                     newFav = result.getString(1);
-                    userFavList.add(newFav);
+                    fav.favName = newFav;
+                    userFavList.add(fav);
                 }
             } catch (Exception e) {
                 System.err.println("error during fetching user fav list from user fav id list");
@@ -437,7 +445,7 @@ public class DbOperation {
     }
 
     // this method will insert new skill for specific person
-    public static void insertNewSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
+    public static boolean insertNewSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
         String SkillID = "";
         try {
             // first fetch skill id from skillinfo table
@@ -456,13 +464,15 @@ public class DbOperation {
             pInsertSkillQuery.setString(2, SkillID);
             pInsertSkillQuery.executeUpdate();
             pInsertSkillQuery.close();
+            return true;
         } catch (Exception e) {
             System.err.println("error during inserting skill for specific person");
+            return false;
         }
     }
 
-    // this mehtod will insert new favourite for specific person
-    public static void insertNewFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
+    // this method will insert new favourite for specific person
+    public static boolean insertNewFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
         String FavID = "";
         try {
             // first fetch fav id from favinfo table
@@ -481,13 +491,15 @@ public class DbOperation {
             pInsertFavQuery.setString(2, FavID);
             pInsertFavQuery.executeUpdate();
             pInsertFavQuery.close();
+            return true;
         } catch (Exception e) {
             System.err.println("error during inserting favourite for specific person");
+            return false;
         }
     }
 
     // this method will remove skill for specific person
-    public static void removeSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
+    public static boolean removeSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
         String SkillID = "";
         try {
             // first fetch skill id from skillinfo table
@@ -506,13 +518,15 @@ public class DbOperation {
             pDeleteSkillQuery.setString(2, SkillID);
             pDeleteSkillQuery.executeUpdate();
             pDeleteSkillQuery.close();
+            return true;
         } catch (Exception e) {
             System.err.println("error during removing skill for specific person");
+            return false;
         }
     }
 
     // this method will remove favourite for specific person
-    public static void removeFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
+    public static boolean removeFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
         String FavID = "";
         try {
             // first fetch fav id from favinfo table
@@ -531,8 +545,10 @@ public class DbOperation {
             pDeleteFavQuery.setString(2, FavID);
             pDeleteFavQuery.executeUpdate();
             pDeleteFavQuery.close();
+            return true;
         } catch (Exception e) {
             System.err.println("error during removing favourite for specific person");
+            return false;
         }
     }
 }

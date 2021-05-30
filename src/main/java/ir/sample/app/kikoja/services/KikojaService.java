@@ -5,21 +5,32 @@ import ir.appsan.sdk.View;
 import ir.appsan.sdk.ViewUpdate;
 import ir.sample.app.kikoja.database.DatabaseManager;
 import ir.sample.app.kikoja.database.DbOperation;
+import ir.sample.app.kikoja.models.Favourite;
 import ir.sample.app.kikoja.models.Person;
 // import required models here
+import ir.sample.app.kikoja.models.ProfilePageData;
+import ir.sample.app.kikoja.models.Skill;
 import ir.sample.app.kikoja.views.*;
 import org.json.simple.JSONObject;
 // import org.json.simple.JSONObject;
  import java.sql.Connection;
+import java.util.LinkedList;
+
 //
 public class KikojaService extends APSService {
 
     private final int FIRST_NAME_MAX_LENGTH = 15, FIRST_NAME_MIN_LENGTH = 1, LAST_NAME_MAX_LENGTH = 15,
             LAST_NAME_MIN_LENGTH = 1;
     private final String emptySelection = "انتخاب کنید";
-    private DbOperation operation = new DbOperation();
-    private Connection connection = DatabaseManager.getConnection();
+    private final Connection connection = DatabaseManager.getConnection();
     private Person person = new Person();
+    private LinkedList<Skill> skillList = new LinkedList<Skill>();
+    private LinkedList<Favourite> favouriteList = new LinkedList<Favourite>();
+    private LinkedList<Skill> personSkillList = new LinkedList<Skill>();
+    private LinkedList<Favourite> personFavouriteList = new LinkedList<Favourite>();
+    private String selectedFav;
+    private String selectedSkill;
+    private View currentPage;
 
     public KikojaService(String channelName) {
         super(channelName);
@@ -36,7 +47,7 @@ public class KikojaService extends APSService {
     @Override
     public View onCreateView(String command, JSONObject pageData, String userId) {
         // assign the next page to view variable and return it to change page
-        View view = new StartingPage();
+        currentPage = new StartingPage();
         // enter the command_name which entered in onclick second attribute here to
         // specify desired on create command
         // use pageData to get data from xml page elements using
@@ -44,55 +55,53 @@ public class KikojaService extends APSService {
         // use view classes to create new page and return view class to open
         switch (command) {
             case "loginPage": {
-                view = new LoginPage();
+                currentPage = new LoginPage();
                 break;
             }
             case "startingPage": {
-                view = new StartingPage();
+                currentPage = new StartingPage();
                 break;
             }
             case "registerPageOne": {
-                view = new RegisterPage_1();
+                currentPage = new RegisterPage_1();
                 break;
             }
             case "loginRegisterPage": {
-                view = new LoginRegisterPage();
+                currentPage = new LoginRegisterPage();
                 break;
             }
             case "getHomePage": {
-                view = new HomePage();
+                currentPage = new HomePage();
                 break;
             }
             case "getFavouritePage": {
-                view = new FavouritePersonsPage();
+                currentPage = new FavouritePersonsPage();
                 break;
             }
             case "getProfilePage": {
-                view = new ProfilePage();
+                currentPage = new ProfilePage();
                 break;
             }
             case "getMoreInfoPage": {
-                view = new MoreInfoPage();
+                currentPage = new MoreInfoPage();
                 break;
             }
             case "getNotFoundPage": {
-                view = new NotFoundPage();
+                currentPage = new NotFoundPage();
                 break;
             }
             case "getChangeFilterPage": {
-                view = new ChangeFilterPage();
+                currentPage = new ChangeFilterPage();
                 break;
             }
         }
-        return view;
+        return currentPage;
     }
 
     // use this method to update current page
     @Override
     public ir.appsan.sdk.Response onUpdate(ViewUpdate update, String updateCommand, JSONObject pageData,
             String userId) {
-        // assign the next page to view variable and return it to change page
-        View view = new StartingPage();
         // used to write warning messages inside the xml elements
         String WarningMessage;
         // enter the command_name which entered in onclick second attribute here to
@@ -116,7 +125,8 @@ public class KikojaService extends APSService {
                     person.firstName = pageData.get("firstNameRegisterInput").toString();
                     person.lastName = pageData.get("lastNameRegisterInput").toString();
                     // REVIEW test section ALL PASSED!
-                    return new RegisterPage_2();
+                    currentPage = new RegisterPage_2();
+                    return currentPage;
                 }
                 // fail case
                 else {
@@ -134,8 +144,8 @@ public class KikojaService extends APSService {
                         update.addChildUpdate("studentNumberHint", "textcolor", "red");
                     } else
                         update.addChildUpdate("studentNumberHint", "textcolor", "black");
+                    return update;
                 }
-                return update;
             }
             case "nextButtonOfSecondRegisterPage": {
                 String uniMajor = pageData.get("uniMajorDropdown").toString();
@@ -145,7 +155,8 @@ public class KikojaService extends APSService {
                     person.uniMajor = uniMajor;
                     person.uniEduLevel = uniEduLevel;
                     person.uniEntryYear = uniEntryYear;
-                    return new RegisterPage_3();
+                    currentPage = new RegisterPage_3();
+                    return currentPage;
                 } else {
                     if (uniMajor.equals(emptySelection))
                         update.addChildUpdate("uniMajorError", "text", "باید رشته تحصیلی را انتخاب کنید.");
@@ -159,8 +170,8 @@ public class KikojaService extends APSService {
                         update.addChildUpdate("uniEntryYearError", "text", "باید سال ورود را انتخاب کنید.");
                     else
                         update.addChildUpdate("uniEntryYearError", "text", "");
+                    return update;
                 }
-                return update;
             }
             case "nextButtonOfThirdRegisterPage":{
                 if(pageData.get("emailRegisterInput").toString().equals(""))
@@ -173,13 +184,19 @@ public class KikojaService extends APSService {
                     person.imageURL = "";
                     boolean registerResponse = DbOperation.registerPerson(person, connection);
                     if (registerResponse) {
-                        ProfilePage profilePage = new ProfilePage();
-                        profilePage.setMustacheModel(person);
-                        return profilePage;
+                        skillList = DbOperation.getSkillList(connection);
+                        favouriteList = DbOperation.getFavouriteList(connection);
+
+                        currentPage = new ProfilePage();
+                        currentPage.setMustacheModel(person);
+                        return currentPage;
                     }
-                    else
-                        return new RegisterPage_1();
+                    else {
+                        currentPage = new RegisterPage_1();
+                        return currentPage;
+                    }
                 }
+                break;
                 //finalize registration process if successful
             }
             case "firstNameRegisterInputClick": {
@@ -193,7 +210,8 @@ public class KikojaService extends APSService {
                 return update;
             }
             case "saveProfile": {
-                return new HomePage();
+                currentPage = new HomePage();
+                return currentPage;
             }
             case "addHobbiesButtonUpdate": {
                 // String hobbyBoxText = pageData.get("hobbiesTextBox").toString();
@@ -204,14 +222,17 @@ public class KikojaService extends APSService {
             case "setUniMajor": {
                 if (pageData.get("uniMajorDropdown").toString() != emptySelection)
                     person.uniMajor = pageData.get("uniMajorDropdown").toString();
+                break;
             }
             case "setUniEduLevel": {
                 if (pageData.get("uniEduLevelDropdown").toString() != emptySelection)
                     person.uniMajor = pageData.get("uniEduLevelDropdown").toString();
+                break;
             }
             case "setUniEntryYear": {
                 if (pageData.get("uniEntryYearDropdown").toString() != emptySelection)
                     person.uniMajor = pageData.get("uniEntryYearDropdown").toString();
+                break;
             }
             case "nextButtonOfLoginPage": {
                 String studentId = pageData.get("studentNumberLoginInput").toString();
@@ -227,22 +248,92 @@ public class KikojaService extends APSService {
                 }
                 if (isValid) {
                     Person loginResponse = DbOperation.retrievePerson(studentId, phoneNumber, connection);
-                    if (loginResponse == null)
-                        return new LoginPage();
-                    else {
+                    if (loginResponse == null) {
+                        currentPage = new LoginPage();
+                    } else {
                         person = loginResponse;
-                        ProfilePage profilePage = new ProfilePage();
-                        profilePage.setMustacheModel(person);
-                        return profilePage;
+                        skillList = DbOperation.getSkillList(connection);
+                        favouriteList = DbOperation.getFavouriteList(connection);
+                        personSkillList = DbOperation.getPersonSkillList(person.id, connection);
+                        personFavouriteList = DbOperation.getPersonFavouriteList(person.id, connection);
+
+                        currentPage = new ProfilePage();
+                        ProfilePageData data = new ProfilePageData(
+                                person,
+                                skillList,
+                                favouriteList,
+                                personSkillList,
+                                personFavouriteList
+                        );
+                        currentPage.setMustacheModel(data);
                     }
+                    return currentPage;
                 }
                 return update;
+            }
+            case "favSelect": {
+                if (pageData.get("favDropdown").toString() != emptySelection)
+                    selectedFav = pageData.get("favDropdown").toString();
+                break;
+            }
+            case "skillSelect": {
+                if (pageData.get("skillDropdown").toString() != emptySelection)
+                    selectedSkill = pageData.get("skillDropdown").toString();
+                break;
+            }
+            case "addFav": {
+                boolean response = DbOperation.insertNewFavouriteForSpecificPerson(person.id, selectedFav, connection);
+                if (response) {
+                    personFavouriteList = DbOperation.getPersonFavouriteList(person.id, connection);
+                    String personFavouriteListString = " ";
+                    for (int i = 0; i < personFavouriteList.size(); i++) {
+                        personFavouriteListString += personFavouriteList.get(i).favName + " \n ";
+                    }
+                    update.addChildUpdate("personFavouriteList", "text", personFavouriteListString);
+                }
+                break;
+            }
+            case "removeFav": {
+                boolean response = DbOperation.removeFavouriteForSpecificPerson(person.id, selectedFav, connection);
+                if (response) {
+                    personFavouriteList = DbOperation.getPersonFavouriteList(person.id, connection);
+                    String personFavouriteListString = " ";
+                    for (int i = 0; i < personFavouriteList.size(); i++) {
+                        personFavouriteListString += personFavouriteList.get(i).favName + " \n ";
+                    }
+                    update.addChildUpdate("personFavouriteList", "text", personFavouriteListString);
+                }
+                break;
+            }
+            case "addSkill": {
+                boolean response = DbOperation.insertNewSkillForSpecificPerson(person.id, selectedSkill, connection);
+                if (response) {
+                    personSkillList = DbOperation.getPersonSkillList(person.id, connection);
+                    String personSkillListString = " ";
+                    for (int i = 0; i < personSkillList.size(); i++) {
+                        personSkillListString += personSkillList.get(i).skillName + " \n ";
+                    }
+                    update.addChildUpdate("personSkillList", "text", personSkillListString);
+                }
+                break;
+            }
+            case "removeSkill": {
+                boolean response = DbOperation.removeSkillForSpecificPerson(person.id, selectedSkill, connection);
+                if (response) {
+                    personSkillList = DbOperation.getPersonSkillList(person.id, connection);
+                    String personSkillListString = " ";
+                    for (int i = 0; i < personSkillList.size(); i++) {
+                        personSkillListString += personSkillList.get(i).skillName + " \n ";
+                    }
+                    update.addChildUpdate("personSkillList", "text", personSkillListString);
+                }
+                break;
             }
             default: {
                 return update;
             }
         }
-
+        return update;
     }
 
 }
