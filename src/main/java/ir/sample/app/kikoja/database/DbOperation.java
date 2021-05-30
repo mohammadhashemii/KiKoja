@@ -10,6 +10,71 @@ import java.util.LinkedList;
 
 public class DbOperation {
 
+    // this method will fetch friend list of the specific person
+    public static LinkedList<Person> retrieveFriendList(String PersonID, Connection connection) {
+        // if there is two row of two people with true accept in relations they are
+        // friends! simple.
+        // people information who are friends
+        LinkedList friendListPerson = new LinkedList<Person>();
+        try {
+            // people whom invited by this person
+            LinkedList invitedPeopleID = new LinkedList<String>();
+            // people who invited this person
+            LinkedList friendListID = new LinkedList<String>();
+
+            Person addFriend = new Person();
+            ResultSet result;
+            boolean isFriend = false;
+
+            // find invitee people
+            String getInvitedPeople = "SELECT inviteeid FROM relations WHERE inviterid = ? AND accepted = ?;";
+            PreparedStatement pGetInvitedPeople = connection.prepareStatement(getInvitedPeople);
+            pGetInvitedPeople.setString(1, PersonID);
+            pGetInvitedPeople.setBoolean(2, true);
+            result = pGetInvitedPeople.executeQuery();
+            while (result.next()) {
+                invitedPeopleID.add(result.getString(1));
+            }
+
+            // find people who invited
+            for (String invitedID : (LinkedList<String>)invitedPeopleID) {
+                String getInviteePeople = "SELECT accepted FROM relations WHERE inviterid = ? AND inviteeid = ?;";
+                PreparedStatement pGetInviteePeople = connection.prepareStatement(getInviteePeople);
+                pGetInviteePeople.setString(1, invitedID);
+                pGetInviteePeople.setString(2, PersonID);
+                result = pGetInviteePeople.executeQuery();
+                while (result.next()) {
+                    isFriend = result.getBoolean(1);
+                }
+                if (isFriend) {
+                    friendListID.add(invitedID);
+                }
+            }
+            // get friend information from database
+            for (String friendID : (LinkedList<String>)friendListID) {
+                String getFriendInformation = "SELECT firstname,lastname,email,phone,unimajor,uniedulevel,unientryyear,imageurl FROM relations WHERE id = ?;";
+                PreparedStatement pGetFriendInformation = connection.prepareStatement(getFriendInformation);
+                pGetFriendInformation.setString(1, friendID);
+                result = pGetFriendInformation.executeQuery();
+                addFriend = new Person();
+                while (result.next()) {
+                    addFriend.firstName = result.getString(1);
+                    addFriend.lastName = result.getString(2);
+                    addFriend.email = result.getString(3);
+                    addFriend.phoneNumber = result.getString(4);
+                    addFriend.uniMajor = result.getString(5);
+                    addFriend.uniEduLevel = result.getString(6);
+                    addFriend.uniEntryYear = result.getInt(7);
+                    addFriend.imageURL = result.getString(8);
+                    friendListPerson.add(addFriend);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("error during fetching friend list of specific person");
+        }
+        return friendListPerson;
+    }
+
     public static boolean registerPerson(Person person, Connection connection) {
         try {
             String signUpQuery = "INSERT INTO person(id,firstName,lastName,email,phone,uniMajor,uniEduLevel,uniEntryYear,imageURL) VALUES(?,?,?,?,?,?,?,?,?)";
@@ -70,6 +135,8 @@ public class DbOperation {
         return newPerson;
     }
 
+    // this method will get a match list for specific person using the filter exists
+    // in search
     public static LinkedList<String> getMatched(String uniMajor, String uniEntryYear, String uniEduLevel, String favs,
             String skills, String userID, Connection connection) {
 
@@ -236,7 +303,8 @@ public class DbOperation {
         return personList;
     }
 
-    public static void invitePerson(String inviterID, String inviteeID, boolean accepted, Connection connection) {
+    // this method will update the relations table
+    public static void setRelationShip(String inviterID, String inviteeID, boolean accepted, Connection connection) {
         // NOTE this method will update the relations table using the match page data
         try {
             String relationsUpdate = "INSERT INTO relations (inviterid, inviteeid, accepted) VALUES (?,?,?)";
@@ -313,7 +381,7 @@ public class DbOperation {
             System.err.println("error during fetching user skill id");
         }
         // use id's to get their values from the skill table
-        for (String skillID : (LinkedList<String>)userSkillIDList) {
+        for (String skillID : (LinkedList<String>) userSkillIDList) {
             try {
                 String selectUserSkill = "SELECT skill FROM skillinfo WHERE id=?;";
                 PreparedStatement pSelectUserSkill = connection.prepareStatement(selectUserSkill);
@@ -351,7 +419,7 @@ public class DbOperation {
             System.err.println("error during fetching user favourite id");
         }
         // use id's to get their values from the skill table
-        for (String favID : (LinkedList<String>)userFavIDList) {
+        for (String favID : (LinkedList<String>) userFavIDList) {
             try {
                 String selectUserFav = "SELECT favourite FROM favinfo WHERE id=?;";
                 PreparedStatement pSelectUserFav = connection.prepareStatement(selectUserFav);
@@ -370,7 +438,7 @@ public class DbOperation {
 
     // this method will insert new skill for specific person
     public static void insertNewSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
-        String SkillID="";
+        String SkillID = "";
         try {
             // first fetch skill id from skillinfo table
             String selecSkillQuery = "SELECT skillid FROM skillinfo WHERE skill=?;";
@@ -395,7 +463,7 @@ public class DbOperation {
 
     // this mehtod will insert new favourite for specific person
     public static void insertNewFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
-        String FavID="";
+        String FavID = "";
         try {
             // first fetch fav id from favinfo table
             String selecFavQuery = "SELECT favid FROM favinfo WHERE favourite=?;";
@@ -420,7 +488,7 @@ public class DbOperation {
 
     // this method will remove skill for specific person
     public static void removeSkillForSpecificPerson(String PersonID, String SkillName, Connection connection) {
-        String SkillID="";
+        String SkillID = "";
         try {
             // first fetch skill id from skillinfo table
             String selecSkillQuery = "SELECT skillid FROM skillinfo WHERE skill=?;";
@@ -445,7 +513,7 @@ public class DbOperation {
 
     // this method will remove favourite for specific person
     public static void removeFavouriteForSpecificPerson(String PersonID, String FavName, Connection connection) {
-        String FavID="";
+        String FavID = "";
         try {
             // first fetch fav id from favinfo table
             String selecFavQuery = "SELECT favid FROM favinfo WHERE favourite=?;";
