@@ -11,7 +11,7 @@
 <frame layout="linear_vertical" >
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">رشته دانشگاه:</text>
-		<dropdown>
+		<dropdown onSelectionChange="update/setUniMajor" id="uniMajorDropdown">
 			<item id="-">{{person.uniMajor}}</item>
 			<item id="ce" onClick="">مهندسی کامپیوتر</item>
 			<item id="civil" onClick="">مهندسی عمران</item>
@@ -39,7 +39,7 @@
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">مقطع تحصیلی</text>
-		<dropdown>
+		<dropdown onSelectionChange="update/setUniEduLevel" id="uniEduLevelDropdown">
 			<item id="-">{{person.uniEduLevel}}</item>
 			<item id="bsc" onClick="">کارشناسی</item>
 			<item id="msc" onClick="">کارشناسی ارشد</item>
@@ -49,7 +49,7 @@
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">سال ورود</text>
-		<dropdown>
+		<dropdown onSelectionChange="update/setUniEntryYear" id="uniEntryYearDropdown">
 			<item id="-">{{person.uniEntryYear}}</item>
 			<item id="1399" onClick="">۱۳۹۹</item>
 			<item id="1398" onClick="">۱۳۹۸</item>
@@ -61,9 +61,9 @@
 	</frame>
 	<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 		<text margin_left="10" margin_right="10" background="white">ایمیل:</text>
-		<textInput textsize="11" textalignment="right" margin-right="50" hint="test@gmail.com" >{{person.email}}</textInput>
+		<textInput id="emailInput" textsize="11" textalignment="right" margin-right="50" hint="test@gmail.com" >{{person.email}}</textInput>
 		<text margin_left="10" margin_right="10" background="white">شماره تماس:</text>
-		<textInput textsize="11" textalignment="right" margin-right="50" hint="+982129901" >{{person.phoneNumber}}</textInput>
+		<textInput id="phoneNumberInput" textsize="11" textalignment="right" margin-right="50" hint="+982129901" >{{person.phoneNumber}}</textInput>
 
 		<text margin_left="10" margin_right="10" background="white">علاقه‌مندی‌ها:</text>
 		<dropdown onSelectionChange="update/favSelect" id="favDropdown">

@@ -10,6 +10,26 @@ import java.util.LinkedList;
 
 public class DbOperation {
 
+    public static void editPersonInfo(Person person, Connection connection) {
+        try {
+            String editInfoQuery = "UPDATE person SET firstName=?,lastName=?,email=?,phone=?,uniMajor=?,uniEduLevel=?,uniEntryYear=?,imageURL=? WHERE id=?";
+            PreparedStatement pEditInfoQuery = connection.prepareStatement(editInfoQuery);
+            pEditInfoQuery.setString(1, person.firstName);
+            pEditInfoQuery.setString(2, person.lastName);
+            pEditInfoQuery.setString(3, person.email);
+            pEditInfoQuery.setString(4, person.phoneNumber);
+            pEditInfoQuery.setString(5, person.uniMajor);
+            pEditInfoQuery.setString(6, person.uniEduLevel);
+            pEditInfoQuery.setInt(7, person.uniEntryYear);
+            pEditInfoQuery.setString(8, person.imageURL);
+            pEditInfoQuery.setString(9, person.id);
+            pEditInfoQuery.executeUpdate();
+            pEditInfoQuery.close();
+        } catch (Exception e) {
+            System.err.println("error during editing person info");
+        }
+    }
+
     // this method will fetch friend list of the specific person
     public static LinkedList<Person> retrieveFriendList(String PersonID, Connection connection) {
         // if there is two row of two people with true accept in relations they are
@@ -37,7 +57,7 @@ public class DbOperation {
             }
 
             // find people who invited
-            for (String invitedID : (LinkedList<String>)invitedPeopleID) {
+            for (String invitedID : (LinkedList<String>) invitedPeopleID) {
                 String getInviteePeople = "SELECT accepted FROM relations WHERE inviterid = ? AND inviteeid = ?;";
                 PreparedStatement pGetInviteePeople = connection.prepareStatement(getInviteePeople);
                 pGetInviteePeople.setString(1, invitedID);
@@ -51,7 +71,7 @@ public class DbOperation {
                 }
             }
             // get friend information from database
-            for (String friendID : (LinkedList<String>)friendListID) {
+            for (String friendID : (LinkedList<String>) friendListID) {
                 String getFriendInformation = "SELECT firstname,lastname,email,phone,unimajor,uniedulevel,unientryyear,imageurl FROM relations WHERE id = ?;";
                 PreparedStatement pGetFriendInformation = connection.prepareStatement(getFriendInformation);
                 pGetFriendInformation.setString(1, friendID);
@@ -138,7 +158,7 @@ public class DbOperation {
     // this method will get a match list for specific person using the filter exists
     // in search
     public static LinkedList<String> getMatched(String uniMajor, String uniEntryYear, String uniEduLevel, String favs,
-            String skills, String userID, Connection connection) {
+                                                String skills, String userID, Connection connection) {
 
         String matchedQuery = "SELECT firstname, lastname, unimajor, unientryyear, id FROM person";
         if (!(uniMajor + uniEntryYear + uniEduLevel + favs + skills).equals(""))
@@ -172,7 +192,7 @@ public class DbOperation {
         }
 
         // NOTE making a list of desired skills id using skill table
-        String[] skillsArray = skills.split(",");
+        String[] skillsArray = skills.replaceAll(" ", "").split(",");
         LinkedList skillIDLIST = new LinkedList<Skill>();
         String skillQuery = "SELECT skillid FROM skillinfo WHERE ";
         for (String skillString : skillsArray)
@@ -221,7 +241,7 @@ public class DbOperation {
         // NOTE making a list of desired favs id using skill table
         LinkedList favIDList = new LinkedList<Integer>();
         try {
-            String[] favsArray = favs.split(",");
+            String[] favsArray = favs.replaceAll(" ", "").split(",");
             String favQuery = "SELECT favid FROM favinfo WHERE ";
             for (String favString : favsArray)
                 favQuery += "favourite=" + favString + " OR ";
