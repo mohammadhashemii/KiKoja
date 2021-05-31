@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class DbOperation {
 
-    public static void changePersonInfo(Person person, Connection connection) {
+    public static void editPersonInfo(Person person, Connection connection) {
         try {
             String editInfoQuery = "UPDATE person SET firstName=?,lastName=?,email=?,phone=?,uniMajor=?,uniEduLevel=?,uniEntryYear=?,imageURL=? WHERE id=?";
             PreparedStatement pEditInfoQuery = connection.prepareStatement(editInfoQuery);
@@ -192,7 +192,7 @@ public class DbOperation {
         }
 
         // NOTE making a list of desired skills id using skill table
-        String[] skillsArray = skills.split(",");
+        String[] skillsArray = skills.replaceAll(" ", "").split(",");
         LinkedList skillIDLIST = new LinkedList<Skill>();
         String skillQuery = "SELECT skillid FROM skillinfo WHERE ";
         for (String skillString : skillsArray)
@@ -241,7 +241,7 @@ public class DbOperation {
         // NOTE making a list of desired favs id using skill table
         LinkedList favIDList = new LinkedList<Integer>();
         try {
-            String[] favsArray = favs.split(",");
+            String[] favsArray = favs.replaceAll(" ", "").split(",");
             String favQuery = "SELECT favid FROM favinfo WHERE ";
             for (String favString : favsArray)
                 favQuery += "favourite=" + favString + " OR ";
