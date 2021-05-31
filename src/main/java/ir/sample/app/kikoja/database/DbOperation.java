@@ -158,7 +158,7 @@ public class DbOperation {
     // this method will get a match list for specific person using the filter exists
     // in search
     public static LinkedList<String> getMatched(String uniMajor, String uniEntryYear, String uniEduLevel, String favs,
-            String skills, String userID, Connection connection) {
+                                                String skills, String userID, Connection connection) {
 
         String matchedQuery = "SELECT firstname, lastname, unimajor, unientryyear, id FROM person";
         if (!(uniMajor + uniEntryYear + uniEduLevel + favs + skills).equals(""))
@@ -192,7 +192,7 @@ public class DbOperation {
         }
 
         // NOTE making a list of desired skills id using skill table
-        String[] skillsArray = skills.replaceAll("[\t\n\s]+", "").split(",");
+        String[] skillsArray = skills.replaceAll(" ", "").split(",");
         LinkedList skillIDLIST = new LinkedList<Skill>();
         String skillQuery = "SELECT skillid FROM skillinfo WHERE ";
         for (String skillString : skillsArray)
@@ -241,7 +241,7 @@ public class DbOperation {
         // NOTE making a list of desired favs id using skill table
         LinkedList favIDList = new LinkedList<Integer>();
         try {
-            String[] favsArray = favs.replaceAll("[\t\n\s]+", "").split(",");
+            String[] favsArray = favs.replaceAll(" ", "").split(",");
             String favQuery = "SELECT favid FROM favinfo WHERE ";
             for (String favString : favsArray)
                 favQuery += "favourite=" + favString + " OR ";

@@ -31,6 +31,10 @@ public class KikojaService extends APSService {
     private String selectedFav;
     private String selectedSkill;
     private View currentPage;
+    //new
+    private LinkedList<String> filterfavouriteList = new LinkedList<String>();
+    private String filterSelectedFav;
+    //endnew
 
     public KikojaService(String channelName) {
         super(channelName);
@@ -211,6 +215,18 @@ public class KikojaService extends APSService {
             }
             case "saveProfile": {
                 currentPage = new HomePage();
+                person.phoneNumber = pageData.get("phoneNumberInput").toString();
+                person.email = pageData.get("emailInput").toString();
+                DbOperation.editPersonInfo(person, connection);
+                currentPage = new ChangeFilterPage();
+                ProfilePageData data = new ProfilePageData(
+                        person,
+                        skillList,
+                        favouriteList,
+                        personSkillList,
+                        personFavouriteList
+                );
+                currentPage.setMustacheModel(data);
                 return currentPage;
             }
             case "addHobbiesButtonUpdate": {
@@ -226,12 +242,12 @@ public class KikojaService extends APSService {
             }
             case "setUniEduLevel": {
                 if (pageData.get("uniEduLevelDropdown").toString() != emptySelection)
-                    person.uniMajor = pageData.get("uniEduLevelDropdown").toString();
+                    person.uniEduLevel = pageData.get("uniEduLevelDropdown").toString();
                 break;
             }
             case "setUniEntryYear": {
                 if (pageData.get("uniEntryYearDropdown").toString() != emptySelection)
-                    person.uniMajor = pageData.get("uniEntryYearDropdown").toString();
+                    person.uniEntryYear = Integer.parseInt(pageData.get("uniEntryYearDropdown").toString());
                 break;
             }
             case "nextButtonOfLoginPage": {
@@ -271,6 +287,28 @@ public class KikojaService extends APSService {
                 }
                 return update;
             }
+            //new
+            case "filterfavSelect"   :{
+                if(pageData.get("filterfavDropdown").toString()!=emptySelection)
+                    filterSelectedFav= pageData.get("filterfavDropDown").toString();
+                break;
+            }
+            case "filteraddFav":{
+                filterfavouriteList.add(filterSelectedFav);
+                String filterNewFav=" ";
+                for(int i = 0; i < filterfavouriteList.size() ; i++){
+                    if(i==0){
+                        filterNewFav+=filterfavouriteList.get(i);
+                    }
+                    else {
+                        filterNewFav += " , ";
+                        filterNewFav += filterSelectedFav;
+                    }
+                }
+                update.addChildUpdate("filterFavouriteList","text",filterNewFav);
+                break;
+            }
+            //endnew
             case "favSelect": {
                 if (pageData.get("favDropdown").toString() != emptySelection)
                     selectedFav = pageData.get("favDropdown").toString();
