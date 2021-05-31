@@ -10,6 +10,26 @@ import java.util.LinkedList;
 
 public class DbOperation {
 
+    public static void changePersonInfo(Person person, Connection connection) {
+        try {
+            String editInfoQuery = "UPDATE person SET firstName=?,lastName=?,email=?,phone=?,uniMajor=?,uniEduLevel=?,uniEntryYear=?,imageURL=? WHERE id=?";
+            PreparedStatement pEditInfoQuery = connection.prepareStatement(editInfoQuery);
+            pEditInfoQuery.setString(1, person.firstName);
+            pEditInfoQuery.setString(2, person.lastName);
+            pEditInfoQuery.setString(3, person.email);
+            pEditInfoQuery.setString(4, person.phoneNumber);
+            pEditInfoQuery.setString(5, person.uniMajor);
+            pEditInfoQuery.setString(6, person.uniEduLevel);
+            pEditInfoQuery.setInt(7, person.uniEntryYear);
+            pEditInfoQuery.setString(8, person.imageURL);
+            pEditInfoQuery.setString(9, person.id);
+            pEditInfoQuery.executeUpdate();
+            pEditInfoQuery.close();
+        } catch (Exception e) {
+            System.err.println("error during editing person info");
+        }
+    }
+
     // this method will fetch friend list of the specific person
     public static LinkedList<Person> retrieveFriendList(String PersonID, Connection connection) {
         // if there is two row of two people with true accept in relations they are
@@ -37,7 +57,7 @@ public class DbOperation {
             }
 
             // find people who invited
-            for (String invitedID : (LinkedList<String>)invitedPeopleID) {
+            for (String invitedID : (LinkedList<String>) invitedPeopleID) {
                 String getInviteePeople = "SELECT accepted FROM relations WHERE inviterid = ? AND inviteeid = ?;";
                 PreparedStatement pGetInviteePeople = connection.prepareStatement(getInviteePeople);
                 pGetInviteePeople.setString(1, invitedID);
@@ -51,7 +71,7 @@ public class DbOperation {
                 }
             }
             // get friend information from database
-            for (String friendID : (LinkedList<String>)friendListID) {
+            for (String friendID : (LinkedList<String>) friendListID) {
                 String getFriendInformation = "SELECT firstname,lastname,email,phone,unimajor,uniedulevel,unientryyear,imageurl FROM relations WHERE id = ?;";
                 PreparedStatement pGetFriendInformation = connection.prepareStatement(getFriendInformation);
                 pGetFriendInformation.setString(1, friendID);
