@@ -13,7 +13,7 @@ import ir.sample.app.kikoja.models.Skill;
 import ir.sample.app.kikoja.views.*;
 import org.json.simple.JSONObject;
 // import org.json.simple.JSONObject;
- import java.sql.Connection;
+import java.sql.Connection;
 import java.util.LinkedList;
 
 //
@@ -33,7 +33,9 @@ public class KikojaService extends APSService {
     private View currentPage;
     //new
     private LinkedList<String> filterfavouriteList = new LinkedList<String>();
+    private LinkedList<String> filterSkillList = new LinkedList<String>();
     private String filterSelectedFav;
+    private String filterSelectedSkill;
     //endnew
 
     public KikojaService(String channelName) {
@@ -105,7 +107,7 @@ public class KikojaService extends APSService {
     // use this method to update current page
     @Override
     public ir.appsan.sdk.Response onUpdate(ViewUpdate update, String updateCommand, JSONObject pageData,
-            String userId) {
+                                           String userId) {
         // used to write warning messages inside the xml elements
         String WarningMessage;
         // enter the command_name which entered in onclick second attribute here to
@@ -287,14 +289,16 @@ public class KikojaService extends APSService {
                 }
                 return update;
             }
-            //new
-            case "filterfavSelect"   :{
-                if(pageData.get("filterfavDropdown").toString()!=emptySelection)
-                    filterSelectedFav= pageData.get("filterfavDropDown").toString();
+            case "filterfavSelect":{
+                if(pageData.get("filterfavDropdownn").toString()!=emptySelection) {
+                    filterSelectedFav = pageData.get("filterfavDropdownn").toString();
+                }
+
                 break;
             }
             case "filteraddFav":{
-                filterfavouriteList.add(filterSelectedFav);
+                if(!filterfavouriteList.contains(filterSelectedFav))
+                    filterfavouriteList.add(filterSelectedFav);
                 String filterNewFav=" ";
                 for(int i = 0; i < filterfavouriteList.size() ; i++){
                     if(i==0){
@@ -302,13 +306,70 @@ public class KikojaService extends APSService {
                     }
                     else {
                         filterNewFav += " , ";
-                        filterNewFav += filterSelectedFav;
+                        filterNewFav += filterfavouriteList.get(i);
                     }
                 }
+                filterNewFav+=" ";
                 update.addChildUpdate("filterFavouriteList","text",filterNewFav);
                 break;
             }
-            //endnew
+            case "filterremoveFav":{
+                filterfavouriteList.remove(filterSelectedFav);
+                String filterNewFav=" ";
+                for(int i = 0; i < filterfavouriteList.size() ; i++){
+                    if (i==0){
+                        filterNewFav+=filterfavouriteList.get(i);
+                    }
+                    else{
+                        filterNewFav += " , ";
+                        filterNewFav += filterfavouriteList.get(i);
+                    }
+
+                }
+                filterNewFav+=" ";
+                update.addChildUpdate("filterFavouriteList","text",filterNewFav);
+                break;
+
+            }
+            case "skilladdFav":{
+                if(!filterSkillList.contains(filterSelectedSkill))
+                    filterSkillList.add(filterSelectedSkill);
+                String filterNewSkill=" ";
+                for(int i = 0 ; i < filterSkillList.size() ; i++){
+                    if(i==0){
+                        filterNewSkill+=filterSkillList.get(i);
+                    }
+                    else{
+                        filterNewSkill+=" , ";
+                        filterNewSkill+=filterSkillList.get(i);
+                    }
+                }
+                filterNewSkill+=" ";
+                update.addChildUpdate("filterSkillListt","text",filterNewSkill);
+                break;
+            }
+            case "filterSkillSelect":{
+                if(pageData.get("filterSkillDropdownn").toString()!=emptySelection) {
+                    filterSelectedSkill = pageData.get("filterSkillDropdownn").toString();
+                }
+                break;
+            }
+            case "skillremoveFav":{
+                filterSkillList.remove(filterSelectedSkill);
+                String filterNewSkill=" ";
+                for(int i = 0 ; i < filterSkillList.size() ; i++){
+                    if(i==0){
+                        filterNewSkill+=filterSkillList.get(i);
+                    }
+                    else{
+                        filterNewSkill+=" , ";
+                        filterNewSkill+=filterSkillList.get(i);
+                    }
+                }
+                filterNewSkill+=" ";
+                update.addChildUpdate("filterSkillListt","text",filterNewSkill);
+                break;
+            }
             case "favSelect": {
                 if (pageData.get("favDropdown").toString() != emptySelection)
                     selectedFav = pageData.get("favDropdown").toString();
