@@ -204,7 +204,7 @@ public class DbOperation {
 
         if (skillsArray.length > 0) {
             for (String skillString : skillsArray) {
-                skillQuery += "skill=\"" + skillString + "\" OR ";
+                skillQuery += "skill=\'" + skillString + "\' OR ";
             }
             skillQuery = skillQuery.substring(0, skillQuery.length() - 3);
         } else {
@@ -223,10 +223,11 @@ public class DbOperation {
             System.err.println("error at function getMatched : skillIDList section");
         }
 
+        LinkedList<Person> newPersonList = new LinkedList<>();
         // filter skills
         try {
             for (Person targetPerson : (LinkedList<Person>) personList) {
-                String personSkillQuery = "SELECT skillid FROM skills WHERE id=\"" + targetPerson.id + "\"";
+                String personSkillQuery = "SELECT skillid FROM skills WHERE id=\'" + targetPerson.id + "\'";
                 PreparedStatement pPersonSkillQuery = connection.prepareStatement(personSkillQuery);
                 result = pPersonSkillQuery.executeQuery();
                 // making person skill id list
@@ -242,11 +243,12 @@ public class DbOperation {
                         break;
                     }
                 }
-                if (!isMatch) {
-                    personList.remove(targetPerson);
+                if (isMatch) {
+                    newPersonList.add(targetPerson);
                 }
             }
         } catch (Exception e) {
+            System.err.println(e);
             System.err.println("error at function getMatched : skillIDList filter");
         }
 
@@ -258,7 +260,7 @@ public class DbOperation {
 
             if (favsArray.length > 0) {
                 for (String favString : favsArray) {
-                    favQuery += "favourite=\"" + favString + "\" OR ";
+                    favQuery += "favourite=\'" + favString + "\' OR ";
                 }
                 favQuery = favQuery.substring(0, favQuery.length() - 3);
             } else {
@@ -276,9 +278,10 @@ public class DbOperation {
         }
 
         // filter skills
+        LinkedList<Person> newNewPersonList = new LinkedList<>();
         try {
-            for (Person targetPerson : (LinkedList<Person>) personList) {
-                String personFavQuery = "SELECT favid FROM favourites WHERE id=\"" + targetPerson.id + "\"";
+            for (Person targetPerson : (LinkedList<Person>) newPersonList) {
+                String personFavQuery = "SELECT favid FROM favourites WHERE id=\'" + targetPerson.id + "\'";
                 PreparedStatement pPersonFavQuery = connection.prepareStatement(personFavQuery);
                 result = pPersonFavQuery.executeQuery();
                 // making person skill id list
@@ -294,8 +297,8 @@ public class DbOperation {
                         break;
                     }
                 }
-                if (!isMatch) {
-                    personList.remove(targetPerson);
+                if (isMatch) {
+                    newNewPersonList.add(targetPerson);
                 }
             }
         } catch (Exception e) {
@@ -304,37 +307,43 @@ public class DbOperation {
 
         // delete blocked persons from person list
         // visited
+        personList = new LinkedList();
         try {
-            for (Person targetPerson : (LinkedList<Person>) personList) {
-                String isAcceptedQuery = "SELECT accepted FROM relations WHERE invitedid=? AND inviteeid=?";
+            for (Person targetPerson : (LinkedList<Person>) newNewPersonList) {
+                boolean condition1 = false, condition2 = false;
+                String isAcceptedQuery = "SELECT accepted FROM relations WHERE inviterid=? AND inviteeid=?";
                 PreparedStatement pIsAcceptedQuery = connection.prepareStatement(isAcceptedQuery);
                 pIsAcceptedQuery.setString(1, targetPerson.id);
                 pIsAcceptedQuery.setString(2, userID);
                 result = pIsAcceptedQuery.executeQuery();
-                pIsAcceptedQuery.close();
                 String isAccepted = "";
                 while (result.next()) {
                     isAccepted = String.valueOf(result.getBoolean(1));
                 }
-                if (isAccepted.equals("false")) {
-                    personList.remove(targetPerson);
+                pIsAcceptedQuery.close();
+                if (!isAccepted.equals("false")) {
+                    condition1 = true;
                 }
 
-                isAcceptedQuery = "SELECT accepted FROM relations WHERE invitedid=? AND inviteeid=?";
+                isAcceptedQuery = "SELECT accepted FROM relations WHERE inviterid=? AND inviteeid=?";
                 pIsAcceptedQuery = connection.prepareStatement(isAcceptedQuery);
                 pIsAcceptedQuery.setString(1, userID);
                 pIsAcceptedQuery.setString(2, targetPerson.id);
                 result = pIsAcceptedQuery.executeQuery();
-                pIsAcceptedQuery.close();
                 isAccepted = "";
                 while (result.next()) {
                     isAccepted = String.valueOf(result.getBoolean(1));
                 }
-                if (isAccepted.equals("false")) {
-                    personList.remove(targetPerson);
+                pIsAcceptedQuery.close();
+                if (!isAccepted.equals("false")) {
+                   condition2 = true;
                 }
+
+                if (condition1 && condition2)
+                    personList.add(targetPerson);
             }
         } catch (Exception e) {
+            System.err.println(e);
             System.err.println("block person filter section error");
         }
 
