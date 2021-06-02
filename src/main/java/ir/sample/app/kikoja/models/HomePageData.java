@@ -1,7 +1,5 @@
 package ir.sample.app.kikoja.models;
 
-import java.util.LinkedList;
-
 public class HomePageData {
     public Person person;
     public String favString;

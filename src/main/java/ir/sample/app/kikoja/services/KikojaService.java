@@ -25,6 +25,7 @@ public class KikojaService extends APSService {
     private LinkedList<Favourite> favouriteList = new LinkedList<Favourite>();
     private LinkedList<Skill> personSkillList = new LinkedList<Skill>();
     private LinkedList<Favourite> personFavouriteList = new LinkedList<Favourite>();
+    private LinkedList<Person> friendList = new LinkedList<Person>();
     private String selectedFav;
     private String selectedSkill;
     private View currentPage;
@@ -150,7 +151,10 @@ public class KikojaService extends APSService {
             }
             case "getFavouritePage": {
                 currentPage = new FavouritePersonsPage();
-                break;
+                friendList = DbOperation.retrieveFriendList(person.id, connection);
+                FavouritePersonsData data = new FavouritePersonsData(friendList);
+                currentPage.setMustacheModel(data);
+                return currentPage;
             }
             case "getProfilePage": {
                 currentPage = new ProfilePage();

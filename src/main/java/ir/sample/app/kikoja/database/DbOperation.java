@@ -72,7 +72,7 @@ public class DbOperation {
             }
             // get friend information from database
             for (String friendID : (LinkedList<String>) friendListID) {
-                String getFriendInformation = "SELECT firstname,lastname,email,phone,unimajor,uniedulevel,unientryyear,imageurl FROM relations WHERE id = ?;";
+                String getFriendInformation = "SELECT firstname,lastname,email,phone,unimajor,uniedulevel,unientryyear,imageurl FROM person WHERE id = ?;";
                 PreparedStatement pGetFriendInformation = connection.prepareStatement(getFriendInformation);
                 pGetFriendInformation.setString(1, friendID);
                 result = pGetFriendInformation.executeQuery();
