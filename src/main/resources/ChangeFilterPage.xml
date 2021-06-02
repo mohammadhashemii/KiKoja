@@ -64,7 +64,7 @@
 						<button onClick="update/filteraddFav" gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="8" textcolor="white" textsize="10" background="#b4d9c7" height="35" width="60"> + اضافه کن</button>
 					</frame>
 					<text textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right" id="filterFavouriteList">
-						{{filterNewFav}}
+						{{favouriteString}}
 					</text>
 				</frame>
 				<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
@@ -82,7 +82,7 @@
 
 					</frame>
 					<text textsize="11" padding_top="50" height="100"  borderCornerRadius="8" borderColor="black" borderStrokeWidth="1" textalignment="right" id="filterSkillListt">
-						{{filterNewSkill}}
+						{{skillString}}
 					</text>
 
 				</frame>

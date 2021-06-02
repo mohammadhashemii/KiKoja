@@ -29,8 +29,8 @@ public class KikojaService extends APSService {
     private String selectedFav;
     private String selectedSkill;
     private View currentPage;
-    private final LinkedList<String> filterFavouriteList = new LinkedList<String>();
-    private final LinkedList<String> filterSkillList = new LinkedList<String>();
+    private LinkedList<String> filterFavouriteList = new LinkedList<String>();
+    private LinkedList<String> filterSkillList = new LinkedList<String>();
     private String filterSelectedFav;
     private String filterSelectedSkill;
     private LinkedList<Person> personLinkedList = new LinkedList<Person>();
@@ -53,6 +53,8 @@ public class KikojaService extends APSService {
     }
 
     public void makeNewFilters() {
+        filterFavouriteList = new LinkedList<String>();
+        filterSkillList = new LinkedList<String>();
         for (Skill skill : personSkillList) {
             filterSkillList.add(skill.skillName);
         }
@@ -177,15 +179,15 @@ public class KikojaService extends APSService {
             }
             case "getChangeFilterPage": {
                 currentPage = new ChangeFilterPage();
-                ProfilePageData data = new ProfilePageData(
+                ChangeFilterPageData data = new ChangeFilterPageData(
                         person,
                         skillList,
                         favouriteList,
-                        personSkillList,
-                        personFavouriteList
+                        favouriteString,
+                        skillString
                 );
                 currentPage.setMustacheModel(data);
-                break;
+                return currentPage;
             }
         }
         return currentPage;
@@ -317,22 +319,11 @@ public class KikojaService extends APSService {
                 filterUniMajor = person.uniMajor;
                 filterUniEduLevel = person.uniEduLevel;
                 filterUniEntryYear = person.uniEntryYear;
-                currentPage = new HomePage();
                 person.phoneNumber = pageData.get("phoneNumberInput").toString();
                 person.email = pageData.get("emailInput").toString();
                 DbOperation.editPersonInfo(person, connection);
-                currentPage = new ChangeFilterPage();
                 makeNewFilters();
-
-                ProfilePageData data = new ProfilePageData(
-                        person,
-                        skillList,
-                        favouriteList,
-                        personSkillList,
-                        personFavouriteList
-                );
-                currentPage.setMustacheModel(data);
-                return currentPage;
+                break;
             }
             case "addHobbiesButtonUpdate": {
                 // String hobbyBoxText = pageData.get("hobbiesTextBox").toString();

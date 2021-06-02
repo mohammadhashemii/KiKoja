@@ -348,7 +348,7 @@ public class DbOperation {
                    condition2 = true;
                 }
 
-                if (condition1 && condition2)
+                if (condition1 && condition2 && targetPerson.id != userID)
                     personList.add(targetPerson);
             }
         } catch (Exception e) {
@@ -357,6 +357,7 @@ public class DbOperation {
         }
 
         // TODO use personList to update the match page
+        System.out.println(personList);
         return personList;
     }
 

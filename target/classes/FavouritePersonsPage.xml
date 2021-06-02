@@ -7,7 +7,7 @@
 		<frame background="#d8f2e5" margin_left="20" margin_right="20" borderCornerRadius="11">
 			<frame layout="linear_vertical" margin_top="0"  >
 				<frame onClick="command/getMoreInfoPage" borderCornerRadius="11" width="300" height="200">
-				  <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="#d8f2e5" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-alireza.jpg" borderStrokeWidth="1"></image>
+				  <image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="#d8f2e5" src="{{imageURL}}" borderStrokeWidth="1"></image>
 				</frame>
 				<text id="name" gravity="center" textsize="20">{{firstName}} {{lastName}}</text>
 			</frame>
