@@ -130,9 +130,6 @@ public class KikojaService extends APSService {
                 break;
             }
             case "getHomePage": {
-                currentPage = new HomePage();
-                next = 0;
-
                 personLinkedList = DbOperation.getMatched(
                         filterUniMajor,
                         String.valueOf(filterUniEntryYear),
@@ -142,6 +139,14 @@ public class KikojaService extends APSService {
                         person.id,
                         connection
                 );
+
+                if (personLinkedList.size() == 0) {
+                    currentPage = new NotFoundPage();
+                    break;
+                }
+
+                currentPage = new HomePage();
+                next = 0;
                 Person currentPerson = personLinkedList.get(next);
                 LinkedList<Favourite> currentFavouriteList = DbOperation.getPersonFavouriteList(currentPerson.id, connection);
                 LinkedList<Skill> currentSkillList = DbOperation.getPersonSkillList(currentPerson.id, connection);
