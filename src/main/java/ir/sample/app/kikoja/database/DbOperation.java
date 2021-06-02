@@ -146,7 +146,8 @@ public class DbOperation {
             newPerson.phoneNumber = data[4];
             newPerson.uniMajor = data[5];
             newPerson.uniEduLevel = data[6];
-            newPerson.uniEntryYear = Integer.parseInt(data[7]);
+            if (data[7] != null)
+                newPerson.uniEntryYear = Integer.parseInt(data[7]);
             newPerson.imageURL = data[8];
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -198,7 +199,11 @@ public class DbOperation {
         }
 
         // NOTE making a list of desired skills id using skill table
-        String[] skillsArray = skills.replaceAll(" ", "").split(",");
+        String[] skillsArray;
+        if (skills.equals(" "))
+            skillsArray = new String[0];
+        else
+            skillsArray = skills.substring(1, skills.length() - 1).split(" , ");
         LinkedList skillIDLIST = new LinkedList<Skill>();
         String skillQuery = "SELECT skillid FROM skillinfo WHERE ";
 
@@ -255,7 +260,11 @@ public class DbOperation {
         // NOTE making a list of desired favs id using skill table
         LinkedList favIDList = new LinkedList<Integer>();
         try {
-            String[] favsArray = favs.replaceAll(" ", "").split(",");
+            String[] favsArray;
+            if (favs.equals(" "))
+                favsArray = new String[0];
+            else
+                favsArray = favs.substring(1, favs.length() - 1).split(" , ");
             String favQuery = "SELECT favid FROM favinfo WHERE ";
 
             if (favsArray.length > 0) {

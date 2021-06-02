@@ -34,8 +34,8 @@ public class KikojaService extends APSService {
     private String filterSelectedFav;
     private String filterSelectedSkill;
     private LinkedList<Person> personLinkedList = new LinkedList<Person>();
-    private String favouriteString;
-    private String skillString;
+    private String favouriteString = " ";
+    private String skillString = " ";
     private String filterUniMajor;
     private String filterUniEduLevel;
     private int filterUniEntryYear;
@@ -163,7 +163,9 @@ public class KikojaService extends APSService {
             }
             case "getProfilePage": {
                 currentPage = new ProfilePage();
-                break;
+                ProfilePageData data = new ProfilePageData(person, skillList, favouriteList, personSkillList, personFavouriteList);
+                currentPage.setMustacheModel(data);
+                return currentPage;
             }
             case "getMoreInfoPage": {
                 currentPage = new MoreInfoPage();
@@ -175,6 +177,14 @@ public class KikojaService extends APSService {
             }
             case "getChangeFilterPage": {
                 currentPage = new ChangeFilterPage();
+                ProfilePageData data = new ProfilePageData(
+                        person,
+                        skillList,
+                        favouriteList,
+                        personSkillList,
+                        personFavouriteList
+                );
+                currentPage.setMustacheModel(data);
                 break;
             }
         }
@@ -275,7 +285,14 @@ public class KikojaService extends APSService {
                         favouriteList = DbOperation.getFavouriteList(connection);
 
                         currentPage = new ProfilePage();
-                        currentPage.setMustacheModel(person);
+                        ProfilePageData data = new ProfilePageData(
+                                person,
+                                skillList,
+                                favouriteList,
+                                new LinkedList<Skill>(),
+                                new LinkedList<Favourite>()
+                        );
+                        currentPage.setMustacheModel(data);
                         return currentPage;
                     }
                     else {

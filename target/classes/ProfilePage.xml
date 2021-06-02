@@ -4,7 +4,7 @@
 </frame>
 <frame layout="linear_vertical" margin_top="0"  >
 	<frame borderColor="black" borderCornerRadius="11" width="150" height="225">
-		<image id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="http://162.55.105.137:8080/api/public/dl/qCi7vK8D" borderStrokeWidth="1"></image>
+		<image src="{{person.imageURL}}" id="profile-image" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor=""  borderStrokeWidth="1"></image>
 	</frame>
 	<text id="name" gravity="center" textsize="20">{{person.firstName}} {{person.lastName}}</text>
 </frame>
