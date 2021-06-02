@@ -72,7 +72,7 @@ public class DbOperation {
             }
             // get friend information from database
             for (String friendID : (LinkedList<String>) friendListID) {
-                String getFriendInformation = "SELECT firstname,lastname,email,phone,unimajor,uniedulevel,unientryyear,imageurl FROM relations WHERE id = ?;";
+                String getFriendInformation = "SELECT firstname,lastname,email,phone,unimajor,uniedulevel,unientryyear,imageurl FROM person WHERE id = ?;";
                 PreparedStatement pGetFriendInformation = connection.prepareStatement(getFriendInformation);
                 pGetFriendInformation.setString(1, friendID);
                 result = pGetFriendInformation.executeQuery();
@@ -157,34 +157,40 @@ public class DbOperation {
 
     // this method will get a match list for specific person using the filter exists
     // in search
-    public static LinkedList<String> getMatched(String uniMajor, String uniEntryYear, String uniEduLevel, String favs,
-                                                String skills, String userID, Connection connection) {
-
-        String matchedQuery = "SELECT firstname, lastname, unimajor, unientryyear, id FROM person";
-        if (!(uniMajor + uniEntryYear + uniEduLevel + favs + skills).equals(""))
-            matchedQuery += " where ";
-
-        if (!uniMajor.equals(""))
-            matchedQuery += "unimajor=" + uniMajor + " ";
-
-        if (!uniEntryYear.equals(""))
-            matchedQuery += "unientryyear=" + uniMajor + " ";
-
-        if (!uniEduLevel.equals(""))
-            matchedQuery += "uniedulevel=" + uniMajor + " ";
-
-        ResultSet result;
+    public static LinkedList<Person> getMatched(String uniMajor, String uniEntryYear, String uniEduLevel, String favs,
+            String skills, String userID, Connection connection) {
         LinkedList personList = new LinkedList<Person>();
+        ResultSet result;
         try {
+            String matchedQuery = "SELECT firstname, lastname, unimajor, unientryyear, id FROM person WHERE condition1 AND condition2 AND condition3";
+
+            if (!uniEntryYear.replaceAll(" ","").equals("")) {
+                matchedQuery = matchedQuery.replaceAll("condition3", ("unientryyear=" + uniEntryYear));
+            } else {
+                matchedQuery = matchedQuery.replaceAll("condition3", "true");
+            }
+
+            if (!uniMajor.replaceAll(" ","").equals("")) {
+                matchedQuery = matchedQuery.replaceAll("condition1", ("unimajor='" + uniMajor + "'"));
+            } else {
+                matchedQuery = matchedQuery.replaceAll("condition1", "true");
+            }
+
+            if (!uniEduLevel.replaceAll(" ","").equals("")) {
+                matchedQuery = matchedQuery.replaceAll("condition2", ("uniedulevel='" + uniEduLevel + "'"));
+            } else {
+                matchedQuery = matchedQuery.replaceAll("condition2", "true");
+            }
+
             PreparedStatement pMatchQuery = connection.prepareStatement(matchedQuery);
             result = pMatchQuery.executeQuery();
             while (result.next()) {
                 Person newPerson = new Person();
-                newPerson.firstName = result.getString(0);
-                newPerson.lastName = result.getString(1);
-                newPerson.uniMajor = result.getString(2);
-                newPerson.uniEntryYear = Integer.parseInt(result.getString(3));
-                newPerson.id = result.getString(4);
+                newPerson.firstName = result.getString(1);
+                newPerson.lastName = result.getString(2);
+                newPerson.uniMajor = result.getString(3);
+                newPerson.uniEntryYear = Integer.parseInt(result.getString(4));
+                newPerson.id = result.getString(5);
                 personList.add(newPerson);
             }
         } catch (Exception e) {
@@ -195,11 +201,17 @@ public class DbOperation {
         String[] skillsArray = skills.replaceAll(" ", "").split(",");
         LinkedList skillIDLIST = new LinkedList<Skill>();
         String skillQuery = "SELECT skillid FROM skillinfo WHERE ";
-        for (String skillString : skillsArray)
-            skillQuery += "skill=" + skillString + " OR ";
+
+        if (skillsArray.length > 0) {
+            for (String skillString : skillsArray) {
+                skillQuery += "skill=\"" + skillString + "\" OR ";
+            }
+            skillQuery = skillQuery.substring(0, skillQuery.length() - 3);
+        } else {
+            skillQuery = skillQuery.substring(0, skillQuery.length() - 6);
+        }
 
         try {
-            skillQuery = skillQuery.substring(0, skillQuery.length() - 3);
             PreparedStatement pSkillQuery = connection.prepareStatement(skillQuery);
             result = pSkillQuery.executeQuery();
 
@@ -214,7 +226,7 @@ public class DbOperation {
         // filter skills
         try {
             for (Person targetPerson : (LinkedList<Person>) personList) {
-                String personSkillQuery = "SELECT skillid FROM skills WHERE id=" + targetPerson.id;
+                String personSkillQuery = "SELECT skillid FROM skills WHERE id=\"" + targetPerson.id + "\"";
                 PreparedStatement pPersonSkillQuery = connection.prepareStatement(personSkillQuery);
                 result = pPersonSkillQuery.executeQuery();
                 // making person skill id list
@@ -243,10 +255,16 @@ public class DbOperation {
         try {
             String[] favsArray = favs.replaceAll(" ", "").split(",");
             String favQuery = "SELECT favid FROM favinfo WHERE ";
-            for (String favString : favsArray)
-                favQuery += "favourite=" + favString + " OR ";
 
-            favQuery = favQuery.substring(0, favQuery.length() - 3);
+            if (favsArray.length > 0) {
+                for (String favString : favsArray) {
+                    favQuery += "favourite=\"" + favString + "\" OR ";
+                }
+                favQuery = favQuery.substring(0, favQuery.length() - 3);
+            } else {
+                favQuery = favQuery.substring(0, favQuery.length() - 6);
+            }
+
             PreparedStatement pfavQuery = connection.prepareStatement(favQuery);
             result = pfavQuery.executeQuery();
 
@@ -260,7 +278,7 @@ public class DbOperation {
         // filter skills
         try {
             for (Person targetPerson : (LinkedList<Person>) personList) {
-                String personFavQuery = "SELECT favid FROM favourites WHERE id=" + targetPerson.id;
+                String personFavQuery = "SELECT favid FROM favourites WHERE id=\"" + targetPerson.id + "\"";
                 PreparedStatement pPersonFavQuery = connection.prepareStatement(personFavQuery);
                 result = pPersonFavQuery.executeQuery();
                 // making person skill id list
@@ -285,6 +303,7 @@ public class DbOperation {
         }
 
         // delete blocked persons from person list
+        // visited
         try {
             for (Person targetPerson : (LinkedList<Person>) personList) {
                 String isAcceptedQuery = "SELECT accepted FROM relations WHERE invitedid=? AND inviteeid=?";
@@ -331,7 +350,7 @@ public class DbOperation {
             PreparedStatement pRelationsUpdate = connection.prepareStatement(relationsUpdate);
             pRelationsUpdate.setString(1, inviterID);
             pRelationsUpdate.setString(2, inviteeID);
-            pRelationsUpdate.setString(3, String.valueOf(accepted));
+            pRelationsUpdate.setBoolean(3, accepted);
             pRelationsUpdate.executeUpdate();
             pRelationsUpdate.close();
         } catch (Exception e) {

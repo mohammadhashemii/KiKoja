@@ -5,11 +5,8 @@ import ir.appsan.sdk.View;
 import ir.appsan.sdk.ViewUpdate;
 import ir.sample.app.kikoja.database.DatabaseManager;
 import ir.sample.app.kikoja.database.DbOperation;
-import ir.sample.app.kikoja.models.Favourite;
-import ir.sample.app.kikoja.models.Person;
+import ir.sample.app.kikoja.models.*;
 // import required models here
-import ir.sample.app.kikoja.models.ProfilePageData;
-import ir.sample.app.kikoja.models.Skill;
 import ir.sample.app.kikoja.views.*;
 import org.json.simple.JSONObject;
 // import org.json.simple.JSONObject;
@@ -28,15 +25,21 @@ public class KikojaService extends APSService {
     private LinkedList<Favourite> favouriteList = new LinkedList<Favourite>();
     private LinkedList<Skill> personSkillList = new LinkedList<Skill>();
     private LinkedList<Favourite> personFavouriteList = new LinkedList<Favourite>();
+    private LinkedList<Person> friendList = new LinkedList<Person>();
     private String selectedFav;
     private String selectedSkill;
     private View currentPage;
-    //new
-    private LinkedList<String> filterfavouriteList = new LinkedList<String>();
-    private LinkedList<String> filterSkillList = new LinkedList<String>();
+    private final LinkedList<String> filterFavouriteList = new LinkedList<String>();
+    private final LinkedList<String> filterSkillList = new LinkedList<String>();
     private String filterSelectedFav;
     private String filterSelectedSkill;
-    //endnew
+    private LinkedList<Person> personLinkedList = new LinkedList<Person>();
+    private String favouriteString;
+    private String skillString;
+    private String filterUniMajor;
+    private String filterUniEduLevel;
+    private int filterUniEntryYear;
+    private int next = 0;
 
     public KikojaService(String channelName) {
         super(channelName);
@@ -47,6 +50,56 @@ public class KikojaService extends APSService {
     public String getServiceName() {
         // format: app:[user_name]:[application_name]
         return "app:kikoja:KiKoja";
+    }
+
+    public void makeNewFilters() {
+        for (Skill skill : personSkillList) {
+            filterSkillList.add(skill.skillName);
+        }
+        for (Favourite fav : personFavouriteList) {
+            filterFavouriteList.add(fav.favName);
+        }
+        favouriteString = " ";
+        skillString = " ";
+        for(int i = 0; i < filterSkillList.size() ; i++) {
+            if (i != 0) {
+                skillString += " , ";
+            }
+            skillString+=filterSkillList.get(i);
+        }
+        skillString+=" ";
+
+        for(int i = 0; i < filterFavouriteList.size() ; i++) {
+            if (i != 0) {
+                favouriteString += " , ";
+            }
+            favouriteString+=filterFavouriteList.get(i);
+        }
+        favouriteString+=" ";
+    }
+
+    public String makeFavouriteString(LinkedList<Favourite> favouriteList) {
+        String string = " ";
+        for(int i = 0; i < favouriteList.size() ; i++) {
+            if (i != 0) {
+                string += " , ";
+            }
+            string += favouriteList.get(i).favName;
+        }
+        string += " ";
+        return string;
+    }
+
+    public String makeSkillString(LinkedList<Skill> skillList) {
+        String string = " ";
+        for(int i = 0; i < skillList.size() ; i++) {
+            if (i != 0) {
+                string += " , ";
+            }
+            string += skillList.get(i).skillName;
+        }
+        string += " ";
+        return string;
     }
 
     // use this method to change pages
@@ -78,11 +131,30 @@ public class KikojaService extends APSService {
             }
             case "getHomePage": {
                 currentPage = new HomePage();
+                next = 0;
+
+                personLinkedList = DbOperation.getMatched(
+                        filterUniMajor,
+                        String.valueOf(filterUniEntryYear),
+                        filterUniEduLevel,
+                        favouriteString,
+                        skillString,
+                        person.id,
+                        connection
+                );
+                Person currentPerson = personLinkedList.get(next);
+                LinkedList<Favourite> currentFavouriteList = DbOperation.getPersonFavouriteList(currentPerson.id, connection);
+                LinkedList<Skill> currentSkillList = DbOperation.getPersonSkillList(currentPerson.id, connection);
+                HomePageData data = new HomePageData(currentPerson, makeFavouriteString(currentFavouriteList), makeSkillString(currentSkillList));
+                currentPage.setMustacheModel(data);
                 break;
             }
             case "getFavouritePage": {
                 currentPage = new FavouritePersonsPage();
-                break;
+                friendList = DbOperation.retrieveFriendList(person.id, connection);
+                FavouritePersonsData data = new FavouritePersonsData(friendList);
+                currentPage.setMustacheModel(data);
+                return currentPage;
             }
             case "getProfilePage": {
                 currentPage = new ProfilePage();
@@ -190,6 +262,10 @@ public class KikojaService extends APSService {
                     person.imageURL = "";
                     boolean registerResponse = DbOperation.registerPerson(person, connection);
                     if (registerResponse) {
+                        filterUniMajor = person.uniMajor;
+                        filterUniEduLevel = person.uniEduLevel;
+                        filterUniEntryYear = person.uniEntryYear;
+
                         skillList = DbOperation.getSkillList(connection);
                         favouriteList = DbOperation.getFavouriteList(connection);
 
@@ -216,11 +292,16 @@ public class KikojaService extends APSService {
                 return update;
             }
             case "saveProfile": {
+                filterUniMajor = person.uniMajor;
+                filterUniEduLevel = person.uniEduLevel;
+                filterUniEntryYear = person.uniEntryYear;
                 currentPage = new HomePage();
                 person.phoneNumber = pageData.get("phoneNumberInput").toString();
                 person.email = pageData.get("emailInput").toString();
                 DbOperation.editPersonInfo(person, connection);
                 currentPage = new ChangeFilterPage();
+                makeNewFilters();
+
                 ProfilePageData data = new ProfilePageData(
                         person,
                         skillList,
@@ -270,10 +351,15 @@ public class KikojaService extends APSService {
                         currentPage = new LoginPage();
                     } else {
                         person = loginResponse;
+                        filterUniMajor = person.uniMajor;
+                        filterUniEduLevel = person.uniEduLevel;
+                        filterUniEntryYear = person.uniEntryYear;
                         skillList = DbOperation.getSkillList(connection);
                         favouriteList = DbOperation.getFavouriteList(connection);
                         personSkillList = DbOperation.getPersonSkillList(person.id, connection);
                         personFavouriteList = DbOperation.getPersonFavouriteList(person.id, connection);
+
+                        makeNewFilters();
 
                         currentPage = new ProfilePage();
                         ProfilePageData data = new ProfilePageData(
@@ -297,34 +383,27 @@ public class KikojaService extends APSService {
                 break;
             }
             case "filteraddFav":{
-                if(!filterfavouriteList.contains(filterSelectedFav))
-                    filterfavouriteList.add(filterSelectedFav);
-                String filterNewFav=" ";
-                for(int i = 0; i < filterfavouriteList.size() ; i++){
-                    if(i==0){
-                        filterNewFav+=filterfavouriteList.get(i);
-                    }
-                    else {
+                if(!filterFavouriteList.contains(filterSelectedFav))
+                    filterFavouriteList.add(filterSelectedFav);
+                String filterNewFav = " ";
+                for(int i = 0; i < filterFavouriteList.size() ; i++) {
+                    if (i != 0) {
                         filterNewFav += " , ";
-                        filterNewFav += filterfavouriteList.get(i);
                     }
+                    filterNewFav+=filterFavouriteList.get(i);
                 }
                 filterNewFav+=" ";
                 update.addChildUpdate("filterFavouriteList","text",filterNewFav);
                 break;
             }
             case "filterremoveFav":{
-                filterfavouriteList.remove(filterSelectedFav);
-                String filterNewFav=" ";
-                for(int i = 0; i < filterfavouriteList.size() ; i++){
-                    if (i==0){
-                        filterNewFav+=filterfavouriteList.get(i);
-                    }
-                    else{
+                filterFavouriteList.remove(filterSelectedFav);
+                String filterNewFav = " ";
+                for(int i = 0; i < filterFavouriteList.size() ; i++) {
+                    if (i != 0) {
                         filterNewFav += " , ";
-                        filterNewFav += filterfavouriteList.get(i);
                     }
-
+                    filterNewFav+=filterFavouriteList.get(i);
                 }
                 filterNewFav+=" ";
                 update.addChildUpdate("filterFavouriteList","text",filterNewFav);
@@ -336,13 +415,10 @@ public class KikojaService extends APSService {
                     filterSkillList.add(filterSelectedSkill);
                 String filterNewSkill=" ";
                 for(int i = 0 ; i < filterSkillList.size() ; i++){
-                    if(i==0){
-                        filterNewSkill+=filterSkillList.get(i);
+                    if(i != 0){
+                        filterNewSkill += " , ";
                     }
-                    else{
-                        filterNewSkill+=" , ";
-                        filterNewSkill+=filterSkillList.get(i);
-                    }
+                    filterNewSkill += filterSkillList.get(i);
                 }
                 filterNewSkill+=" ";
                 update.addChildUpdate("filterSkillListt","text",filterNewSkill);
@@ -358,13 +434,10 @@ public class KikojaService extends APSService {
                 filterSkillList.remove(filterSelectedSkill);
                 String filterNewSkill=" ";
                 for(int i = 0 ; i < filterSkillList.size() ; i++){
-                    if(i==0){
-                        filterNewSkill+=filterSkillList.get(i);
-                    }
-                    else{
+                    if(i != 0){
                         filterNewSkill+=" , ";
-                        filterNewSkill+=filterSkillList.get(i);
                     }
+                    filterNewSkill+=filterSkillList.get(i);
                 }
                 filterNewSkill+=" ";
                 update.addChildUpdate("filterSkillListt","text",filterNewSkill);
@@ -384,6 +457,7 @@ public class KikojaService extends APSService {
                 boolean response = DbOperation.insertNewFavouriteForSpecificPerson(person.id, selectedFav, connection);
                 if (response) {
                     personFavouriteList = DbOperation.getPersonFavouriteList(person.id, connection);
+                    makeNewFilters();
                     String personFavouriteListString = " ";
                     for (int i = 0; i < personFavouriteList.size(); i++) {
                         personFavouriteListString += personFavouriteList.get(i).favName + " \n ";
@@ -396,6 +470,7 @@ public class KikojaService extends APSService {
                 boolean response = DbOperation.removeFavouriteForSpecificPerson(person.id, selectedFav, connection);
                 if (response) {
                     personFavouriteList = DbOperation.getPersonFavouriteList(person.id, connection);
+                    makeNewFilters();
                     String personFavouriteListString = " ";
                     for (int i = 0; i < personFavouriteList.size(); i++) {
                         personFavouriteListString += personFavouriteList.get(i).favName + " \n ";
@@ -408,6 +483,7 @@ public class KikojaService extends APSService {
                 boolean response = DbOperation.insertNewSkillForSpecificPerson(person.id, selectedSkill, connection);
                 if (response) {
                     personSkillList = DbOperation.getPersonSkillList(person.id, connection);
+                    makeNewFilters();
                     String personSkillListString = " ";
                     for (int i = 0; i < personSkillList.size(); i++) {
                         personSkillListString += personSkillList.get(i).skillName + " \n ";
@@ -420,6 +496,7 @@ public class KikojaService extends APSService {
                 boolean response = DbOperation.removeSkillForSpecificPerson(person.id, selectedSkill, connection);
                 if (response) {
                     personSkillList = DbOperation.getPersonSkillList(person.id, connection);
+                    makeNewFilters();
                     String personSkillListString = " ";
                     for (int i = 0; i < personSkillList.size(); i++) {
                         personSkillListString += personSkillList.get(i).skillName + " \n ";
@@ -427,6 +504,51 @@ public class KikojaService extends APSService {
                     update.addChildUpdate("personSkillList", "text", personSkillListString);
                 }
                 break;
+            }
+            case "changeUniMajorFilter": {
+                if (pageData.get("uniMajorFilterDropdown").toString() != emptySelection)
+                    filterUniMajor = pageData.get("uniMajorFilterDropdown").toString();
+                break;
+            }
+            case "changeUniEduLevelFilter": {
+                if (pageData.get("uniEduLevelFilterDropdown").toString() != emptySelection)
+                    filterUniEduLevel = pageData.get("uniEduLevelFilterDropdown").toString();
+                break;
+            }
+            case "changeUniEntryYearFilter": {
+                if (pageData.get("uniEntryYearFilterDropdown").toString() != emptySelection)
+                    filterUniEntryYear = Integer.parseInt(pageData.get("uniEntryYearFilterDropdown").toString());
+                break;
+            }
+            case "dislikePerson": {
+                DbOperation.setRelationShip(person.id, personLinkedList.get(next).id, false, connection);
+                next++;
+                if (next == personLinkedList.size()) {
+                    currentPage = new NotFoundPage();
+                    return currentPage;
+                } else {
+                    Person currentPerson = personLinkedList.get(next);
+                    LinkedList<Favourite> currentFavouriteList = DbOperation.getPersonFavouriteList(currentPerson.id, connection);
+                    LinkedList<Skill> currentSkillList = DbOperation.getPersonSkillList(currentPerson.id, connection);
+                    HomePageData data = new HomePageData(currentPerson, makeFavouriteString(currentFavouriteList), makeSkillString(currentSkillList));
+                    currentPage.setMustacheModel(data);
+                    break;
+                }
+            }
+            case "likePerson": {
+                DbOperation.setRelationShip(person.id, personLinkedList.get(next).id, true, connection);
+                next++;
+                if (next == personLinkedList.size()) {
+                    currentPage = new NotFoundPage();
+                    return currentPage;
+                } else {
+                    Person currentPerson = personLinkedList.get(next);
+                    LinkedList<Favourite> currentFavouriteList = DbOperation.getPersonFavouriteList(currentPerson.id, connection);
+                    LinkedList<Skill> currentSkillList = DbOperation.getPersonSkillList(currentPerson.id, connection);
+                    HomePageData data = new HomePageData(currentPerson, makeFavouriteString(currentFavouriteList), makeSkillString(currentSkillList));
+                    currentPage.setMustacheModel(data);
+                    return currentPage;
+                }
             }
             default: {
                 return update;

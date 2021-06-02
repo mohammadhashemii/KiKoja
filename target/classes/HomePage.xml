@@ -5,26 +5,28 @@
 			<frame   borderCornerRadius="8" width="290" height="300" >
 				<image id="profile-image"  layout="linear_vertical" width="match_parent" height="match_parent" borderCornerRadius="11"  borderColor="" src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/person-alireza.jpg" borderStrokeWidth="1"></image>
 			</frame>
-			<text   id="name"  textsize="14"  padding_right="10"> علیرضا بیناییان</text>
+			<text   id="name"  textsize="14"  padding_right="10">{{person.firstName}} {{person.lastName}}</text>
 			<frame layout="linear_horizontal" padding_left="15" padding_right="10">
-				<text  id="major"  gravity="left" textsize="11"  textcolor="#909090"> ورودی ۱۳۹۷</text>
-				<text  id="major"  textsize="11"  textcolor="#909090">رشته: مهندسی کامپیوتر</text>
+				<text  id="major"  gravity="left" textsize="11"  textcolor="#909090"> ورودی {{person.uniEntryYear}}</text>
+				<text  id="major"  textsize="11"  textcolor="#909090">رشته: {{person.uniMajor}}</text>
 			</frame>
 			<frame layout="linear_vertical"  margin_left="15" margin_right="15" >
 				<text margin_left="10" textsize="11" margin_right="10" background="white"  textcolor="#909090">علاقه‌مندی‌ها:</text>
-				<text  textsize="11"  textcolor="#909090"   padding_right="10" height="50"  borderCornerRadius="8" borderColor="#909090" borderStrokeWidth="1" textalignment="right"> کار‌پژوهشی - کافه‌گردی - فوتبال - ...</text>
-				<frame  gravity="left" layout="linear_vertical" >
-					<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="5" onClick="command/getMoreInfoPage"  textcolor="black" textsize="8" background="#b4d9c7" height="35" width="50"> بیشتر ▼</button>
-				</frame>
+				<text  textsize="11"  textcolor="#909090"   padding_right="10" height="50"  borderCornerRadius="8" borderColor="#909090" borderStrokeWidth="1" textalignment="right">{{favString}}</text>
+				<text margin_left="10" textsize="11" margin_right="10" background="white"  textcolor="#909090">مهارت ها:</text>
+				<text  textsize="11"  textcolor="#909090"   padding_right="10" height="50"  borderCornerRadius="8" borderColor="#909090" borderStrokeWidth="1" textalignment="right">{{skillString}}</text>
+<!--				<frame  gravity="left" layout="linear_vertical" >-->
+<!--					<button  gravity="center" progressBarRadius="11" progressBarColor="white" borderCornerRadius="5" onClick="command/getMoreInfoPage"  textcolor="black" textsize="8" background="#b4d9c7" height="35" width="50"> بیشتر ▼</button>-->
+<!--				</frame>-->
 			</frame>
 			<frame  layout="linear_horizontal" >
 				<frame layout="linear_vertical" background="#f2c7c7" borderStrokeWidth="1" borderCornerRadius="11" borderColor="" padding_bottom="5">
-					<frame onClick="command/getNotFoundPage" width="60"  >
+					<frame onClick="update/dislikePerson" width="60"  >
 						<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-x.png"></image>
 					</frame>
 				</frame>
 				<frame layout="linear_vertical" background="#d8f2e5" borderStrokeWidth="1" borderCornerRadius="11" borderColor="" padding_bottom="5">
-					<frame onClick="command/getNotFoundPage" width="60" >
+					<frame onClick="update/likePerson" width="60" >
 						<image  src="https://raw.githubusercontent.com/mohammadhashemii/KiKoja/master/src/main/images/icon-like.png"></image>
 					</frame>
 				</frame>
