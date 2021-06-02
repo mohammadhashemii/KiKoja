@@ -164,19 +164,19 @@ public class DbOperation {
         try {
             String matchedQuery = "SELECT firstname, lastname, unimajor, unientryyear, id FROM person WHERE condition1 AND condition2 AND condition3";
 
-            if (!uniEntryYear.equals("")) {
+            if (!uniEntryYear.replaceAll(" ","").equals("")) {
                 matchedQuery = matchedQuery.replaceAll("condition3", ("unientryyear=" + uniEntryYear));
             } else {
                 matchedQuery = matchedQuery.replaceAll("condition3", "true");
             }
 
-            if (!uniMajor.equals("")) {
+            if (!uniMajor.replaceAll(" ","").equals("")) {
                 matchedQuery = matchedQuery.replaceAll("condition1", ("unimajor='" + uniMajor + "'"));
             } else {
                 matchedQuery = matchedQuery.replaceAll("condition1", "true");
             }
 
-            if (!uniEduLevel.equals("")) {
+            if (!uniEduLevel.replaceAll(" ","").equals("")) {
                 matchedQuery = matchedQuery.replaceAll("condition2", ("uniedulevel='" + uniEduLevel + "'"));
             } else {
                 matchedQuery = matchedQuery.replaceAll("condition2", "true");
